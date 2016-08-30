@@ -1,0 +1,618 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="字符编码," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="这是上古时期的机械打字机，每输入一个字符，滚筒会左移一小截（一个字符的宽度 + 字符间距，好在那时候打字机都是等宽字体）。当滚筒移动到最左侧，即纸张右侧已经和敲针对齐时（也就是打完一行字），会有响铃提示已经抵达行末。这时拉动左侧墨带盒上边的金属手柄（换行手柄），然后滚筒会被推到最右边，打字头对准了行首，这就是 CR（carriage return, 回车）。继续用力，换行手柄大约会被扳动30度">
+<meta property="og:type" content="article">
+<meta property="og:title" content="回车与换行">
+<meta property="og:url" content="http://yoursite.com/2016/06/08/endofline/index.html">
+<meta property="og:site_name" content="雨雪霏霏">
+<meta property="og:description" content="这是上古时期的机械打字机，每输入一个字符，滚筒会左移一小截（一个字符的宽度 + 字符间距，好在那时候打字机都是等宽字体）。当滚筒移动到最左侧，即纸张右侧已经和敲针对齐时（也就是打完一行字），会有响铃提示已经抵达行末。这时拉动左侧墨带盒上边的金属手柄（换行手柄），然后滚筒会被推到最右边，打字头对准了行首，这就是 CR（carriage return, 回车）。继续用力，换行手柄大约会被扳动30度">
+<meta property="og:image" content="http://i53.photobucket.com/albums/g61/foxlovesnowy/typewriter_zpsuwuqtj5t.jpg">
+<meta property="og:updated_time" content="2016-08-30T13:23:08.176Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="回车与换行">
+<meta name="twitter:description" content="这是上古时期的机械打字机，每输入一个字符，滚筒会左移一小截（一个字符的宽度 + 字符间距，好在那时候打字机都是等宽字体）。当滚筒移动到最左侧，即纸张右侧已经和敲针对齐时（也就是打完一行字），会有响铃提示已经抵达行末。这时拉动左侧墨带盒上边的金属手柄（换行手柄），然后滚筒会被推到最右边，打字头对准了行首，这就是 CR（carriage return, 回车）。继续用力，换行手柄大约会被扳动30度">
+<meta name="twitter:image" content="http://i53.photobucket.com/albums/g61/foxlovesnowy/typewriter_zpsuwuqtj5t.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/06/08/endofline/"/>
+
+  <title> 回车与换行 | 雨雪霏霏 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">雨雪霏霏</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                回车与换行
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-08T00:00:00+08:00" content="2016-06-08">
+              2016-06-08
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/杂谈/" itemprop="url" rel="index">
+                    <span itemprop="name">杂谈</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <center><br><img src="http://i53.photobucket.com/albums/g61/foxlovesnowy/typewriter_zpsuwuqtj5t.jpg" alt="typewriter"><br></center>
+
+<p>这是上古时期的机械打字机，每输入一个字符，滚筒会左移一小截（一个字符的宽度 + 字符间距，好在那时候打字机都是等宽字体）。当滚筒移动到最左侧，即纸张右侧已经和敲针对齐时（也就是打完一行字），会有响铃提示已经抵达行末。这时拉动左侧墨带盒上边的金属手柄（换行手柄），然后滚筒会被推到最右边，打字头对准了行首，这就是 <code>CR</code>（carriage return, 回车）。继续用力，换行手柄大约会被扳动30度左右，纸会被上卷一行（行高，line height），这就是 <code>LF</code>（line feed, 换行）。<br><a id="more"></a></p>
+<p>如果只换行不回车，那么第一行敲满以后，敲针始终在纸张右侧，无法继续输入；只回车不换行，所有的内容都敲到同一行里了。</p>
+<p>可以看下这两个视频：<a href="https://www.youtube.com/watch?v=nEdeZkBG14w" target="_blank" rel="external">Olympia SM9 Typewriter Demo</a> 和 <a href="https://www.youtube.com/watch?v=FkUXn5bOwzk" target="_blank" rel="external">How to Use a Typewriter</a></p>
+<p>在最早的 ASCII 标准（1963-1968）中，有两套标准，一套是 ISO 出的认为 <code>CRLF</code> 和 <code>LF</code> 都是标准的；然而另一套是 ASA 出的只认为 <code>CRLF</code> 是符合标准的。</p>
+<p>所以 MS-DOS（1981）设计的时候是采用了在两种方法中都符合标准的 <code>CRLF</code>，一方面是满足了两个标准，另一方面是兼容了当时大量采用 <code>CRLF</code> 的计算机。而 Unix 的前身 Multics 的设计者认为在每行的结尾加两个字符用于换行，实在是极大的浪费（那时的存储设备非常昂贵）。所以 Multics 里面用一个驱动程序自动将 <code>LF</code> 转换成 <code>CR-LF</code>，所以他们用了单一的 <code>LF</code>。</p>
+<p>很明显，<code>CRLF</code> 才是正统，*nix 是异端。关于 <code>CR</code> 与 <code>LF</code> 的表示如下：</p>
+<blockquote>
+<p>CR（carriage return, 回车）用 \r （return）表示，对应的 ASCII 码为 0x0D<br>LF（line feed, 换行）用 \n （newline）表示，对应的 ASCII 码为 0x0A</p>
+</blockquote>
+<p>所以现在各操作系统对换行的表示方式如下：</p>
+<blockquote>
+<p>LF：在 Unix 或 Unix 相容系统（GNU/Linux，AIX，Xenix，Mac OS X，…）、BeOS、Amiga、RISC OS<br>CR+LF：MS-DOS、微软视窗操作系统（Microsoft Windows）、大部分非Unix的系统<br>CR：Apple II家族，Mac OS至版本9</p>
+</blockquote>
+<p>假设有这样一段文本：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">aaa</div><div class="line">bbb</div><div class="line">ccc</div></pre></td></tr></table></figure></p>
+<p>如果这段文本是在 Windows 下编辑的，当它移植到 Linux 下，用 vim 打开会显示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">aaa^M</div><div class="line">bbb^M</div><div class="line">ccc^M</div></pre></td></tr></table></figure></p>
+<p>如果你的 vim 正常显示（可能是vim的版本比较高），可以 <code>cat -A</code> 一下，会显示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">aaa^M$</div><div class="line">aaa^M$</div><div class="line">aaa^M$</div></pre></td></tr></table></figure></p>
+<p>这里的 <code>^M</code> 不是 <code>^</code> 符号加 <code>M</code>，而是一个组合字符，代表 <code>CR</code>。</p>
+<p>目前大多数文本编辑器都能够进行不同的换行符之间的转换（Windows 系统的记事本不行……）。如果是在 linux 下可使用如下命令进行转换：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$dos2unix</span> file_name</div><div class="line"><span class="variable">$unix2dos</span> file_name</div></pre></td></tr></table></figure></p>
+<p>当然，你的系统可能没有这个命令，那么你可以用 vi 或者 vim 打开，然后在命令模式下输入：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">%s/^M$//g    <span class="comment">#这里的^M是Ctrl+v+m`</span></div></pre></td></tr></table></figure></p>
+<p>如果你的vi或者vim正常显示了，那么上面这个办法也是行不通的，这时可以使用 sed，命令如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$sed</span> -i <span class="string">'s/^M//g'</span> filename    <span class="comment">#这里的 ^M 仍然是 Ctrl+v+m</span></div><div class="line"><span class="variable">$sed</span> -i <span class="string">'s/\r//g'</span> filename    <span class="comment">#与上一个命令相同`</span></div></pre></td></tr></table></figure></p>
+<p>或者使用 tr 命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$tr</span> <span class="_">-d</span> <span class="string">'\r'</span> &lt; inputfile &gt; outputfile    <span class="comment">#CRLF 转 LF</span></div><div class="line"><span class="variable">$tr</span> <span class="string">'\r'</span> <span class="string">'\n'</span> &lt; inputfile &gt; outputfile    <span class="comment">#CR 转 LF</span></div></pre></td></tr></table></figure></p>
+<p>如果是在 Mac OS 9 或者 Linux 系统下编辑的，当它移植到 Windows 下，用记事本打开会显示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">aaabbbccc</div></pre></td></tr></table></figure></p>
+<p>但是不妨写这样一段C语言程序：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">printf</span>(<span class="string">"aaa\n"</span>);</div><div class="line"><span class="built_in">printf</span>(<span class="string">"bbb\n"</span>);</div><div class="line"><span class="built_in">printf</span>(<span class="string">"ccc\n"</span>);</div></pre></td></tr></table></figure></p>
+<p>在控制台下输出为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">aaa</div><div class="line">bbb</div><div class="line">ccc</div></pre></td></tr></table></figure></p>
+<p>即便是将输出定向到文件用记事本打开，显示依然如上所示。这就有些坑了，再来这样一段程序：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">char</span> c;</div><div class="line">c = getchar();</div><div class="line"><span class="built_in">printf</span>(<span class="string">"%d\n"</span>, c);</div></pre></td></tr></table></figure></p>
+<p>输入回车，输出 10，说好的 Windows 下按一下 <kbd>Enter</kbd> 键输入两个字符，为什么只剩下一个了呢？再比如这样一段程序：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">printf</span>(<span class="string">"aaa\n"</span>);</div><div class="line"><span class="built_in">printf</span>(<span class="string">"bbb\r\n"</span>);</div><div class="line"><span class="built_in">printf</span>(<span class="string">"ccc\r\r\n"</span>);</div></pre></td></tr></table></figure></p>
+<p>输出都是一样的换行。编译器做了什么，Windows 系统做了什么，我无从知晓，既然已经理不清其中的原因，那最好的办法就是避开这个陷阱。如果你对此事的兴趣非常强烈，不妨看下这个：<a href="https://www.zhihu.com/question/24639606" target="_blank" rel="external">在 Windows 下键入 Enter 键，是在键盘缓冲区中存入 ‘\n’ 还是 ‘\r’’\n’ 两个？</a></p>
+<p>参考：<a href="https://www.wikiwand.com/en/Newline" target="_blank" rel="external">Newline</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/字符编码/" rel="tag">#字符编码</a>
+          
+        </div>
+      
+
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="雨雪霏霏" />
+          <p class="site-author-name" itemprop="name">雨雪霏霏</p>
+          <p class="site-description motion-element" itemprop="description">简单快乐与幸福同行</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">1</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">雨雪霏霏</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
