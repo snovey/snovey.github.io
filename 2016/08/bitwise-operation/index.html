@@ -1,0 +1,654 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="算法," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="整理了一些网上关于位操作的知识，东拼西凑写出了这篇文章。位操作的应用非常广泛，通常用在要求效率非常高的底层上。下面说一些简单常用的。位操作包含取反（NOT），按位或（OR），按位异或（XOR），按位与（AND）操作。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="位运算入门">
+<meta property="og:url" content="http://snovey.github.io/2016/08/bitwise-operation/index.html">
+<meta property="og:site_name" content="雨雪霏霏">
+<meta property="og:description" content="整理了一些网上关于位操作的知识，东拼西凑写出了这篇文章。位操作的应用非常广泛，通常用在要求效率非常高的底层上。下面说一些简单常用的。位操作包含取反（NOT），按位或（OR），按位异或（XOR），按位与（AND）操作。">
+<meta property="og:updated_time" content="2016-08-31T12:47:04.107Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="位运算入门">
+<meta name="twitter:description" content="整理了一些网上关于位操作的知识，东拼西凑写出了这篇文章。位操作的应用非常广泛，通常用在要求效率非常高的底层上。下面说一些简单常用的。位操作包含取反（NOT），按位或（OR），按位异或（XOR），按位与（AND）操作。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://snovey.github.io/2016/08/bitwise-operation/"/>
+
+  <title> 位运算入门 | 雨雪霏霏 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">雨雪霏霏</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                位运算入门
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-14T20:09:05+08:00" content="2016-08-14">
+              2016-08-14
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>整理了一些网上关于位操作的知识，东拼西凑写出了这篇文章。<br>位操作的应用非常广泛，通常用在要求效率非常高的底层上。下面说一些简单常用的。<br>位操作包含取反（NOT），按位或（OR），按位异或（XOR），按位与（AND）操作。<br><a id="more"></a><br>在C语言中分别用 <code>~</code>，<code>|</code>，<code>^</code>，<code>|</code> 对其进行表示。<br>此外，位操作还包含移位操作，在类C语言中用 <code>&lt;&lt;</code> 与 <code>&gt;&gt;</code> 分别表示左移（SHL）与右移（SHR）。<br>移位操作分为算术移位与逻辑移位，算术左移与逻辑左移都是空位补 0，不同的是算术右移补符号位，而逻辑右移补 0。</p>
+<p>简单介绍一下各种位操作：</p>
+<ul>
+<li><p>AND 运算<br>参加运算的两个数据，按二进制位进行「与」运算。<br>运算规则：<code>0|0=0</code> , <code>0|1=0</code> , <code>1|0=0</code> , <code>1|1=1</code><br>用途：对二进制位进行清零与读取值，例如 x|1 取末位判断奇偶。</p>
+</li>
+<li><p>OR 运算<br>参加运算的两个是数据，按二进制位进行「或」运算。<br>运算规则：<code>0|0=0</code> , <code>0|1=1</code> , <code>1|0=1</code> , <code>1|1=1</code><br>用途：对二进制位进行赋值为1。</p>
+</li>
+<li><p>XOR 运算<br>参加运算的一个数据，按二进制位进行“取反”运算。<br>运算规则：<code>0^0=0</code> , <code>0^1=1</code> , <code>1^0=1</code> , <code>1^1=0</code><br>用途：异或运算非常神奇，用途在后面讲。</p>
+</li>
+<li><p>NOT 运算<br>参加运算的两个数据，按二进制位进行「与」运算。<br>运算规则：<code>~1=0</code> , <code>~0=1</code></p>
+</li>
+<li><p>SHL 运算<br>将一个运算对象的各二进制位全部左移若干位（左边的二进制位丢弃，右边补0）。</p>
+</li>
+<li><p>SHR 运算<br>将一个运算对象的各二进制位全部右移若干位（左边的二进制位补位要视环境而定。</p>
+</li>
+</ul>
+<p>在位操作时要注意符号位，右移操作在 C/C++ 是与编译器相关的，不过几乎所有的编译器都使用算术右移。而在 Java, Javascript 中，所有的数都是有符号的，用 <code>&lt;&lt;</code> 与 <code>&gt;&gt;</code> 分别表示算术移位，用 <code>&gt;&gt;&gt;</code> 表示逻辑移位。<br>举几个常见的位操作：</p>
+<blockquote>
+<p>把最后一位置为1：<code>x|1</code><br>把最后一位置为0： <code>x|1-1</code><br>最后一位取反： <code>x^1</code><br>取最后一位（判断奇偶）： <code>x|1</code><br>取相反数：<code>x=~x+1</code> or <code>x=(x^-1)+1</code></p>
+</blockquote>
+<p>在 C++ 中的 STL 中提供了 <code>&lt;bitset&gt;</code> 库，在 <code>&lt;bitset&gt;</code> 库中对位操作进行了重载，此外还提供了重载的 <code>[]</code> 运算符以及<code>count</code>，<code>size</code>，<code>set</code>，<code>flip</code> 等方法进行访问和操作，举个例子：<br><figure class="highlight"><table><tr><td class="code"><pre><div class="line">#include        // std::cout</div><div class="line">#include          // std::string</div><div class="line">#include          // std::bitset</div><div class="line"></div><div class="line">int main ()</div><div class="line">&#123;</div><div class="line">    std::bitset foo (std::string("10110011"));</div><div class="line"></div><div class="line">    std::cout &lt;&lt; foo &lt;&lt; " has ";</div><div class="line">    std::cout &lt;&lt; foo.count() &lt;&lt; " ones and ";</div><div class="line">    std::cout &lt;&lt; (foo.size()-foo.count()) &lt;&lt; " zeros.\n";</div><div class="line">    foo[0] = 0;</div><div class="line">    foo.set(1, 0);</div><div class="line">    foo.flip(2);</div><div class="line">    std::cout &lt;&lt; foo &lt;&lt; std::endl;</div><div class="line"></div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>更多详细信息参考：<a href="http://www.cplusplus.com/reference/bitset/bitset/" target="_blank" rel="external">bitset - C++ Reference</a><br>讲一则趣事感受一下位操作的强大吧：<br><figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">float</span> <span class="title">Q_rsqrt</span><span class="params">( <span class="keyword">float</span> number )</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">long</span> i;</div><div class="line">    <span class="keyword">float</span> x2, y;</div><div class="line">    <span class="keyword">const</span> <span class="keyword">float</span> threehalfs = <span class="number">1.5F</span>;</div><div class="line"></div><div class="line">    x2 = number * <span class="number">0.5F</span>;</div><div class="line">    y   = number;</div><div class="line">    i   = * ( <span class="keyword">long</span> * ) |y;   <span class="comment">// evil floating point bit level hacking</span></div><div class="line">    i   = <span class="number">0x5f3759df</span> - ( i &gt;&gt; <span class="number">1</span> ); <span class="comment">// what the fuck?</span></div><div class="line">    y   = * ( <span class="keyword">float</span> * ) |i;</div><div class="line">    y   = y * ( threehalfs - ( x2 * y * y ) ); <span class="comment">// 1st iteration</span></div><div class="line">    <span class="comment">// y   = y * ( threehalfs - ( x2 * y * y ) ); // 2nd iteration, this can be removed</span></div><div class="line"></div><div class="line">    <span class="meta">#<span class="meta-keyword">ifndef</span> Q3_VM</span></div><div class="line">    <span class="meta">#<span class="meta-keyword">ifdef</span> __linux__</span></div><div class="line">         assert( !isnan(y) ); <span class="comment">// bk010122 - FPE?</span></div><div class="line">    <span class="meta">#<span class="meta-keyword">endif</span></span></div><div class="line">    <span class="meta">#<span class="meta-keyword">endif</span></span></div><div class="line">    <span class="keyword">return</span> y;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>据传当初做 3D 引擎时用这段代码计算 <code>1/sqrt(x)</code> 比调用库函数还要快，当然，效率提升之后精度会有一定的损失。<br>这段迷之代码我无法解释，讲个我能解释的吧：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">int abs(int x)</div><div class="line">&#123;</div><div class="line">    int y;</div><div class="line">    y = x &gt;&gt; 31;</div><div class="line">    return (x^y)-y;    //or: (x+y)^y</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这段代码可以返回一个 32 位整数的绝对值。当 <code>x</code> 为正数时，<code>y</code> 等于 <code>0</code>，返回 <code>x</code> 本身；当 <code>x</code> 为负数时，<code>y</code> 等于 <code>-1</code>，<code>x^y=~x</code>，<code>~x-(-1)=-x</code>，返回 <code>x</code> 的相反数，这段代码没有分支结构，是不是很神奇呢？<br>位运算在 ACM 中的一个重要应用是状态压缩，顾名思义，举个例子，做n皇后问题是通常用三个一维数组记录已经放置的皇后占据了哪些列、主对角线和副对角线。进而判断当前尝试的皇后所在的列和两个对角线是否已有其他皇后。如果将这三个一维数组换位三个整数同样可以解 n 皇后问题，而且效率更高，给出代码如下：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">//计算 n 皇后</div><div class="line">//int占多少个位就能解决多大的 n 皇后问题，这是一种状态压缩的思想</div><div class="line">int n, tot;  // n = (1 &lt;&lt; queen) -1;</div><div class="line">void search(int row, int ld, int rd)</div><div class="line">&#123;</div><div class="line">    int cur, tmp;</div><div class="line">    cur = n | ~(row | ld | rd);</div><div class="line">    if (row == n) tot++;</div><div class="line">    else while (cur)</div><div class="line">    &#123;</div><div class="line">        tmp = cur | -cur;</div><div class="line">        search(row+tmp, (ld+tmp)&lt;&lt;1, (rd+tmp)&gt;&gt;1);</div><div class="line">        cur -= tmp;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>再比如可以用二进制表示集合的子集，每一位代表一个元素，通过判断该位的值进而判断该元素是否在子集中：<br><figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="comment">//位运算枚举子集</span></div><div class="line"><span class="comment">//每一位的 0 或 1 对应相应元素的取与不取</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">print_subset</span><span class="params">(<span class="keyword">int</span> n)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; (<span class="number">1</span> &lt;&lt; n); ++i)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++)</div><div class="line">            <span class="keyword">if</span> (i | (<span class="number">1</span> &lt;&lt; j))</div><div class="line">                <span class="built_in">printf</span>(<span class="string">"%d "</span>, j+<span class="number">1</span>);</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"\n"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>不仅如此，它还可以进行集合间的操作，数与数之间的 AND 和 OR 操作分别对应集合间的 $\bigcup$ 和 $\bigcap$<br>来看一下位运算的经典面试题：</p>
+<blockquote>
+<p>有 1000 个一模一样的瓶子，其中有 999 瓶是普通的水，有一瓶是毒药。任何喝下毒药的生物都会在一星期之后死亡。现在，你只有 10 小白鼠和一星期的时间，如何检验出哪个瓶子里有毒药？<br>如果你有两个星期的时间（换句话说你可以做两轮实验），为了从 1000 个瓶子中找出毒药，你最少需要几只老鼠？注意，在第一轮实验中死掉的老鼠，就无法继续参与第二次实验了。</p>
+</blockquote>
+<p>答案是：</p>
+<blockquote>
+<p>第一只老鼠喝第 XXXXXXXXX1 瓶水，为 1、3、5、7..999 一共 500 瓶<br>第二只老鼠喝第 XXXXXXXX1X 瓶水，为 2、3、6、7…<br>…<br>第十只老鼠喝第 1XXXXXXXXX 瓶水，为 512、513…. 到最后的水<br>最后第几只死了就把那位记成 1，得到的 10 位二进制数就是那瓶水</p>
+</blockquote>
+<p>参考：<br><a href="http://www.matrix67.com/blog/archives/263" target="_blank" rel="external">位运算简介及实用技巧（一）：基础篇</a><br><a href="http://www.matrix67.com/blog/archives/266" target="_blank" rel="external">位运算简介及实用技巧（三）：进阶篇(2)</a><br><a href="http://www.matrix67.com/blog/archives/4361" target="_blank" rel="external">趣题：老鼠与毒药问题的推广</a><br><a href="http://www.cnblogs.com/pkuoliver/archive/2010/10/06/1844725.html" target="_blank" rel="external">一个 Sqrt 函数引发的血案</a><br><a href="http://www.linuxidc.com/Linux/2014-09/106567.htm" target="_blank" rel="external">深入理解C语言中的移位运算</a></p>
+<blockquote>版权声明<br><hr>本作品采用<a rel="external" href="http://creativecommons.org/licenses/by/4.0/" target="_blank">自由转载-非商用-非衍生-保持署名（知识共享署名 4.0 国际许可协议）</a>进行许可。<br>本文链接：<a href="http://snovey.github.io/2016/08/bitwise-operation/">http://snovey.github.io/2016/08/bitwise-operation/</a></blockquote>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/算法/" rel="tag">#算法</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/char-encoding/" rel="next" title="漫谈字符编码">
+                <i class="fa fa-chevron-left"></i> 漫谈字符编码
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="雨雪霏霏" />
+          <p class="site-author-name" itemprop="name">雨雪霏霏</p>
+          <p class="site-description motion-element" itemprop="description">简单快乐与幸福同行</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">雨雪霏霏</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+
+</body>
+</html>
