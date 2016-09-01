@@ -1548,7 +1548,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #9a5cc9;
+  background: #089542;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2044,13 +2044,6 @@ a.search-result {
 .page-pv .busuanzi-value {
   margin: 0 5px;
 }
-.site-uv {
-  margin-right: 10px;
-}
-.site-uv::after {
-  content: "|";
-  padding-left: 10px;
-}
 .use-motion .post {
   opacity: 0;
 }
@@ -2437,4 +2430,12 @@ kbd {
   border-radius: 3px;
   margin: 0 0.1em;
   white-space: nowrap;
+}
+.IPA {
+  font-family: "Segoe UI", Verdana, Lucida Sans Regular, Lucida Sans Unicode, Arial, sans-serif;
+  width: 2em;
+  height: 2em;
+  line-height: 1.5em;
+  text-align: center;
+  border-bottom: 1px solid #eee;
 }

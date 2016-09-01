@@ -92,7 +92,7 @@
 <meta property="og:site_name" content="雨雪霏霏">
 <meta property="og:description" content="0x00 前言
 计算机只能存储二进制的数据，所以字符也一样只能通过将字符映射为相应的二进制形式才能保存，读取的时候由系统对字符进行图形渲染。">
-<meta property="og:updated_time" content="2016-08-31T12:20:01.290Z">
+<meta property="og:updated_time" content="2016-09-01T07:42:40.863Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="漫谈字符编码">
 <meta name="twitter:description" content="0x00 前言
@@ -307,6 +307,11 @@
           
 
           
+              &nbsp; | &nbsp;
+              <span class="page-pv">阅读：<!--<i class="fa fa-file-o"></i>-->
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+              </span>
+          
         </div>
       </header>
     
@@ -327,7 +332,7 @@
 <p>在 ISO 标准完全定型之前，IBM 就有一系列自己的字符编码，叫做代码页（code page），比如 437（扩展 ASCII）、850（西欧语言）、852（东欧语言）。IBM代码页通常被用于控制台（console）环境，也就是 MS-DOS 或 Unix Shell 那样的命令行环境。<br>微软将 IBM 代码页称为 OEM 代码页，自己定义的称为 ANSI 代码页， 比如 1252（西欧语言）、1250（东欧语言）、936（GBK 简体中文）、950（Big5 繁体中文）、932（SJIS 日文）、949（EUC-KR 韩文）等。</p>
 <h1 id="0x03-GB-家族"><a href="#0x03-GB-家族" class="headerlink" title="0x03 GB 家族"></a>0x03 GB 家族</h1><hr>
 <p>当计算机来到中国，这个问题的难度升级了，一个字节无论如何也表达不了博大精深的汉字，于是人们拿两个字节解决了这个问题，也就是 GB 2312 字符集，它是一个 94 * 94 的表，包括 7445 个字符。GB 2312 兼容 ASCII，GB 2312 编码对汉字/符号进行了分区（区位码）。每个汉字 / 符号以两个字节来表示。第一个字节称为「高位字节」，第二个字节称为「低位字节」。GB 2312 还有另一种编码方式 HZ，只是不常用。</p>
-<p>GB 2312 的出现，基本满足了汉字的计算机处理需要，它所收录的汉字已经覆盖中国大陆 99.75% 的使用频率。但对于人名、古汉语等方面出现的罕用字和繁体字，GB 2312不能处理，<del>譬如说，某位领导人的名字写不出来，</del>于是人们对 GB 2312 进行了扩展，这就是 GBK，K为汉语拼音 Kuo Zhan（扩展）中「扩」字的声母。GBK 全称是汉字内码扩展规范（Chinese Internal Code Extension Specification）。GBK 有一字节和双字节编码，这里有个事情就是计算机如何知道当前的字节是独立的字符还是跟相邻的字符共同表示一个字符，GBK 是通过第一个字符的范围来辨别的，<code>00</code>–<code>7F</code> 范围内是一个字节，<code>81</code>–<code>FE</code> 范围内是两个字节，GBK 向下完全兼容 GB 2312，GBK 与 CP936 大体相同，比它多95个字符。然而 GBK 但是毕竟只是规范，不是标准，随后国家推出 GBK 18030 以取代 GBK，它完全兼容 GB 2312，基本兼容 GBK，采用多字节编码，每个字可以由 1 个、2 个或 4 个字节组成。</p>
+<p>GB 2312 的出现，基本满足了汉字的计算机处理需要，它所收录的汉字已经覆盖中国大陆 99.75% 的使用频率。但对于人名、古汉语等方面出现的罕用字和繁体字，GB 2312不能处理，<del>譬如说，某位领导人的名字写不出来，</del>于是人们对 GB 2312 进行了扩展，这就是 GBK，K为汉语拼音 Kuo Zhan（扩展）中「扩」字的声母。GBK 全称是汉字内码扩展规范（Chinese Internal Code Extension Specification）。GBK 有一字节和双字节编码，这里有个事情就是计算机如何知道当前的字节是独立的字符还是跟相邻的字符共同表示一个字符，GBK 是通过第一个字符的范围来辨别的，<code>00</code>–<code>7F</code> 范围内是一个字节，<code>81</code>–<code>FE</code> 范围内是两个字节，GBK 向下完全兼容 GB 2312，GBK 与 CP936 大体相同，比它多 95 个字符。然而 GBK 但是毕竟只是规范，不是标准，随后国家推出 GBK 18030 以取代 GBK，它完全兼容 GB 2312，基本兼容 GBK，采用多字节编码，每个字可以由 1 个、2 个或 4 个字节组成。</p>
 <h1 id="0x04-UCS-Unicode"><a href="#0x04-UCS-Unicode" class="headerlink" title="0x04 UCS / Unicode"></a>0x04 UCS / Unicode</h1><hr>
 <h2 id="UCS"><a href="#UCS" class="headerlink" title="UCS"></a>UCS</h2><p>为了使混乱的编码格局得到统一，ISO 于 1990 年推出了通用字符集（Unicode Character Set，UCS），它包含了一百多万个字符，UCS 有两种编码方式：UCS-2 和 UCS-4，分别用两个字节和四个字节表示一个字符，UCS-2 只能表示 65536 个字符，明显不够用，已经过时了。UCS-4 根据最高位为0的最高字节分成2<sup>7</sup>=128 个 group。每个 group 再根据次高字节分为 256 个 plane。每个 plane 根据第 3 个字节分为 256 行（rows），每行包含256个 cells。当然同一行的 cells 只是最后一个字节不同，其余都相同。group 0 的 plane 0 就是 BMP。</p>
 <h2 id="Unicode"><a href="#Unicode" class="headerlink" title="Unicode"></a>Unicode</h2><p>ISO之外还有另外一个组织：统一码联盟（The Unicode Consortium），它于1991年推出了 Unicode 1.0。后来与 ISO 组织合并成果。<br>Unicode 全称 Universal Multiple-Octet Coded Character Set。Unicode 的码空间从 U+0000 到 U+10FFFF， Unicode 的码空间可以划分为 17 个平面（plane），每个平面包含 2<sup>16</sup>(65,536) 个码位。每个平面的码位可表示为从 U+xx0000 到 U+xxFFFF，其中 xx 表示十六进制值从 00H 到 10H，共计 17 个平面。如果 xx 是 0，即第 0 平面，可省略不写，第一个 Unicode 平面（码位从 U+0000 至 U+FFFF）包含了最常用的字符，该平面被称为基本多语言平面（Basic Multilingual Plane），缩写为 BMP。其他平面称为辅助平面（Supplementary Planes）。<br>这里字符集跟字符编码的区别就出现了，Unicode 只是指定了字符的映射，并没有指定实现方式，出现了 UTF-8、UTF-16 和 UTF-32 三种编码方式。</p>
@@ -539,20 +544,11 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel ">
+      <section class="site-overview sidebar-panel  sidebar-panel-active ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
-               src="/images/avatar.gif"
+               src="/uploads/avatar.jpg"
                alt="雨雪霏霏" />
           <p class="site-author-name" itemprop="name">雨雪霏霏</p>
           <p class="site-description motion-element" itemprop="description">简单快乐与幸福同行</p>
@@ -600,17 +596,6 @@
       </section>
 
       
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-            
-              
-            
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#0x00-前言"><span class="nav-number">1.</span> <span class="nav-text">0x00 前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x01-ASCII"><span class="nav-number">2.</span> <span class="nav-text">0x01 ASCII</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x02-代码页"><span class="nav-number">3.</span> <span class="nav-text">0x02 代码页</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x03-GB-家族"><span class="nav-number">4.</span> <span class="nav-text">0x03 GB 家族</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x04-UCS-Unicode"><span class="nav-number">5.</span> <span class="nav-text">0x04 UCS / Unicode</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#UCS"><span class="nav-number">5.1.</span> <span class="nav-text">UCS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Unicode"><span class="nav-number">5.2.</span> <span class="nav-text">Unicode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UTF-16"><span class="nav-number">5.3.</span> <span class="nav-text">UTF-16</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UTF-32"><span class="nav-number">5.4.</span> <span class="nav-text">UTF-32</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UTF-8"><span class="nav-number">5.5.</span> <span class="nav-text">UTF-8</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x05-记事本"><span class="nav-number">6.</span> <span class="nav-text">0x05 记事本</span></a></li></ol></div>
-            
-          </div>
-        </section>
-      
 
     </div>
   </aside>
@@ -644,6 +629,18 @@
 </div>
 
         
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+  
+</div>
+
+
 
         
       </div>

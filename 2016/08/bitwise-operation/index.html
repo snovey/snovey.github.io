@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://snovey.github.io/2016/08/bitwise-operation/index.html">
 <meta property="og:site_name" content="雨雪霏霏">
 <meta property="og:description" content="整理了一些网上关于位操作的知识，东拼西凑写出了这篇文章。位操作的应用非常广泛，通常用在要求效率非常高的底层上。下面说一些简单常用的。位操作包含取反（NOT），按位或（OR），按位异或（XOR），按位与（AND）操作。">
-<meta property="og:updated_time" content="2016-08-31T13:01:01.498Z">
+<meta property="og:updated_time" content="2016-09-01T07:44:45.435Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="位运算入门">
 <meta name="twitter:description" content="整理了一些网上关于位操作的知识，东拼西凑写出了这篇文章。位操作的应用非常广泛，通常用在要求效率非常高的底层上。下面说一些简单常用的。位操作包含取反（NOT），按位或（OR），按位异或（XOR），按位与（AND）操作。">
@@ -304,6 +304,11 @@
           
 
           
+              &nbsp; | &nbsp;
+              <span class="page-pv">阅读：<!--<i class="fa fa-file-o"></i>-->
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+              </span>
+          
         </div>
       </header>
     
@@ -320,11 +325,11 @@
 <ul>
 <li><p>AND 运算<br>参加运算的两个数据，按二进制位进行「与」运算。<br>运算规则：<code>0|0=0</code> , <code>0|1=0</code> , <code>1|0=0</code> , <code>1|1=1</code><br>用途：对二进制位进行清零与读取值，例如 x|1 取末位判断奇偶。</p>
 </li>
-<li><p>OR 运算<br>参加运算的两个是数据，按二进制位进行「或」运算。<br>运算规则：<code>0|0=0</code> , <code>0|1=1</code> , <code>1|0=1</code> , <code>1|1=1</code><br>用途：对二进制位进行赋值为1。</p>
+<li><p>OR 运算<br>参加运算的两个数据，按二进制位进行「或」运算。<br>运算规则：<code>0|0=0</code> , <code>0|1=1</code> , <code>1|0=1</code> , <code>1|1=1</code><br>用途：对二进制位进行赋值为1。</p>
 </li>
-<li><p>XOR 运算<br>参加运算的一个数据，按二进制位进行“取反”运算。<br>运算规则：<code>0^0=0</code> , <code>0^1=1</code> , <code>1^0=1</code> , <code>1^1=0</code><br>用途：异或运算非常神奇，用途在后面讲。</p>
+<li><p>XOR(<span class="IPA">/ˌɛksˈɔːr/</span>) 运算<br>参加运算的两个数据，按二进制位进行「异或」运算。<br>运算规则：<code>0^0=0</code> , <code>0^1=1</code> , <code>1^0=1</code> , <code>1^1=0</code><br>用途：异或运算非常神奇，用途在下一篇中讲。</p>
 </li>
-<li><p>NOT 运算<br>参加运算的两个数据，按二进制位进行「与」运算。<br>运算规则：<code>~1=0</code> , <code>~0=1</code></p>
+<li><p>NOT 运算<br>参加运算的一个数据，按二进制位进行「取反」运算。<br>运算规则：<code>~1=0</code> , <code>~0=1</code></p>
 </li>
 <li><p>SHL 运算<br>将一个运算对象的各二进制位全部左移若干位（左边的二进制位丢弃，右边补0）。</p>
 </li>
@@ -354,9 +359,9 @@
 <li><a href="http://www.matrix67.com/blog/archives/266" target="_blank" rel="external">位运算简介及实用技巧（三）：进阶篇(2)</a></li>
 <li><a href="http://www.matrix67.com/blog/archives/4361" target="_blank" rel="external">趣题：老鼠与毒药问题的推广</a></li>
 <li><a href="http://www.cnblogs.com/pkuoliver/archive/2010/10/06/1844725.html" target="_blank" rel="external">一个 Sqrt 函数引发的血案</a></li>
-<li><a href="http://www.linuxidc.com/Linux/2014-09/106567.htm" target="_blank" rel="external">深入理解C语言中的移位运算</a><blockquote>版权声明<br><hr>本作品采用<a rel="external" href="http://creativecommons.org/licenses/by/4.0/" target="_blank">自由转载-非商用-非衍生-保持署名（知识共享署名 4.0 国际许可协议）</a>进行许可。<br>本文链接：<a href="http://snovey.github.io/2016/08/bitwise-operation/">http://snovey.github.io/2016/08/bitwise-operation/</a></blockquote></li>
+<li><a href="http://www.linuxidc.com/Linux/2014-09/106567.htm" target="_blank" rel="external">深入理解C语言中的移位运算</a></li>
 </ul>
-
+<blockquote>版权声明<br><hr>本作品采用<a rel="external" href="http://creativecommons.org/licenses/by/4.0/" target="_blank">自由转载-非商用-非衍生-保持署名（知识共享署名 4.0 国际许可协议）</a>进行许可。<br>本文链接：<a href="http://snovey.github.io/2016/08/bitwise-operation/">http://snovey.github.io/2016/08/bitwise-operation/</a></blockquote>
       
     </div>
 
@@ -444,20 +449,11 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel ">
+      <section class="site-overview sidebar-panel  sidebar-panel-active ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
-               src="/images/avatar.gif"
+               src="/uploads/avatar.jpg"
                alt="雨雪霏霏" />
           <p class="site-author-name" itemprop="name">雨雪霏霏</p>
           <p class="site-description motion-element" itemprop="description">简单快乐与幸福同行</p>
@@ -505,17 +501,6 @@
       </section>
 
       
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-            
-              
-            
-            
-              <p class="post-toc-empty">此文章未包含目录</p>
-            
-          </div>
-        </section>
-      
 
     </div>
   </aside>
@@ -549,6 +534,18 @@
 </div>
 
         
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+  
+</div>
+
+
 
         
       </div>
