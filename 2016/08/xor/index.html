@@ -105,7 +105,7 @@
 自反： $A\oplus B\oplus B = A\oplus 0 = A$
 推论">
 <meta property="og:image" content="http://snovey.github.io/image/cube.png">
-<meta property="og:updated_time" content="2016-09-03T13:34:14.375Z">
+<meta property="og:updated_time" content="2016-09-04T07:41:10.252Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="位运算进阶：异或">
 <meta name="twitter:description" content="上一篇文章讲了基本的位运算知识，其实位运算中最神奇的莫过于异或了，来看一下异或运算的性质
@@ -354,7 +354,7 @@
 </li>
 </ul>
 <p>体会一下逆运算<br>交换变量：swap(a, b) &lt;-&gt; a = a+b; b = a-b; a = a-b;<br>把 + 号和 - 号都换成 $\oplus$ 符号：$a = a\oplus b; b = a\oplus b; a = a\oplus b;$<br>第 1 步：$a = a\oplus b, b = b$<br>第 2 步：$a = a\oplus b, b = (a\oplus b)\oplus b = a$<br>第 3 步：$a = (a\oplus b)\oplus a = b, b = a$<br>合成一步用C语言写：<code>a^=b^=a^=b</code> 这个方法能够防止溢出，但是有缺点(&amp;a != &amp;b)。</p>
-<p>上面的推论推论可以应用于数据备份，RAID 5 用奇偶校验实现冗余。如果阵列中的一块磁盘出现故障，工作磁盘中的数据块与奇偶校验块一起来重建丢失的数据。<br>假设 A1、A2、A3 代表三块磁盘，Ap 用于备份。假设 A1 = 00000111、A2 = 00000101 以及 A3 = 00000000。A1、A2、A3 异或得到的 Ap 等于 00000010。如果第二个磁盘出现故障，A2 将不能被访问，但是可以通过 A1、A3 与 Ap 的异或进行重建：<br>A1$\oplus$ A3$\oplus$ Ap = 00000101</p>
+<p>上面的推论推论可以应用于数据备份，RAID 5 用奇偶校验实现冗余。如果阵列中的一块磁盘出现故障，工作磁盘中的数据块与奇偶校验块一起来重建丢失的数据。<br>假设 A1、A2、A3 代表三块磁盘，Ap 用于备份。假设 A1 = 00000111、A2 = 00000101 以及 A3 = 00000000。A1、A2、A3 异或得到的 Ap 等于 00000010。如果第二个磁盘出现故障，A2 将不能被访问，但是可以通过 A1、A3 与 Ap 的异或进行重建：<br>A1$\oplus$A3$\oplus$Ap = 00000101</p>
 <p>利用异或的逆运算是本身，可以进行简单的对称加密。</p>
 <p>异或在集合中用 $\bigtriangleup$ 表示<br>与，或分别代表集合运算中的交，并而异或则代表对称差，证明如下：<br>$$<br>A\bigtriangleup B=(A-B)\cap (B-A)=(A\cup B)-(A\cap B)<br>$$</p>
 <p>来看一道题：</p>
@@ -379,7 +379,7 @@
 <p>假设函数 $f(n)$ 是自然数 $1, 2, 3,…, n$ 的所有数的异或，即 $f(n)=f(n-1)\oplus n=1\oplus 2\oplus 3\oplus …\oplus n$，那么，任意的 $n$（$n$ 为自然数），我们能够很快的计算出 $f(n)$ 的值</p>
 </blockquote>
 <p>神奇么？我们可以先试探着写几个值：$f(0)=0,f(1)=1,f(2)=3,f(3)=0,f(4)=4,f(5)=1,f(6)=7,f(7)=0\ldots$ 发现 0 重复出现，可能有周期性，猜想答案为：</p>
-<p>$$<br>\begin{cases}<br>f(4n)=4n \\<br>f(4n+1)=1 \\<br>f(4n+2)=4n+3 \\<br>f(4n+3)=0<br>\end{cases}<br>$$</p>
+<p>$$<br>\begin{cases}<br>f(4n)=4n \<br>f(4n+1)=1 \<br>f(4n+2)=4n+3 \<br>f(4n+3)=0<br>\end{cases}<br>$$</p>
 <p>这个答案可由数学归纳法得出，粗略的证明如下：</p>
 <blockquote>
 <p>当 $n = 0$ 时显然成立<br>当 $n = k$ 时假设成立<br>当 $n = k+1$ 时 $f(4(k+1))=f(4k+3)\oplus 4(k+1)=0\oplus 4(k+1)=4(k+1)$<br>$f(4(k+1)+1)=f(4(k+1))\oplus (4(k+1)+1)=4(k+1)\oplus (4(k+1)+1)=1$（因为 $4(k+1)$ 的二进制末位一定是 $0$，所以 $4(k+1)$ 与 $4(k+1)$ 只有末位不同）<br>$f(4(k+1)+2)=f(4(k+1)+1)\oplus (4(k+1)+2)=1\oplus (4(k+1)+2)=4(k+1)+3$（因为 $4(k+1)+2$ 的二进制末两位一定是 $10$，所以 $1$ 与 $4(k+1)+2$ 异或后末两位为 $11$）<br>$f(4(k+1)+3)=f(4(k+1)+2)\oplus (4(k+1)+3)=4(k+1)+3\oplus (4(k+1)+3)=0$</p>
@@ -678,7 +678,7 @@
       }
     });
   </script>
-  <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
 
   
