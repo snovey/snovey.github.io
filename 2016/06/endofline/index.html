@@ -341,10 +341,10 @@
 <p>如果这段文本是在 Windows 下编辑的，当它移植到 Linux 下，用 vim 打开会显示：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">aaa^M</div><div class="line">bbb^M</div><div class="line">ccc^M</div></pre></td></tr></table></figure></p>
 <p>如果你的 vim 正常显示（可能是vim的版本比较高），可以 <code>cat -A</code> 一下，会显示：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">aaa^M$</div><div class="line">aaa^M$</div><div class="line">aaa^M$</div></pre></td></tr></table></figure></p>
 <p>这里的 <code>^M</code> 不是 <code>^</code> 符号加 <code>M</code>，而是一个组合字符，代表 <code>CR</code>。</p>
-<p>目前大多数文本编辑器都能够进行不同的换行符之间的转换（Windows 系统的记事本不行……）。如果是在 linux 下可使用如下命令进行转换：<br><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line"><span class="variable">$dos2unix</span> file_name</div><div class="line"><span class="variable">$unix2dos</span> file_name</div></pre></td></tr></table></figure></p>
+<p>目前大多数文本编辑器都能够进行不同的换行符之间的转换（Windows 系统的记事本不行……）。如果是在 linux 下可使用如下命令进行转换：<br><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line"><span class="variable">$dos2unix</span> file_name</div><div class="line"><span class="variable">$unix2dos</span> file\_name</div></pre></td></tr></table></figure></p>
 <p>当然，你的系统可能没有这个命令，那么你可以用 vi 或者 vim 打开，然后在命令模式下输入：<br><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">%s/^M$//g    <span class="comment">#这里的^M是Ctrl+v+m`</span></div></pre></td></tr></table></figure></p>
 <p>如果你的vi或者vim正常显示了，那么上面这个办法也是行不通的，这时可以使用 sed，命令如下：<br><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line"><span class="variable">$sed</span> -i <span class="string">'s/^M//g'</span> filename    <span class="comment">#这里的 ^M 仍然是 Ctrl+v+m</span></div><div class="line"><span class="variable">$sed</span> -i <span class="string">'s/\r//g'</span> filename    <span class="comment">#与上一个命令相同</span></div></pre></td></tr></table></figure></p>
-<p>或者使用 tr 命令：<br><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line"><span class="variable">$tr</span> <span class="_">-d</span> <span class="string">'\r'</span> &lt; inputfile &gt; outputfile    <span class="comment">#CRLF 转 LF</span></div><div class="line"><span class="variable">$tr</span> <span class="string">'\r'</span> <span class="string">'\n'</span> &lt; inputfile &gt; outputfile    <span class="comment">#CR 转 LF</span></div></pre></td></tr></table></figure></p>
+<p>或者使用 tr 命令：<br><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line"><span class="variable">$tr</span> <span class="\_">-d</span> <span class="string">'\r'</span> &lt; inputfile &gt; outputfile    <span class="comment">#CRLF 转 LF</span></div><div class="line"><span class="variable">$tr</span> <span class="string">'\r'</span> <span class="string">'\n'</span> &lt; inputfile &gt; outputfile    <span class="comment">#CR 转 LF</span></div></pre></td></tr></table></figure></p>
 <p>如果是在 Mac OS 9 或者 Linux 系统下编辑的，当它移植到 Windows 下，用记事本打开会显示：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">aaabbbccc</div></pre></td></tr></table></figure></p>
 <p>但是不妨写这样一段C语言程序：<br><figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="built_in">printf</span>(<span class="string">"aaa\n"</span>);</div><div class="line"><span class="built_in">printf</span>(<span class="string">"bbb\n"</span>);</div><div class="line"><span class="built_in">printf</span>(<span class="string">"ccc\n"</span>);</div></pre></td></tr></table></figure></p>
 <p>在控制台下输出为：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">aaa</div><div class="line">bbb</div><div class="line">ccc</div></pre></td></tr></table></figure></p>
@@ -463,7 +463,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -472,7 +472,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
