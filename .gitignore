@@ -1,5 +1,7 @@
-/image/*
 /js/*
-/uploads/*
+/css/*
+/image/*
+/images/*
 /vendors/*
+/uploads/*
 *.tex
