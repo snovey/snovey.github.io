@@ -1,0 +1,5 @@
+/image/*
+/js/*
+/uploads/*
+/vendors/*
+*.tex
