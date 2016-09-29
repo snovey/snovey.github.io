@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.snovey.com/"/>
-  <updated>2016-09-29T07:39:07.946Z</updated>
+  <updated>2016-09-29T07:42:50.061Z</updated>
   <id>http://www.snovey.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://www.snovey.com/2016/09/call-by-value/"/>
     <id>http://www.snovey.com/2016/09/call-by-value/</id>
     <published>2016-09-29T05:03:25.000Z</published>
-    <updated>2016-09-29T07:39:07.946Z</updated>
+    <updated>2016-09-29T07:42:50.061Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>All function arguments in ECMAScript are passed by value.<br><span style="display:block;text-align:right;"><em>Professional JavaScript for Web Developers, 3rd Edition</em></span></p>
@@ -30,8 +30,8 @@
 <p>如果是纯粹的按值传递，那么函数内部的修改不会影响外部对象，应该都输出 <code>unchanged</code> 的才对，如果是按引用传递，那么二者都应该保持     <code>unchanged</code> 才对。</p>
 <p>确切的说，JavaScript 中的基本类型值（primitive type）是按值传递的，引用类型值（Object type）是按共享传递（call by sharing）的。</p>
 <p>这里补充一下 JavaScript 的内存分配方式，基本类型值是在栈空间分配的内存，而引用类型值则是在堆空间分配的内存，然后在栈空间分配一个指向对象的指针。在把对象作为参数传入函数时，会将指向对象的指针进行复制然后传递过去（不是直接传递的指针！），这样当对对象进行修改时，会改变对象，这就是 <code>obj1.item</code> 被改变的原因，而 <code>y = {item: &quot;changed&quot;};</code> 则是改变了指针的指向，也就与原来的对象无关了，所以 <code>obj1.item</code> 未被改变。更多信息请查看<a href="http://dmitrysoshnikov.com/ecmascript/chapter-8-evaluation-strategy/" target="_blank" rel="external">ECMA-262-3 in detail. Chapter 8. Evaluation strategy.</a></p>
-<p>反过来看红宝书错了么？红宝书在这句话之后进行了解释，作者认为传递拷贝之后的对象地址也是一种传值。</p>
-<p>JavaScript 坑比较多，学习的时候最好找点靠谱的书和文档，有些人不懂还一本正经的瞎 BB，<!--像 [这样](http://www.cnblogs.com/Mblog/archive/2009/12/24/1631215.html)、[这样](http://www.zhihu.com/question/21673545)-->小心被带沟里去。<br>参考链接：</p>
+<p>反过来看红宝书错了么？红宝书在这句话之后进行了解释，作者认为传递拷贝之后的对象地址也是一种传值。所以请理解作者要传达的思想。</p>
+<p>JavaScript 坑比较多，学习的时候最好找点靠谱的书和文档，有些人不懂还一本正经的瞎 BB，<!--像 [这样](http://www.cnblogs.com/Mblog/archive/2009/12/24/1631215.html)、[这样](http://www.zhihu.com/question/21673545)-->小心被带沟里去。<br>参考：</p>
 <ul>
 <li><a href="http://stackoverflow.com/questions/518000/is-javascript-a-pass-by-reference-or-pass-by-value-language" target="_blank" rel="external">Is JavaScript a pass-by-reference or pass-by-value language?</a></li>
 <li>Professional JavaScript for Web Developers, 3rd Edition</li>
@@ -58,7 +58,7 @@
     <link href="http://www.snovey.com/2016/09/STL-iterator/"/>
     <id>http://www.snovey.com/2016/09/STL-iterator/</id>
     <published>2016-09-27T06:06:28.000Z</published>
-    <updated>2016-09-29T02:39:36.467Z</updated>
+    <updated>2016-09-29T07:45:18.354Z</updated>
     
     <content type="html"><![CDATA[<p>我第一个接触的容器是 vector，当时遍历容器的写法是这样的：<br><figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v;</div><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; v.size(); i++)</div><div class="line">&#123;</div><div class="line">    <span class="comment">//TODO</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <a id="more"></a>
@@ -99,7 +99,7 @@
     <link href="http://www.snovey.com/2016/08/xor/"/>
     <id>http://www.snovey.com/2016/08/xor/</id>
     <published>2016-08-31T12:51:12.000Z</published>
-    <updated>2016-09-13T08:38:05.687Z</updated>
+    <updated>2016-09-29T07:45:37.217Z</updated>
     
     <content type="html"><![CDATA[<p>上一篇文章讲了基本的位运算知识，其实位运算中最神奇的莫过于异或了，来看一下异或运算的性质</p>
 <ul>
@@ -241,7 +241,7 @@
     <link href="http://www.snovey.com/2016/06/char-encoding/"/>
     <id>http://www.snovey.com/2016/06/char-encoding/</id>
     <published>2016-06-17T10:57:03.000Z</published>
-    <updated>2016-09-01T07:42:40.863Z</updated>
+    <updated>2016-09-29T07:45:05.321Z</updated>
     
     <content type="html"><![CDATA[<h1 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h1><hr>
 <p>计算机只能存储二进制的数据，所以字符也一样只能通过将字符映射为相应的二进制形式才能保存，读取的时候由系统对字符进行图形渲染。<br><a id="more"></a></p>
