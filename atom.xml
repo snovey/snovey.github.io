@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.snovey.com/"/>
-  <updated>2016-09-29T07:42:50.061Z</updated>
+  <updated>2016-09-29T08:13:49.171Z</updated>
   <id>http://www.snovey.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://www.snovey.com/2016/09/call-by-value/"/>
     <id>http://www.snovey.com/2016/09/call-by-value/</id>
     <published>2016-09-29T05:03:25.000Z</published>
-    <updated>2016-09-29T07:42:50.061Z</updated>
+    <updated>2016-09-29T08:13:49.171Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>All function arguments in ECMAScript are passed by value.<br><span style="display:block;text-align:right;"><em>Professional JavaScript for Web Developers, 3rd Edition</em></span></p>
@@ -28,7 +28,7 @@
 <a id="more"></a>
 <p>不要单纯的根据上面这句话就认为 JavaScript 中的对象是按值传递（call by value）的，因为执行这段代码：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">change</span>(<span class="params">x, y</span>) </span>&#123;</div><div class="line">  x.item = <span class="string">"changed"</span>;</div><div class="line">  y = &#123;item: <span class="string">"changed"</span>&#125;;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> obj1 = &#123;item: <span class="string">"unchanged"</span>&#125;;</div><div class="line"><span class="keyword">var</span> obj2 = &#123;item: <span class="string">"unchanged"</span>&#125;;</div><div class="line"></div><div class="line">change(obj1, obj2);</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(obj1.item);  <span class="comment">//changed</span></div><div class="line"><span class="built_in">console</span>.log(obj2.item);  <span class="comment">//unchanged</span></div></pre></td></tr></table></figure></p>
 <p>如果是纯粹的按值传递，那么函数内部的修改不会影响外部对象，应该都输出 <code>unchanged</code> 的才对，如果是按引用传递，那么二者都应该保持     <code>unchanged</code> 才对。</p>
-<p>确切的说，JavaScript 中的基本类型值（primitive type）是按值传递的，引用类型值（Object type）是按共享传递（call by sharing）的。</p>
+<p>确切的说，JavaScript 中的基本类型值（primitive type）是按值传递的，引用类型值（Object type）是<strong>按共享传递（call by sharing）</strong>的。</p>
 <p>这里补充一下 JavaScript 的内存分配方式，基本类型值是在栈空间分配的内存，而引用类型值则是在堆空间分配的内存，然后在栈空间分配一个指向对象的指针。在把对象作为参数传入函数时，会将指向对象的指针进行复制然后传递过去（不是直接传递的指针！），这样当对对象进行修改时，会改变对象，这就是 <code>obj1.item</code> 被改变的原因，而 <code>y = {item: &quot;changed&quot;};</code> 则是改变了指针的指向，也就与原来的对象无关了，所以 <code>obj1.item</code> 未被改变。更多信息请查看<a href="http://dmitrysoshnikov.com/ecmascript/chapter-8-evaluation-strategy/" target="_blank" rel="external">ECMA-262-3 in detail. Chapter 8. Evaluation strategy.</a></p>
 <p>反过来看红宝书错了么？红宝书在这句话之后进行了解释，作者认为传递拷贝之后的对象地址也是一种传值。所以请理解作者要传达的思想。</p>
 <p>JavaScript 坑比较多，学习的时候最好找点靠谱的书和文档，有些人不懂还一本正经的瞎 BB，<!--像 [这样](http://www.cnblogs.com/Mblog/archive/2009/12/24/1631215.html)、[这样](http://www.zhihu.com/question/21673545)-->小心被带沟里去。<br>参考：</p>
