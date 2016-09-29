@@ -68,7 +68,7 @@
 <link href="https://blog.snovey.com/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="JavaScript," />
 
 
 
@@ -86,15 +86,16 @@
 
 
 
-<meta name="description" content="简单快乐与幸福同行">
-<meta property="og:type" content="website">
-<meta property="og:title" content="雨雪霏霏">
-<meta property="og:url" content="http://www.snovey.com/archives/2016/09/index.html">
+<meta name="description" content="All function arguments in ECMAScript are passed by value.Professional JavaScript for Web Developers, 3rd Edition">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript 对象作为函数参数的传递方式">
+<meta property="og:url" content="http://www.snovey.com/2016/09/call-by-value/index.html">
 <meta property="og:site_name" content="雨雪霏霏">
-<meta property="og:description" content="简单快乐与幸福同行">
+<meta property="og:description" content="All function arguments in ECMAScript are passed by value.Professional JavaScript for Web Developers, 3rd Edition">
+<meta property="og:updated_time" content="2016-09-29T07:39:07.946Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="雨雪霏霏">
-<meta name="twitter:description" content="简单快乐与幸福同行">
+<meta name="twitter:title" content="JavaScript 对象作为函数参数的传递方式">
+<meta name="twitter:description" content="All function arguments in ECMAScript are passed by value.Professional JavaScript for Web Developers, 3rd Edition">
 
 
 
@@ -115,9 +116,9 @@
 
 
 
-  <link rel="canonical" href="http://www.snovey.com/archives/2016/09/"/>
+  <link rel="canonical" href="http://www.snovey.com/2016/09/call-by-value/"/>
 
-  <title> 归档 | 雨雪霏霏 </title>
+  <title> JavaScript 对象作为函数参数的传递方式 | 雨雪霏霏 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -138,7 +139,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  page-archive  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -236,103 +237,154 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <span class="archive-move-on"></span>
-
-    <span class="archive-page-counter">
-      
-      
-      
-        
-      
-      嗯..! 目前共计 7 篇日志。 继续努力。
-    </span>
-
+  <div id="posts" class="posts-expand">
     
-
-      
-      
-      
-
-      
-        
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-2016">2016</h2>
-        </div>
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/09/call-by-value/" itemprop="url">
-              
-                <span itemprop="name">JavaScript 对象作为函数参数的传递方式</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-09-29T13:03:25+08:00"
-              content="2016-09-29" >
-          09-29
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/09/STL-iterator/" itemprop="url">
-              
-                <span itemprop="name">关于 STL 中迭代器的一点思考</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-09-27T14:06:28+08:00"
-              content="2016-09-27" >
-          09-27
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-  </section>
 
   
+  
 
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                JavaScript 对象作为函数参数的传递方式
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-29T13:03:25+08:00" content="2016-09-29">
+              2016-09-29
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>All function arguments in ECMAScript are passed by value.<br><span style="display:block;text-align:right;"><em>Professional JavaScript for Web Developers, 3rd Edition</em></span></p>
+</blockquote>
+<a id="more"></a>
+<p>不要单纯的根据上面这句话就认为 JavaScript 中的对象是按值传递（call by value）的，因为执行这段代码：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">change</span>(<span class="params">x, y</span>) </span>&#123;</div><div class="line">  x.item = <span class="string">"changed"</span>;</div><div class="line">  y = &#123;item: <span class="string">"changed"</span>&#125;;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> obj1 = &#123;item: <span class="string">"unchanged"</span>&#125;;</div><div class="line"><span class="keyword">var</span> obj2 = &#123;item: <span class="string">"unchanged"</span>&#125;;</div><div class="line"></div><div class="line">change(obj1, obj2);</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(obj1.item);  <span class="comment">//changed</span></div><div class="line"><span class="built_in">console</span>.log(obj2.item);  <span class="comment">//unchanged</span></div></pre></td></tr></table></figure></p>
+<p>如果是纯粹的按值传递，那么函数内部的修改不会影响外部对象，应该都输出 <code>unchanged</code> 的才对，如果是按引用传递，那么二者都应该保持     <code>unchanged</code> 才对。</p>
+<p>确切的说，JavaScript 中的基本类型值（primitive type）是按值传递的，引用类型值（Object type）是按共享传递（call by sharing）的。</p>
+<p>这里补充一下 JavaScript 的内存分配方式，基本类型值是在栈空间分配的内存，而引用类型值则是在堆空间分配的内存，然后在栈空间分配一个指向对象的指针。在把对象作为参数传入函数时，会将指向对象的指针进行复制然后传递过去（不是直接传递的指针！），这样当对对象进行修改时，会改变对象，这就是 <code>obj1.item</code> 被改变的原因，而 <code>y = {item: &quot;changed&quot;};</code> 则是改变了指针的指向，也就与原来的对象无关了，所以 <code>obj1.item</code> 未被改变。更多信息请查看<a href="http://dmitrysoshnikov.com/ecmascript/chapter-8-evaluation-strategy/" target="_blank" rel="external">ECMA-262-3 in detail. Chapter 8. Evaluation strategy.</a></p>
+<p>反过来看红宝书错了么？红宝书在这句话之后进行了解释，作者认为传递拷贝之后的对象地址也是一种传值。</p>
+<p>JavaScript 坑比较多，学习的时候最好找点靠谱的书和文档，有些人不懂还一本正经的瞎 BB，<!--像 [这样](http://www.cnblogs.com/Mblog/archive/2009/12/24/1631215.html)、[这样](http://www.zhihu.com/question/21673545)-->小心被带沟里去。<br>参考链接：</p>
+<ul>
+<li><a href="http://stackoverflow.com/questions/518000/is-javascript-a-pass-by-reference-or-pass-by-value-language" target="_blank" rel="external">Is JavaScript a pass-by-reference or pass-by-value language?</a></li>
+<li>Professional JavaScript for Web Developers, 3rd Edition</li>
+</ul>
+<blockquote>版权声明<br><hr>本作品采用<a rel="external" href="http://creativecommons.org/licenses/by/4.0/" target="_blank">自由转载-非商用-非衍生-保持署名（知识共享署名 4.0 国际许可协议）</a>进行许可。<br>本文链接：<a href="http://www.snovey.com/2016/09/call-by-value/">http://www.snovey.com/2016/09/call-by-value/</a></blockquote>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag">#JavaScript</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/STL-iterator/" rel="next" title="关于 STL 中迭代器的一点思考">
+                <i class="fa fa-chevron-left"></i> 关于 STL 中迭代器的一点思考
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -340,6 +392,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -513,11 +569,9 @@
   
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
+  <script type="text/javascript" src="https://blog.snovey.com/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="https://blog.snovey.com/js/src/post-details.js?v=5.0.1"></script>
+
 
 
   
