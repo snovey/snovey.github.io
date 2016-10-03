@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="www.snovey.com/"/>
-  <updated>2016-10-02T10:04:57.440Z</updated>
+  <updated>2016-10-02T10:10:18.553Z</updated>
   <id>www.snovey.com/</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>通关 hacked</title>
+    <title>通关 hacked 的 story 模式</title>
     <link href="www.snovey.com/2016/10/hacked/"/>
     <id>www.snovey.com/2016/10/hacked/</id>
     <published>2016-10-01T09:42:28.000Z</published>
-    <updated>2016-10-02T10:04:57.440Z</updated>
+    <updated>2016-10-02T10:10:18.553Z</updated>
     
     <content type="html"><![CDATA[<p>十一返乡的绿皮车异常拥挤，漫长的旅途连一碗泡面都吃不上，百无聊赖之际想起手机里还有 <a href="http://www.hackedapp.com" target="_blank" rel="external">hacked</a> 这个游戏，这是我的手机中除了 chrome 的小恐龙之外的唯一一款游戏了，当初初学 C 语言，未能通关便放弃了，它就这样躺在手机里一年多，如今通关就把代码贴出来纪念一下。<br><a id="more"></a></p>
 <h1 id="The-Hackpad"><a href="#The-Hackpad" class="headerlink" title="The Hackpad"></a>The Hackpad</h1><hr>
