@@ -94,7 +94,7 @@
 <p>写个递归<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">var_a = [];</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>: <span class="title">var_a</span>, <span class="title">var_b</span> </span>&#123;</div><div class="line">  <span class="keyword">if</span> !var_a.is_list &#123;</div><div class="line">    var_b.push(var_a);</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">else</span> &#123;</div><div class="line">    foreach var_c <span class="keyword">in</span> var_a &#123;</div><div class="line">      f1(var_c, var_b);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">f1(input, var_a);</div><div class="line"><span class="keyword">return</span> var_a;</div></pre></td></tr></table></figure></p>
 <h1 id="Retirement"><a href="#Retirement" class="headerlink" title="Retirement"></a>Retirement</h1><hr>
 <h3 id="Draw"><a href="#Draw" class="headerlink" title="Draw"></a>Draw</h3><p>画点<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">return draw(input[0], input[1]);</div></pre></td></tr></table></figure></p>
-<blockquote>版权声明<br><hr>本作品采用<a rel="external" href="http://creativecommons.org/licenses/by/4.0/" target="_blank">自由转载-非商用-非衍生-保持署名（知识共享署名 4.0 国际许可协议）</a>进行许可。<br>本文链接：www.snovey.com/2016/10/hacked-story/</blockquote>]]></content>
+<blockquote>版权声明<br><hr>本作品采用<a rel="external" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。<br>本文链接：www.snovey.com/2016/10/hacked-story/</blockquote>]]></content>
     
     <summary type="html">
     
@@ -132,7 +132,7 @@
 <li><a href="http://stackoverflow.com/questions/518000/is-javascript-a-pass-by-reference-or-pass-by-value-language" target="_blank" rel="external">Is JavaScript a pass-by-reference or pass-by-value language?</a></li>
 <li>Professional JavaScript for Web Developers, 3rd Edition</li>
 </ul>
-<blockquote>版权声明<br><hr>本作品采用<a rel="external" href="http://creativecommons.org/licenses/by/4.0/" target="_blank">自由转载-非商用-非衍生-保持署名（知识共享署名 4.0 国际许可协议）</a>进行许可。<br>本文链接：www.snovey.com/2016/09/call-by-value/</blockquote>]]></content>
+<blockquote>版权声明<br><hr>本作品采用<a rel="external" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。<br>本文链接：www.snovey.com/2016/09/call-by-value/</blockquote>]]></content>
     
     <summary type="html">
     
@@ -171,7 +171,7 @@
 <li><a href="http://stackoverflow.com/questions/9963401/why-are-standard-iterator-ranges-begin-end-instead-of-begin-end?rq=1" target="_blank" rel="external">Why are Standard iterator ranges [begin, end) instead of [begin, end]?</a></li>
 <li><a href="http://stackoverflow.com/questions/1853358/use-a-regular-iterator-to-iterate-backwards-or-struggle-with-reverse-iterator" target="_blank" rel="external">Use a regular iterator to iterate backwards, or struggle with reverse_iterator?</a></li>
 </ul>
-<blockquote>版权声明<br><hr>本作品采用<a rel="external" href="http://creativecommons.org/licenses/by/4.0/" target="_blank">自由转载-非商用-非衍生-保持署名（知识共享署名 4.0 国际许可协议）</a>进行许可。<br>本文链接：www.snovey.com/2016/09/STL-iterator/</blockquote>]]></content>
+<blockquote>版权声明<br><hr>本作品采用<a rel="external" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。<br>本文链接：www.snovey.com/2016/09/STL-iterator/</blockquote>]]></content>
     
     <summary type="html">
     
@@ -246,7 +246,7 @@
 <li><a href="https://en.wikipedia.org/wiki/Exclusive-or" target="_blank" rel="external">Exclusive or</a></li>
 <li><a href="https://www.lijinma.com/blog/2014/05/29/amazing-xor/" target="_blank" rel="external">感受异或的神奇</a></li>
 </ul>
-<blockquote>版权声明<br><hr>本作品采用<a rel="external" href="http://creativecommons.org/licenses/by/4.0/" target="_blank">自由转载-非商用-非衍生-保持署名（知识共享署名 4.0 国际许可协议）</a>进行许可。<br>本文链接：www.snovey.com/2016/08/xor/</blockquote>]]></content>
+<blockquote>版权声明<br><hr>本作品采用<a rel="external" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。<br>本文链接：www.snovey.com/2016/08/xor/</blockquote>]]></content>
     
     <summary type="html">
     
@@ -317,7 +317,7 @@
 <li><a href="http://www.cnblogs.com/pkuoliver/archive/2010/10/06/1844725.html" target="_blank" rel="external">一个 Sqrt 函数引发的血案</a></li>
 <li><a href="http://www.linuxidc.com/Linux/2014-09/106567.htm" target="_blank" rel="external">深入理解C语言中的移位运算</a></li>
 </ul>
-<blockquote>版权声明<br><hr>本作品采用<a rel="external" href="http://creativecommons.org/licenses/by/4.0/" target="_blank">自由转载-非商用-非衍生-保持署名（知识共享署名 4.0 国际许可协议）</a>进行许可。<br>本文链接：www.snovey.com/2016/08/bitwise-operation/</blockquote>]]></content>
+<blockquote>版权声明<br><hr>本作品采用<a rel="external" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。<br>本文链接：www.snovey.com/2016/08/bitwise-operation/</blockquote>]]></content>
     
     <summary type="html">
     
@@ -472,7 +472,7 @@
 <li><a href="https://www.wikiwand.com/zh/%E4%BD%8D%E5%85%83%E7%B5%84%E9%A0%86%E5%BA%8F%E8%A8%98%E8%99%9F&quot;" target="_blank" rel="external">位元組順序記號</a></li>
 <li><a href="http://unicode.org/faq/utf_bom.html&quot;" target="_blank" rel="external">UTF-BOM</a></li>
 </ul>
-<blockquote>版权声明<br><hr>本作品采用<a rel="external" href="http://creativecommons.org/licenses/by/4.0/" target="_blank">自由转载-非商用-非衍生-保持署名（知识共享署名 4.0 国际许可协议）</a>进行许可。<br>本文链接：www.snovey.com/2016/06/char-encoding/</blockquote>]]></content>
+<blockquote>版权声明<br><hr>本作品采用<a rel="external" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。<br>本文链接：www.snovey.com/2016/06/char-encoding/</blockquote>]]></content>
     
     <summary type="html">
     
@@ -527,7 +527,7 @@
 <ul>
 <li><a href="https://www.wikiwand.com/en/Newline" target="_blank" rel="external">Newline</a></li>
 </ul>
-<blockquote>版权声明<br><hr>本作品采用<a rel="external" href="http://creativecommons.org/licenses/by/4.0/" target="_blank">自由转载-非商用-非衍生-保持署名（知识共享署名 4.0 国际许可协议）</a>进行许可。<br>本文链接：www.snovey.com/2016/06/endofline/</blockquote>]]></content>
+<blockquote>版权声明<br><hr>本作品采用<a rel="external" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。<br>本文链接：www.snovey.com/2016/06/endofline/</blockquote>]]></content>
     
     <summary type="html">
     
@@ -551,7 +551,7 @@
     <updated>2016-09-29T08:41:04.392Z</updated>
     
     <content type="html"><![CDATA[<p>对于一个有向图，可以通过拓扑排序（Topological Sort）来判断是否是有向无环图（Directed Acyclic Graph，DAG）。<br>拓扑排序的算法思想是：<br>（1）每次从图中取出入度为 0 的节点<br>（2）删除该节点发出的所有边，进行（1）步骤<br><a id="more"></a><br>邻接表的实现方式如下：<br><img src="//blog.snovey.com/image/toposort.png" alt="toposort"><br>初始的时候建立两个表，一个邻接表，以及另外一个表存储出度为0的节点，每次将入度表中入度为 0 的点加入容器中，然后从容器中取出节点，去邻接表中查询，根据邻接表修改入度表，发现入度为 0 的点加入容器中，如此反复，直至容器为空。<br>如果最终入度表中有入度不为 0 的节点，则该图有环，否则该图无环。若该图为偏序关系，则某一时刻容器中的元素多于一个，取出的元素可能是随机的，造成拓扑排序的结果不唯一，与容器的选取有关。若该图为全序关系，则容器中的元素始终只有一个，结果唯一，与容器的选取无关。<br>下面以题为例说明：<br>HDU 3342<br>题意：有一个 ACM 日常 QQ 交流群，群内存在一些师徒关系，若存在某个人的徒弟是自己的师傅的情况则不合法，输出 NO，否则输出 YES。此题有 trick，即要判断重边，代码如下<br><figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> n, m, x, y, cnt, table[<span class="number">105</span>];</div><div class="line">    <span class="keyword">bool</span> vis[<span class="number">105</span>][<span class="number">105</span>];  <span class="comment">//防止出现重边</span></div><div class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;n, &amp;m) &amp;&amp; n &amp;&amp; m)</div><div class="line">    &#123;</div><div class="line">        cnt = <span class="number">0</span>;</div><div class="line">        <span class="built_in">memset</span>(vis, <span class="number">0</span>, <span class="keyword">sizeof</span>(vis));</div><div class="line">        <span class="built_in">memset</span>(table, <span class="number">0</span>, <span class="keyword">sizeof</span>(table));</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v[<span class="number">105</span>];  <span class="comment">//邻接表</span></div><div class="line">        <span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt; st;  <span class="comment">//存储入度为0的节点</span></div><div class="line">        <span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;::iterator it;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)</div><div class="line">        &#123;</div><div class="line">            <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;x, &amp;y);</div><div class="line">            <span class="keyword">if</span>(!vis[x][y])</div><div class="line">            &#123;</div><div class="line">                v[x].push_back(y);</div><div class="line">                table[y]++;</div><div class="line">                vis[x][y] = <span class="literal">true</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</div><div class="line">            <span class="keyword">if</span>(table[i] == <span class="number">0</span>)</div><div class="line">                cnt++, st.insert(i);</div><div class="line">        <span class="keyword">while</span>(!st.empty())</div><div class="line">        &#123;</div><div class="line">            it = st.begin();</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">unsigned</span> <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; v[*it].size(); i++)</div><div class="line">            &#123;</div><div class="line">                table[v[*it][i]]--;</div><div class="line">                <span class="keyword">if</span>(table[v[*it][i]] == <span class="number">0</span>)</div><div class="line">                    cnt++, st.insert(v[*it][i]);</div><div class="line">            &#125;</div><div class="line">            st.erase(*it);</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">printf</span>(cnt == n ? <span class="string">"YES\n"</span> : <span class="string">"NO\n"</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<blockquote>版权声明<br><hr>本作品采用<a rel="external" href="http://creativecommons.org/licenses/by/4.0/" target="_blank">自由转载-非商用-非衍生-保持署名（知识共享署名 4.0 国际许可协议）</a>进行许可。<br>本文链接：www.snovey.com/2016/06/toposort/</blockquote>]]></content>
+<blockquote>版权声明<br><hr>本作品采用<a rel="external" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。<br>本文链接：www.snovey.com/2016/06/toposort/</blockquote>]]></content>
     
     <summary type="html">
     
