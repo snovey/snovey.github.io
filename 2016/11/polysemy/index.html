@@ -98,7 +98,7 @@
 
 数学中的「闭包」与计算机科学中的「闭包」有什么关系？
 内存管理中的「堆」与数据结构中的「堆」有什么关系？">
-<meta property="og:updated_time" content="2016-11-22T11:08:16.025Z">
+<meta property="og:updated_time" content="2016-11-22T13:43:04.425Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="撞词">
 <meta name="twitter:description" content="学习中常常遇到同一个词语出现在多个地方，其中有一部分词语让我相当的困惑：
@@ -368,7 +368,7 @@
 <blockquote>
 <p>在数学中，集合 X 上的二元关系 R 的 <strong>传递闭包</strong> 是 X 上包含 R 的最小的传递关系。<br>集合 X 上的关系 R 的传递闭包 S 的定义为<br>$$<br>S=\bigcup_{i\in \lbrace 1,2,3,\ldots\rbrace} R^i.<br>$$<br>其中<br>$$<br>\begin{cases}<br>R^1 = R\,\\[2ex]<br>R^{i+1} = R \circ R^i<br>\end{cases}<br>$$<br>换言之，R 的传递闭包是 R 与 X 上的传递关系的并集。</p>
 </blockquote>
-<p>正则表达式中的 「Kleene 闭包」：</p>
+<p>形式语言中的「Kleene 闭包」：</p>
 <blockquote>
 <p>假定<br>$$<br>V_{0}=\lbrace\epsilon \rbrace\,<br>$$<br>递归的定义集合<br>$$<br>V_{i+1}=\lbrace wv:w\in V_{i}\wedge v\in V\rbrace\, 这里的\ i&gt;0\,<br>$$<br>如果 $V$ 是一个形式语言，集合 $V$ 的第 $i$ 次幂是集合 $V$ 同自身的 i 次串接的简写。就是说， $V_{i}$ 可以被理解为是从 $V$ 中的符号形成的所有长度为 $i$ 的字符串的集合。<br>所以在 $V$ 上的 Kleene 星号的定义是<br>$$<br>V^{*}=\bigcup_{i=0}^{+\infty} V_i=\left\lbrace\varepsilon \right\rbrace\cup V\cup V^{2}\cup V^{3}\cup \ldots<br>$$<br>就是说，它是从 $V$ 中的符号生成的所有可能的有限长度的字符串的并集。</p>
 </blockquote>
