@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="www.snovey.com/"/>
-  <updated>2016-11-22T13:43:04.425Z</updated>
+  <updated>2016-11-22T14:31:32.464Z</updated>
   <id>www.snovey.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="www.snovey.com/2016/11/polysemy/"/>
     <id>www.snovey.com/2016/11/polysemy/</id>
     <published>2016-11-21T14:12:17.000Z</published>
-    <updated>2016-11-22T13:43:04.425Z</updated>
+    <updated>2016-11-22T14:31:32.464Z</updated>
     
     <content type="html"><![CDATA[<p>学习中常常遇到同一个词语出现在多个地方，其中有一部分词语让我相当的困惑：</p>
 <ul>
@@ -42,7 +42,7 @@
 <blockquote>
 <p>在编程语言中， <strong>闭包</strong> （也叫 <strong>词法闭包</strong> 或 <strong>函数闭包</strong> ）是在语言中使用一等函数实现词法作用域名称绑定的技术。</p>
 </blockquote>
-<p>看定义他们就没什么关系，彼得 · 兰丁 在 1964 年将术语 <strong>闭包</strong> 定义为一种包含 <strong>环境成分</strong> 和 <strong>控制成分</strong> 的实体，来指代某些其开放绑定（自由变量）已经由其语法环境完成闭合（或者绑定）的 lambda 表达式，从而形成了 <strong>闭合的表达式</strong> ，或称闭包。在 <em>SICP</em> 中也提到了这个：</p>
+<p>看定义他们就没什么关系，Peter J. Landin 在 1964 年将术语 <strong>闭包</strong> 定义为一种包含 <strong>环境成分</strong> 和 <strong>控制成分</strong> 的实体，来指代某些其开放绑定（自由变量）已经由其语法环境完成闭合（或者绑定）的 lambda 表达式，从而形成了 <strong>闭合的表达式</strong> ，或称闭包。在 <em>SICP</em> 中也提到了这个：</p>
 <blockquote>
 <p>The use of the word “closure” here comes from abstract algebra, where a set of elements is said to be closed under an operation if applying the operation to elements in the set produces an element that is again an element of the set. <strong>The Lisp community also (unfortunately) uses the word “closure” to describe a totally unrelated concept</strong>: A closure is an implementation technique for representing procedures with free.<br><span style="display:block;text-align:right;"><em>Structure and Interpretation of Computer Programs, 2nd ed. p.133</em></span></p>
 </blockquote>
