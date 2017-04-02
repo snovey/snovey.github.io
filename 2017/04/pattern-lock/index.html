@@ -94,7 +94,7 @@
 <meta property="og:description" content="要制作一个图案解锁，第一步要想好设计，对外开放哪些接口，如果我是一位开发者，我希望初始化的时候可以自定义行数列数，以及颜色大小等参数，如果用户不定义要有一套默认的参数，我希望可以调用方法获取用户的输入，并且提供一些额外的 API。就像买煎饼果子告诉老板不要加辣多放香菜，如果省略某些信息老板还要有自己的默认配置，最后给你你想要的煎饼果子。">
 <meta property="og:image" content="www.snovey.com//blog.snovey.com/image/pattern-lock.gif">
 <meta property="og:image" content="www.snovey.com//blog.snovey.com/image/pattern-lock.png">
-<meta property="og:updated_time" content="2017-04-02T09:46:39.310Z">
+<meta property="og:updated_time" content="2017-04-02T13:10:19.699Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="制作图案解锁">
 <meta name="twitter:description" content="要制作一个图案解锁，第一步要想好设计，对外开放哪些接口，如果我是一位开发者，我希望初始化的时候可以自定义行数列数，以及颜色大小等参数，如果用户不定义要有一套默认的参数，我希望可以调用方法获取用户的输入，并且提供一些额外的 API。就像买煎饼果子告诉老板不要加辣多放香菜，如果省略某些信息老板还要有自己的默认配置，最后给你你想要的煎饼果子。">
@@ -309,7 +309,7 @@
 <p>如果在圆内并且未触摸过该点，则标记该点，并将该点存入数组中。</p>
 <p>当然，记得每次 <code>touchmove</code> 发生时都要清空画布重绘图案！重新绘制时需要将走过的节点两两连线，这里用一个 <code>reduce</code> 函数就搞定了：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">self.input.reduce((prev, next) =&gt; self.drawLine(prev, next));</div></pre></td></tr></table></figure></p>
 <p>最后，整个流程最消耗资源的就是每次发生 <code>touchmove</code> 事件时的重绘画布了，这里需要做一下函数节流和防抖，不过我做的时候出了点问题，就先搁置了。</p>
-<p>想了解详细的使用请移步我的 <a href="">GitHub</a></p>
+<p>想了解详细的使用请移步我的 <a href="https://github.com/snovey/Web-crafts/tree/master/pattern-lock" target="_blank" rel="external">GitHub</a></p>
 <blockquote>版权声明<br><hr>本作品采用<a rel="external" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。<br>本文链接：www.snovey.com/2017/04/pattern-lock/</blockquote>
       
     </div>
