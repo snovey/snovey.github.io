@@ -1,21 +1,17 @@
-<!doctype html>
-
-
-
-  
-
-
-<html class="theme-next mist use-motion">
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-
-
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 
+<link href="//blog.snovey.com/css/style.css?v=1.0.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined," />
 
 
 
@@ -23,304 +19,82 @@
 
 
 
-
-
-
-
-  
-  
-  <link href="//blog.snovey.com/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
-
-
-
-<link href="//blog.snovey.com/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
-
-<link href="//blog.snovey.com/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="字符编码," />
-
-
-
-
-
-  <link rel="alternate" href="/atom.xml" title="雨雪霏霏" type="application/atom+xml" />
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
-
-
-
-
-
-
-<meta name="description" content="下图是上古时期的机械打字机，每输入一个字符，滚筒会左移一小截（一个字符的宽度 + 字符间距，好在那时候打字机都是等宽字体）。当滚筒移动到最左侧，即纸张右侧已经和敲针对齐时（也就是打完一行字），会有响铃提示已经抵达行末。这时拉动左侧墨带盒上边的金属手柄（换行手柄），然后滚筒会被推到最右边，打字头对准了行首，这就是 CR（carriage return, 回车）。继续用力，换行手柄大约会被扳动 30">
-<meta property="og:type" content="article">
-<meta property="og:title" content="回车与换行">
-<meta property="og:url" content="www.snovey.com/2016/06/endofline/index.html">
-<meta property="og:site_name" content="雨雪霏霏">
-<meta property="og:description" content="下图是上古时期的机械打字机，每输入一个字符，滚筒会左移一小截（一个字符的宽度 + 字符间距，好在那时候打字机都是等宽字体）。当滚筒移动到最左侧，即纸张右侧已经和敲针对齐时（也就是打完一行字），会有响铃提示已经抵达行末。这时拉动左侧墨带盒上边的金属手柄（换行手柄），然后滚筒会被推到最右边，打字头对准了行首，这就是 CR（carriage return, 回车）。继续用力，换行手柄大约会被扳动 30">
-<meta property="og:image" content="www.snovey.com/blog.snovey.com/image/typewriter.jpg">
-<meta property="og:updated_time" content="2017-08-09T02:25:08.996Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="回车与换行">
-<meta name="twitter:description" content="下图是上古时期的机械打字机，每输入一个字符，滚筒会左移一小截（一个字符的宽度 + 字符间距，好在那时候打字机都是等宽字体）。当滚筒移动到最左侧，即纸张右侧已经和敲针对齐时（也就是打完一行字），会有响铃提示已经抵达行末。这时拉动左侧墨带盒上边的金属手柄（换行手柄），然后滚筒会被推到最右边，打字头对准了行首，这就是 CR（carriage return, 回车）。继续用力，换行手柄大约会被扳动 30">
-<meta name="twitter:image" content="www.snovey.com/blog.snovey.com/image/typewriter.jpg">
-
-
-
-<script type="text/javascript" id="hexo.configuration">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    scheme: 'Mist',
-    sidebar: {"position":"left","display":"post"},
-    fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: 0,
-      author: 'Author'
-    }
-  };
-</script>
-
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.0.0" />
 
 
 
   <link rel="canonical" href="www.snovey.com/2016/06/endofline/"/>
 
-  <title> 回车与换行 | 雨雪霏霏 </title>
+<title>雨雪霏霏</title>
+
 </head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
-
-  
-
-
-
-
-
-
-
-
-
-
-  
-  
-    
-  
-
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
-
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">雨雪霏霏</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN" class="typo">
+  <header class="header">
+  <div class="header-inner">
+    <div class="blog-title">
+      <a href="/" class="logo">雨雪霏霏</a>
+    </div>
+    <nav class="navbar">
+        
+            <a href="/" class="menu-item-link">首页</a>
+          
+            <a href="/archives" class="menu-item-link">归档</a>
+          
+            <a href="/tags" class="menu-item-link">标签</a>
+          
+            <a href="/about" class="menu-item-link">关于</a>
+          
+      </nav>
   </div>
-  <p class="site-subtitle"></p>
-</div>
+</header>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
+  <main class="main">
+    <aside class="siderbar">
+  <section class="siderbar-panel">
+    <div class="author-panel" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <img class="author-image lazyload" itemprop="image" data-src="//blog.snovey.com/uploads/avatar.jpg" alt="雨雪霏霏">
+      <p class="author-name" itemprop="name">雨雪霏霏</p>
+      <p class="site-description" itemprop="description" >简单快乐与幸福同行</p>
+    </div>
+    <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives">
+          <span class="site-state-item-name">日志</span>
+          <span class="site-state-item-count">11</span>
+        </a>
+      </div>
       
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            Startseite
+        <div class="site-state-item site-state-tags">
+          <a href="/tags">
+            <span class="site-state-item-name">标签</span>
+            <span class="site-state-item-count">11</span>
           </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            Archiv
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            Kategorien
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            Tags
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            Über
-          </a>
-        </li>
-      
-
-      
-    </ul>
-  
-
-  
-</nav>
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
-    
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                回车与换行
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
-            <time itemprop="dateCreated" datetime="2016-06-08T00:00:00+08:00" content="2016-06-08">
-              2016-06-08
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">in</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/杂谈/" itemprop="url" rel="index">
-                    <span itemprop="name">杂谈</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
       
-      
-
-      
-        <p>下图是上古时期的机械打字机，每输入一个字符，滚筒会左移一小截（一个字符的宽度 + 字符间距，好在那时候打字机都是等宽字体）。当滚筒移动到最左侧，即纸张右侧已经和敲针对齐时（也就是打完一行字），会有响铃提示已经抵达行末。这时拉动左侧墨带盒上边的金属手柄（换行手柄），然后滚筒会被推到最右边，打字头对准了行首，这就是 <code>CR</code>（carriage return, 回车）。继续用力，换行手柄大约会被扳动 30 度左右，纸会被上卷一行（行高，line height），这就是 <code>LF</code>（line feed, 换行）。<br><a id="more"></a></p>
-<p><img src="blog.snovey.com/image/typewriter.jpg" alt="typewriter"></p>
+    </nav>
+    <div class="feed-link motion-element" style="opacity: 1; display: block; transform: translateX(0px);">
+      <a href="/atom.xml" rel="alternate">RSS</a>
+    </div>
+    <div class="links-of-author motion-element">
+    </div>
+    <div class="cc-license motion-element" itemprop="license">
+      <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">
+        <img data-src="//blog.snovey.com/images/cc-by-nc-nd.svg" class="lazyload" alt="Creative Commons">
+      </a>
+    </div>
+  </section>
+</aside>
+    <button type="button" id="info"><?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1502186391435" class="icon" style="" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1007" xmlns:xlink="http://www.w3.org/1999/xlink" width="32" height="32"><defs><style type="text/css"></style></defs><path d="M65.012178 128.544655 65.012178 230.875275 959.381795 230.875275 959.381795 128.544655 65.012178 128.544655Z" p-id="1008" fill="#ffffff"></path><path d="M64.729745 563.201126 959.269231 563.201126 959.269231 460.870506 64.729745 460.870506 64.729745 563.201126Z" p-id="1009" fill="#ffffff"></path><path d="M64.729745 895.525953 959.269231 895.525953 959.269231 793.195334 64.729745 793.195334 64.729745 895.525953Z" p-id="1010" fill="#ffffff"></path><path d="M64.729745 889.742227" p-id="1011" fill="#000000"></path></svg></button>
+    <article class="post">
+  <div class="post-title">
+    <h2 class="title">回车与换行</h2>
+  </div>
+   <div class="post-meta">
+    <span class="post-time">2016-06-08</span>
+  </div>
+  <div class="post-content">
+    <p>下图是上古时期的机械打字机，每输入一个字符，滚筒会左移一小截（一个字符的宽度 + 字符间距，好在那时候打字机都是等宽字体）。当滚筒移动到最左侧，即纸张右侧已经和敲针对齐时（也就是打完一行字），会有响铃提示已经抵达行末。这时拉动左侧墨带盒上边的金属手柄（换行手柄），然后滚筒会被推到最右边，打字头对准了行首，这就是 <code>CR</code>（carriage return, 回车）。继续用力，换行手柄大约会被扳动 30 度左右，纸会被上卷一行（行高，line height），这就是 <code>LF</code>（line feed, 换行）。<br><a id="more"></a></p>
+<p><img class="lazyload"  data-src="//blog.snovey.com/image/typewriter.jpg" alt="typewriter"></p>
 <p>如果只换行不回车，那么第一行敲满以后，敲针始终在纸张右侧，无法继续输入；只回车不换行，所有的内容都敲到同一行里了。</p>
 <p>可以看下这两个视频：<a href="https://www.youtube.com/watch?v=nEdeZkBG14w" target="_blank" rel="external">Olympia SM9 Typewriter Demo</a> 和 <a href="https://www.youtube.com/watch?v=FkUXn5bOwzk" target="_blank" rel="external">How to Use a Typewriter</a></p>
 <p>在最早的 ASCII 标准（1963-1968）中，有两套标准，一套是 ISO 出的认为 <code>CRLF</code> 和 <code>LF</code> 都是标准的；然而另一套是 ASA 出的只认为 <code>CRLF</code> 是符合标准的。</p>
@@ -353,302 +127,45 @@
 <li><a href="https://www.wikiwand.com/en/Newline" target="_blank" rel="external">Newline</a></li>
 </ul>
 <blockquote>版权声明<br><hr>本作品采用<a rel="external" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。<br>本文链接：www.snovey.com/2016/06/endofline/</blockquote>
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/字符编码/" rel="tag">#字符编码</a>
-          
-        </div>
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2016/06/toposort/" rel="next" title="拓扑排序的算法实现">
-                <i class="fa fa-chevron-left"></i> 拓扑排序的算法实现
-              </a>
-            
-          </div>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/06/char-encoding/" rel="prev" title="漫谈字符编码">
-                漫谈字符编码 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
   </div>
+</article>
 
 
-          </div>
-          
-
-
-          
-  <div class="comments" id="comments">
-    
+  </main>
+  <footer class="footer">
+  <div class="footer-inner">
+    <p class="copyright">
+      雨雪霏霏 &copy; 2016-2017
+    </p>
+    <p class="info">
+      Power by hexo &#124; Theme delica &#124; Host on GitHub, Coding
+    </p>
   </div>
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-
-      
-
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="//blog.snovey.com/uploads/avatar.jpg"
-               alt="雨雪霏霏" />
-          <p class="site-author-name" itemprop="name">雨雪霏霏</p>
-          <p class="site-description motion-element" itemprop="description">简单快乐与幸福同行</p>
-        </div>
-        <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">11</span>
-              <span class="site-state-item-name">Artikel</span>
-            </a>
-          </div>
-
-          
-            <div class="site-state-item site-state-categories">
-              <a href="/categories">
-                <span class="site-state-item-count">4</span>
-                <span class="site-state-item-name">Kategorien</span>
-              </a>
-            </div>
-          
-
-          
-            <div class="site-state-item site-state-tags">
-              <a href="/tags">
-                <span class="site-state-item-count">11</span>
-                <span class="site-state-item-name">Tags</span>
-              </a>
-            </div>
-          
-
-        </nav>
-
-        
-          <div class="feed-link motion-element">
-            <a href="/atom.xml" rel="alternate">
-              <i class="fa fa-rss"></i>
-              RSS
-            </a>
-          </div>
-        
-
-        <div class="links-of-author motion-element">
-          
-        </div>
-
-        
-        
-          <div class="cc-license motion-element" itemprop="license">
-            <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" class="cc-opacity" target="_blank">
-              <img src="//blog.snovey.com/images/cc-by-nc-nd.svg" alt="Creative Commons" />
-            </a>
-          </div>
-        
-
-        
-        
-
-      </section>
-
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy; 
-  <span itemprop="copyrightYear">2017</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">雨雪霏霏</span>
-</div>
-
-<div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
-</div>
-
-<div class="theme-info">
-  Theme -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
-  </a>
-</div>
-
-        
-
-        
-      </div>
-    </footer>
-
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-    </div>
-  </div>
-
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
+</footer>
+<script>
+  /*! lazysizes - v4.0.0-rc3 */
+!function(a,b){var c=b(a,a.document);a.lazySizes=c,"object"==typeof module&&module.exports&&(module.exports=c)}(window,function(a,b){"use strict";if(b.getElementsByClassName){var c,d,e=b.documentElement,f=a.Date,g=a.HTMLPictureElement,h="addEventListener",i="getAttribute",j=a[h],k=a.setTimeout,l=a.requestAnimationFrame||k,m=a.requestIdleCallback,n=/^picture$/i,o=["load","error","lazyincluded","_lazyloaded"],p={},q=Array.prototype.forEach,r=function(a,b){return p[b]||(p[b]=new RegExp("(\\s|^)"+b+"(\\s|$)")),p[b].test(a[i]("class")||"")&&p[b]},s=function(a,b){r(a,b)||a.setAttribute("class",(a[i]("class")||"").trim()+" "+b)},t=function(a,b){var c;(c=r(a,b))&&a.setAttribute("class",(a[i]("class")||"").replace(c," "))},u=function(a,b,c){var d=c?h:"removeEventListener";c&&u(a,b),o.forEach(function(c){a[d](c,b)})},v=function(a,d,e,f,g){var h=b.createEvent("CustomEvent");return e||(e={}),e.instance=c,h.initCustomEvent(d,!f,!g,e),a.dispatchEvent(h),h},w=function(b,c){var e;!g&&(e=a.picturefill||d.pf)?e({reevaluate:!0,elements:[b]}):c&&c.src&&(b.src=c.src)},x=function(a,b){return(getComputedStyle(a,null)||{})[b]},y=function(a,b,c){for(c=c||a.offsetWidth;c<d.minSize&&b&&!a._lazysizesWidth;)c=b.offsetWidth,b=b.parentNode;return c},z=function(){var a,c,d=[],e=[],f=d,g=function(){var b=f;for(f=d.length?e:d,a=!0,c=!1;b.length;)b.shift()();a=!1},h=function(d,e){a&&!e?d.apply(this,arguments):(f.push(d),c||(c=!0,(b.hidden?k:l)(g)))};return h._lsFlush=g,h}(),A=function(a,b){return b?function(){z(a)}:function(){var b=this,c=arguments;z(function(){a.apply(b,c)})}},B=function(a){var b,c=0,d=125,e=666,g=e,h=function(){b=!1,c=f.now(),a()},i=m?function(){m(h,{timeout:g}),g!==e&&(g=e)}:A(function(){k(h)},!0);return function(a){var e;(a=a===!0)&&(g=44),b||(b=!0,e=d-(f.now()-c),0>e&&(e=0),a||9>e&&m?i():k(i,e))}},C=function(a){var b,c,d=99,e=function(){b=null,a()},g=function(){var a=f.now()-c;d>a?k(g,d-a):(m||e)(e)};return function(){c=f.now(),b||(b=k(g,d))}},D=function(){var g,l,m,o,p,y,D,F,G,H,I,J,K,L,M=/^img$/i,N=/^iframe$/i,O="onscroll"in a&&!/glebot/.test(navigator.userAgent),P=0,Q=0,R=0,S=-1,T=function(a){R--,a&&a.target&&u(a.target,T),(!a||0>R||!a.target)&&(R=0)},U=function(a,c){var d,f=a,g="hidden"==x(b.body,"visibility")||"hidden"!=x(a,"visibility");for(F-=c,I+=c,G-=c,H+=c;g&&(f=f.offsetParent)&&f!=b.body&&f!=e;)g=(x(f,"opacity")||1)>0,g&&"visible"!=x(f,"overflow")&&(d=f.getBoundingClientRect(),g=H>d.left&&G<d.right&&I>d.top-1&&F<d.bottom+1);return g},V=function(){var a,f,h,j,k,m,n,p,q,r=c.elements;if((o=d.loadMode)&&8>R&&(a=r.length)){f=0,S++,null==K&&("expand"in d||(d.expand=e.clientHeight>500&&e.clientWidth>500?500:370),J=d.expand,K=J*d.expFactor),K>Q&&1>R&&S>2&&o>2&&!b.hidden?(Q=K,S=0):Q=o>1&&S>1&&6>R?J:P;for(;a>f;f++)if(r[f]&&!r[f]._lazyRace)if(O)if((p=r[f][i]("data-expand"))&&(m=1*p)||(m=Q),q!==m&&(y=innerWidth+m*L,D=innerHeight+m,n=-1*m,q=m),h=r[f].getBoundingClientRect(),(I=h.bottom)>=n&&(F=h.top)<=D&&(H=h.right)>=n*L&&(G=h.left)<=y&&(I||H||G||F)&&(d.loadHidden||"hidden"!=x(r[f],"visibility"))&&(l&&3>R&&!p&&(3>o||4>S)||U(r[f],m))){if(ba(r[f]),k=!0,R>9)break}else!k&&l&&!j&&4>R&&4>S&&o>2&&(g[0]||d.preloadAfterLoad)&&(g[0]||!p&&(I||H||G||F||"auto"!=r[f][i](d.sizesAttr)))&&(j=g[0]||r[f]);else ba(r[f]);j&&!k&&ba(j)}},W=B(V),X=function(a){s(a.target,d.loadedClass),t(a.target,d.loadingClass),u(a.target,Z),v(a.target,"lazyloaded")},Y=A(X),Z=function(a){Y({target:a.target})},$=function(a,b){try{a.contentWindow.location.replace(b)}catch(c){a.src=b}},_=function(a){var b,c=a[i](d.srcsetAttr);(b=d.customMedia[a[i]("data-media")||a[i]("media")])&&a.setAttribute("media",b),c&&a.setAttribute("srcset",c)},aa=A(function(a,b,c,e,f){var g,h,j,l,o,p;(o=v(a,"lazybeforeunveil",b)).defaultPrevented||(e&&(c?s(a,d.autosizesClass):a.setAttribute("sizes",e)),h=a[i](d.srcsetAttr),g=a[i](d.srcAttr),f&&(j=a.parentNode,l=j&&n.test(j.nodeName||"")),p=b.firesLoad||"src"in a&&(h||g||l),o={target:a},p&&(u(a,T,!0),clearTimeout(m),m=k(T,2500),s(a,d.loadingClass),u(a,Z,!0)),l&&q.call(j.getElementsByTagName("source"),_),h?a.setAttribute("srcset",h):g&&!l&&(N.test(a.nodeName)?$(a,g):a.src=g),f&&(h||l)&&w(a,{src:g})),a._lazyRace&&delete a._lazyRace,t(a,d.lazyClass),z(function(){(!p||a.complete&&a.naturalWidth>1)&&(p?T(o):R--,X(o))},!0)}),ba=function(a){var b,c=M.test(a.nodeName),e=c&&(a[i](d.sizesAttr)||a[i]("sizes")),f="auto"==e;(!f&&l||!c||!a[i]("src")&&!a.srcset||a.complete||r(a,d.errorClass))&&(b=v(a,"lazyunveilread").detail,f&&E.updateElem(a,!0,a.offsetWidth),a._lazyRace=!0,R++,aa(a,b,f,e,c))},ca=function(){if(!l){if(f.now()-p<999)return void k(ca,999);var a=C(function(){d.loadMode=3,W()});l=!0,d.loadMode=3,W(),j("scroll",function(){3==d.loadMode&&(d.loadMode=2),a()},!0)}};return{_:function(){p=f.now(),c.elements=b.getElementsByClassName(d.lazyClass),g=b.getElementsByClassName(d.lazyClass+" "+d.preloadClass),L=d.hFac,j("scroll",W,!0),j("resize",W,!0),a.MutationObserver?new MutationObserver(W).observe(e,{childList:!0,subtree:!0,attributes:!0}):(e[h]("DOMNodeInserted",W,!0),e[h]("DOMAttrModified",W,!0),setInterval(W,999)),j("hashchange",W,!0),["focus","mouseover","click","load","transitionend","animationend","webkitAnimationEnd"].forEach(function(a){b[h](a,W,!0)}),/d$|^c/.test(b.readyState)?ca():(j("load",ca),b[h]("DOMContentLoaded",W),k(ca,2e4)),c.elements.length?(V(),z._lsFlush()):W()},checkElems:W,unveil:ba}}(),E=function(){var a,c=A(function(a,b,c,d){var e,f,g;if(a._lazysizesWidth=d,d+="px",a.setAttribute("sizes",d),n.test(b.nodeName||""))for(e=b.getElementsByTagName("source"),f=0,g=e.length;g>f;f++)e[f].setAttribute("sizes",d);c.detail.dataAttr||w(a,c.detail)}),e=function(a,b,d){var e,f=a.parentNode;f&&(d=y(a,f,d),e=v(a,"lazybeforesizes",{width:d,dataAttr:!!b}),e.defaultPrevented||(d=e.detail.width,d&&d!==a._lazysizesWidth&&c(a,f,e,d)))},f=function(){var b,c=a.length;if(c)for(b=0;c>b;b++)e(a[b])},g=C(f);return{_:function(){a=b.getElementsByClassName(d.autosizesClass),j("resize",g)},checkElems:g,updateElem:e}}(),F=function(){F.i||(F.i=!0,E._(),D._())};return function(){var b,c={lazyClass:"lazyload",loadedClass:"lazyloaded",loadingClass:"lazyloading",preloadClass:"lazypreload",errorClass:"lazyerror",autosizesClass:"lazyautosizes",srcAttr:"data-src",srcsetAttr:"data-srcset",sizesAttr:"data-sizes",minSize:40,customMedia:{},init:!0,expFactor:1.5,hFac:.8,loadMode:2,loadHidden:!0};d=a.lazySizesConfig||a.lazysizesConfig||{};for(b in c)b in d||(d[b]=c[b]);a.lazySizesConfig=d,k(function(){d.init&&F()})}(),c={cfg:d,autoSizer:E,loader:D,init:F,uP:w,aC:s,rC:t,hC:r,fire:v,gW:y,rAF:z}}});
 </script>
 
+  <script>
+    function toggleClassMenu() {
+      myMenu.classList.add("siderbar--animatable");
+    if(!myMenu.classList.contains("siderbar--visible")) {
+      myMenu.classList.add("siderbar--visible");
+    } else {
+      myMenu.classList.remove('siderbar--visible');
+    }
+    }
 
+    function OnTransitionEnd() {
+      myMenu.classList.remove("siderbar--animatable");
+    }
 
-
-
-
-
-
-
-  
-
-
-
-  
-  <script type="text/javascript" src="//blog.snovey.com/vendors/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="//blog.snovey.com/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="//blog.snovey.com/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="//blog.snovey.com/vendors/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="//blog.snovey.com/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="//blog.snovey.com/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="//blog.snovey.com/js/src/utils.js?v=5.0.1"></script>
-
-  <script type="text/javascript" src="//blog.snovey.com/js/src/motion.js?v=5.0.1"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="//blog.snovey.com/js/src/scrollspy.js?v=5.0.1"></script>
-<script type="text/javascript" src="//blog.snovey.com/js/src/post-details.js?v=5.0.1"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="//blog.snovey.com/js/src/bootstrap.js?v=5.0.1"></script>
-
-
-
-  
-
-
-
-  
-
-
-
-
-  
-  
-
-  
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    });
+    var myMenu = document.querySelector(".siderbar");
+    var oppMenu = document.querySelector("#info");
+    myMenu.addEventListener("transitionend", OnTransitionEnd, false);
+    oppMenu.addEventListener("click", toggleClassMenu, false);
+    myMenu.addEventListener("click", toggleClassMenu, false);
   </script>
-
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-      var all = MathJax.Hub.getAllJax(), i;
-      for (i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-      }
-    });
-  </script>
-  <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
-
-  
-
-  
-
 </body>
 </html>
