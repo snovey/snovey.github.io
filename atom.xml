@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="www.snovey.com/"/>
-  <updated>2017-04-03T04:29:47.947Z</updated>
+  <updated>2017-08-08T11:07:30.227Z</updated>
   <id>www.snovey.com/</id>
   
   <author>
@@ -16,11 +16,66 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Nginx 配置 HTTPS</title>
+    <link href="www.snovey.com/2017/08/nginx-https/"/>
+    <id>www.snovey.com/2017/08/nginx-https/</id>
+    <published>2017-08-01T02:51:20.000Z</published>
+    <updated>2017-08-08T11:07:30.227Z</updated>
+    
+    <content type="html"><![CDATA[<p>之前我一直认为配置 SSL 证书只不过是在 Nginx 中配置好证书路径就完事了。直到认真做起来才发现别有洞天。</p>
+<p>本文主要讲述如何配置，对于其中的原理一律从简。</p>
+<a id="more"></a>
+<h1 id="SSL-TLS-简介"><a href="#SSL-TLS-简介" class="headerlink" title="SSL/TLS 简介"></a>SSL/TLS 简介</h1><hr>
+<p>SSL 最初是由网景（Netscape）提出，后来几经修改</p>
+<p>TLS 是位于 HTTP 与 TCP 协议栈中间，</p>
+<h1 id="证书的申请流程"><a href="#证书的申请流程" class="headerlink" title="证书的申请流程"></a>证书的申请流程</h1><p>根据证书链生成证书，如果在 SSL labs 测试时发现提示 Inc</p>
+<h1 id="获取免费证书"><a href="#获取免费证书" class="headerlink" title="获取免费证书"></a>获取免费证书</h1><p>购买证书前先讲一讲证书的分类吧，按适用域名数量分类有：</p>
+<ul>
+<li>单域名 SSL 证书</li>
+<li>多域名 SSL 证书</li>
+<li>泛域名 SSL 证书（野卡）</li>
+</ul>
+<p>按证书认证等级分类有：</p>
+<ul>
+<li>域名型(DV, Domain Validation) SSL 证书</li>
+<li>企业型(OV, Organization Validation) SSL 证书</li>
+<li>增强型(EV, Extended Validation) SSL 证书</li>
+</ul>
+<p>最爽的就是野卡了，一次性解决二级域名，论外貌还是 EV，浏览器的小标识独树一帜，然而鱼与熊掌不可兼得，野卡不能是 EV。不过现在的主题是获取免费的证书，这些都与我们无关，出售证书的商家非常多，提供免费证书的也不少。之前沃通(WoSign)和 StartCom 都已经被浏览器厂商拉黑，这里就不推荐了。可能也正是这种原因，阿里云的免费证书由沃通换成了赛门铁克。目前能用到的免费证书有：</p>
+<ul>
+<li>阿里云云盾证书服务（赛门铁克 DV SSL 证书）</li>
+<li>腾讯云 SSL 证书管理（赛门铁克 GeoTrust DV SSL 证书）</li>
+<li>腾讯云 SSL 证书管理（赛门铁克 TrustAsia DV SSL 证书）</li>
+<li>七牛云 SSL 证书管理（赛门铁克 TrustAsia DV SSL 证书）</li>
+<li>又拍云 SSL 证书管理（赛门铁克 TrustAsia DV SSL 证书）</li>
+<li>Let’s Encrypt</li>
+</ul>
+<p>以上证书中除了 Let’s Encrypt 期限为三个月外，其余均为一年，根据自己的情况进行选择吧。</p>
+<h1 id="安装-Nginx"><a href="#安装-Nginx" class="headerlink" title="安装 Nginx"></a>安装 Nginx</h1><p>为了能够达到比较好的优化效果，这里编译安装 Nginx，具体请参考屈老师的 <a href="https://imququ.com/post/my-nginx-conf.html" target="_blank" rel="external">本博客 Nginx 配置之完整篇</a> ，不同的操作系统，不同的软件版本都有可能出现问题，既无法一一列举，就自行解决吧。<br>拿到证书后配置 Nginx<br><figure class="highlight nginx"><table><tr><td class="code"><pre><div class="line"><span class="attribute">listen</span> <span class="number">443</span> ssl;    <span class="comment"># 侦听端口</span></div><div class="line"><span class="comment"># listen [::]:443 ssl ipv6only=on;    # 如果您希望同时侦听 IPv6，请取消此行注释</span></div><div class="line"></div><div class="line"><span class="attribute">server_name</span> example.com;    <span class="comment"># 请改为您的域名</span></div><div class="line"></div><div class="line"><span class="attribute">ssl_certificate</span> /etc/ssl/private/example_com.bundle.crt;    <span class="comment"># 证书链</span></div><div class="line"><span class="attribute">ssl_certificate_key</span> /etc/ssl/private/example_com.key;    <span class="comment"># 密钥</span></div><div class="line"><span class="attribute">ssl_protocols</span> TLSv1.<span class="number">2</span> TLSv1.<span class="number">1</span> TLSv1;    <span class="comment"># 支持的协议，Windows XP 不支持</span></div><div class="line"><span class="attribute">ssl_prefer_server_ciphers</span> <span class="literal">on</span>;    <span class="comment"># 启用 Forward Secrecy</span></div><div class="line"><span class="attribute">ssl_ciphers</span> <span class="string">"EECDH+ECDSA+AESGCM EECDH+aRSA+AESGCM EECDH+ECDSA+SHA384 EECDH+ECDSA+SHA256 EECDH+aRSA+SHA384 EECDH+aRSA+SHA256 EECDH+aRSA+RC4 EECDH EDH+aRSA !aNULL !eNULL !LOW !3DES !MD5 !EXP !PSK !SRP !DSS !RC4"</span>;</div><div class="line"><span class="attribute">keepalive_timeout</span> <span class="number">70</span>;</div><div class="line"><span class="attribute">ssl_session_cache</span> shared:SSL:<span class="number">10m</span>;</div><div class="line"><span class="attribute">ssl_session_timeout</span> <span class="number">10m</span>;</div></pre></td></tr></table></figure></p>
+<h1 id="开启-HSTS"><a href="#开启-HSTS" class="headerlink" title="开启 HSTS"></a>开启 HSTS</h1><h1 id="开启-HPKP"><a href="#开启-HPKP" class="headerlink" title="开启 HPKP"></a>开启 HPKP</h1><p>如果想通过 SSL labs 中的认证，那么需要有备份证书，pin-key 用两个中间证书是不可以的</p>
+<h1 id="开启-CSP"><a href="#开启-CSP" class="headerlink" title="开启 CSP"></a>开启 CSP</h1><h1 id="开启-CAA"><a href="#开启-CAA" class="headerlink" title="开启 CAA"></a>开启 CAA</h1><p>这个是在 DNS 中配置解析，不过目前支持的并不多</p>
+<blockquote>版权声明<br><hr>本作品采用<a rel="external" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。<br>本文链接：www.snovey.com/2017/08/nginx-https/</blockquote>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;之前我一直认为配置 SSL 证书只不过是在 Nginx 中配置好证书路径就完事了。直到认真做起来才发现别有洞天。&lt;/p&gt;
+&lt;p&gt;本文主要讲述如何配置，对于其中的原理一律从简。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Nginx" scheme="www.snovey.com/tags/Nginx/"/>
+    
+      <category term="HTTP" scheme="www.snovey.com/tags/HTTP/"/>
+    
+  </entry>
+  
+  <entry>
     <title>制作图案解锁</title>
     <link href="www.snovey.com/2017/04/pattern-lock/"/>
     <id>www.snovey.com/2017/04/pattern-lock/</id>
     <published>2017-04-02T04:38:07.000Z</published>
-    <updated>2017-04-03T04:29:47.947Z</updated>
+    <updated>2017-08-06T04:41:26.850Z</updated>
     
     <content type="html"><![CDATA[<p><img src="//blog.snovey.com/image/pattern-lock.gif" alt="pattern-lock" style="margin:auto"><br>想看看效果么？戳这里：<a href="//snovey.github.io/Web-crafts/pattern-lock/demo.html">pattern-lock</a><br><a id="more"></a><br>要制作一个图案解锁，第一步要想好设计，对外开放哪些接口，如果我是一位开发者，我希望初始化的时候可以自定义行数列数，以及颜色大小等参数，如果用户不定义要有一套默认的参数，我希望可以调用方法获取用户的输入，并且提供一些额外的 API。就像买煎饼果子告诉老板不要加辣多放香菜，如果省略某些信息老板还要有自己的默认配置，最后给你你想要的煎饼果子。<br>JavaScript 实现类似这样：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">constructor</span>(obj) &#123;</div><div class="line">  <span class="keyword">this</span>.row    = +obj.row || <span class="number">3</span>;</div><div class="line">  <span class="keyword">this</span>.column = +obj.column || <span class="number">3</span>;</div><div class="line">  <span class="keyword">this</span>.backgroundColor = obj.backgroundColor || <span class="string">'whitesmoke'</span>;</div><div class="line">  <span class="keyword">this</span>.opacity = obj.opacity || <span class="number">0.0</span>;</div><div class="line">  <span class="keyword">this</span>.container = obj.container;</div><div class="line">  <span class="keyword">this</span>.lineColor = obj.lineColor || <span class="string">'springgreen'</span>;</div><div class="line">  <span class="keyword">this</span>.lineWidth = obj.lineWidth || <span class="number">3</span>;</div><div class="line">  <span class="keyword">this</span>.pointBackColor = obj.pointBackColor || <span class="string">'white'</span>;</div><div class="line">  <span class="keyword">this</span>.pointBorderColor = obj.pointBorderColor || <span class="string">'grey'</span>;</div><div class="line">  <span class="keyword">this</span>.radius = obj.radius || <span class="string">'auto'</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>想好之后就是实现的问题了，图案有斜线等元素，比较复杂，所以采用 canvas 实现，以常见的三排三列为例，大致需要画出如下的图案，采取坐标轴如下（别问我为什么是左手系）：</p>
@@ -45,11 +100,11 @@
   </entry>
   
   <entry>
-    <title>撞词</title>
+    <title>计算机中的一词多义</title>
     <link href="www.snovey.com/2016/11/polysemy/"/>
     <id>www.snovey.com/2016/11/polysemy/</id>
     <published>2016-11-21T14:12:17.000Z</published>
-    <updated>2016-11-22T14:31:32.464Z</updated>
+    <updated>2017-08-06T04:46:14.538Z</updated>
     
     <content type="html"><![CDATA[<p>学习中常常遇到同一个词语出现在多个地方，其中有一部分词语让我相当的困惑：</p>
 <ul>
@@ -58,8 +113,7 @@
 </ul>
 <a id="more"></a>
 <p>我目前就想到这两个，那我就说说这两个，先说答案：他们没什么关系。</p>
-<h1 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h1><hr>
-<p>数学中的「闭包」：</p>
+<h1 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h1><p>数学中的「闭包」：</p>
 <blockquote>
 <p>数学中，若对某个集合的成员进行一种运算，生成的仍然是这个集合的成员，则该集合被称为 <strong>在这个运算下闭合</strong> 。<br>当一个集合 S 在某个运算下不闭合的时候，我们通常可以找到包含 S 的最小的闭合集合。这个最小闭合集合被称为 S 的（关于这个运算的） <strong>闭包</strong> 。<br><span style="display:block;text-align:right;">中文维基百科</span></p>
 </blockquote>
@@ -102,8 +156,7 @@
 <p>对于任何 $p\in Q$，从 p 可到达的状态的集合叫做 p 的 <strong>ε-闭包</strong> ，并写为<br>$$<br>\,E(\lbrace p\rbrace)=\lbrace q\in Q:p{\stackrel  {\epsilon }{\rightarrow }}q\rbrace。<br>$$<br>对于 $P\subset Q$ 的任何子集，定义 P 的 <strong>ε-闭包</strong> 为<br>$$<br>E(P)=\bigcup \limits _{p\in P}E(\lbrace p\rbrace)<br>$$</p>
 </blockquote>
 <p>纵观以上种种「闭包」，除去「词法闭包」，「闭包」都是指具备某种性质的最小集合，他们本质上的思想是一样的。而「词法闭包」与他们没有什么关系。</p>
-<h1 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h1><hr>
-<p>内存管理中的「堆」：</p>
+<h1 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h1><p>内存管理中的「堆」：</p>
 <blockquote>
 <p>在计算机科学中, <strong>动态内存分配</strong> （Dynamic memory allocation）又称为 <strong>堆内存分配</strong> ，是指计算机程序在运行期中分配使用内存。它可以当成是一种分配有限内存资源所有权的方法。</p>
 </blockquote>
@@ -140,7 +193,7 @@
 <li><em>TAOCP</em></li>
 <li><em>CLRS</em></li>
 </ul>
-<blockquote>版权声明<br><hr>本文链接：www.snovey.com/2016/11/polysemy/</blockquote>]]></content>
+<blockquote>版权声明<br><hr>本作品采用<a rel="external" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。<br>本文链接：www.snovey.com/2016/11/polysemy/</blockquote>]]></content>
     
     <summary type="html">
     
@@ -164,11 +217,10 @@
     <link href="www.snovey.com/2016/10/hacked-story/"/>
     <id>www.snovey.com/2016/10/hacked-story/</id>
     <published>2016-10-01T09:42:28.000Z</published>
-    <updated>2016-10-06T06:26:33.000Z</updated>
+    <updated>2017-08-06T04:40:57.060Z</updated>
     
     <content type="html"><![CDATA[<p><img src="//blog.snovey.com/image/hacked-story.png" alt="hacked-story" style="max-width: 40%;margin: auto;"><br>十一返乡的绿皮车异常拥挤，漫长的旅途连一碗泡面都吃不上，百无聊赖之际想起手机里还有 <a href="http://www.hackedapp.com" target="_blank" rel="external">hacked</a> 这个游戏，这是我的手机中除了 chrome 的小恐龙之外的唯一一款游戏了，当初初学 C 语言，未能通关便放弃了，它就这样躺在手机里一年多，如今通关把代码贴出来纪念一下。<br><a id="more"></a></p>
-<h1 id="The-Hackpad"><a href="#The-Hackpad" class="headerlink" title="The Hackpad"></a>The Hackpad</h1><hr>
-<h3 id="Increment-me"><a href="#Increment-me" class="headerlink" title="Increment me"></a>Increment me</h3><p>Sample Input/Output<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">2 =&gt; 3</div><div class="line">5 =&gt; 8</div><div class="line">8 =&gt; 9</div></pre></td></tr></table></figure></p>
+<h1 id="The-Hackpad"><a href="#The-Hackpad" class="headerlink" title="The Hackpad"></a>The Hackpad</h1><h3 id="Increment-me"><a href="#Increment-me" class="headerlink" title="Increment me"></a>Increment me</h3><p>Sample Input/Output<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">2 =&gt; 3</div><div class="line">5 =&gt; 8</div><div class="line">8 =&gt; 9</div></pre></td></tr></table></figure></p>
 <p>输入 <code>+1</code><br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">input + <span class="number">1</span>;</div></pre></td></tr></table></figure></p>
 <h3 id="Positive"><a href="#Positive" class="headerlink" title="Positive"></a>Positive</h3><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">3 =&gt; true</div><div class="line">-7 =&gt; false</div><div class="line">9 =&gt; true</div></pre></td></tr></table></figure>
 <p>判断正负<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">input &gt; <span class="number">0</span>;</div></pre></td></tr></table></figure></p>
@@ -176,8 +228,7 @@
 <p>此时没有 <code>abs</code> 函数，需要手写<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">if</span> input &lt; <span class="number">0</span> &#123;</div><div class="line">  <span class="keyword">return</span> -input;</div><div class="line">&#125;</div><div class="line"><span class="keyword">return</span> input;</div></pre></td></tr></table></figure></p>
 <h3 id="Absolute-2"><a href="#Absolute-2" class="headerlink" title="Absolute 2"></a>Absolute 2</h3><p>Sample Input/Output<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">1 =&gt; 1</div><div class="line">-2 =&gt; 2</div><div class="line">0 =&gt; 0</div></pre></td></tr></table></figure></p>
 <p>得到 <code>abs</code> 函数，直接调用即可<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">return</span> abs(input);</div></pre></td></tr></table></figure></p>
-<h1 id="High-School-Hack"><a href="#High-School-Hack" class="headerlink" title="High School Hack"></a>High School Hack</h1><hr>
-<h3 id="Power"><a href="#Power" class="headerlink" title="Power"></a>Power</h3><p>Sample Input/Output<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">2 =&gt; 4</div><div class="line">3 =&gt; 9</div><div class="line">4 =&gt; 16</div></pre></td></tr></table></figure></p>
+<h1 id="High-School-Hack"><a href="#High-School-Hack" class="headerlink" title="High School Hack"></a>High School Hack</h1><h3 id="Power"><a href="#Power" class="headerlink" title="Power"></a>Power</h3><p>Sample Input/Output<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">2 =&gt; 4</div><div class="line">3 =&gt; 9</div><div class="line">4 =&gt; 16</div></pre></td></tr></table></figure></p>
 <p>此时没有 <code>pow</code> 函数，需要手写<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">while</span> var_a &lt; input &#123;</div><div class="line">  var_b = var_b + input;</div><div class="line">  var_a++;</div><div class="line">&#125;</div><div class="line">var_b;</div></pre></td></tr></table></figure></p>
 <h3 id="Power-2"><a href="#Power-2" class="headerlink" title="Power 2"></a>Power 2</h3><p>Sample Input/Output<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">2 =&gt; 4</div><div class="line">3 =&gt; 9</div><div class="line">4 =&gt; 16</div></pre></td></tr></table></figure></p>
 <p>得到 <code>pow</code> 函数，直接调用即可<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">return</span> pow(input, <span class="number">2</span>);</div></pre></td></tr></table></figure></p>
@@ -185,8 +236,7 @@
 <p>此时没有 <code>length</code>，需要手写<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">foreach var_a <span class="keyword">in</span> input &#123;</div><div class="line">  var_b++;</div><div class="line">&#125;</div><div class="line"><span class="keyword">return</span> var_b;</div></pre></td></tr></table></figure></p>
 <h3 id="Push-it"><a href="#Push-it" class="headerlink" title="Push it"></a>Push it</h3><p>Sample Input/Output<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">5 =&gt; [0, 1, 2, 3, 4]</div><div class="line">2 =&gt; [0, 1]</div><div class="line">0 =&gt; []</div></pre></td></tr></table></figure></p>
 <p>根据输入输出列表<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">var_a = [];</div><div class="line"><span class="keyword">while</span> var_b &lt; input &#123;</div><div class="line">  var_a.push(var_b);</div><div class="line">  var_b++;</div><div class="line">&#125;</div><div class="line"><span class="keyword">return</span> var_a;</div></pre></td></tr></table></figure></p>
-<h1 id="Jailbreak"><a href="#Jailbreak" class="headerlink" title="Jailbreak"></a>Jailbreak</h1><hr>
-<h3 id="Max"><a href="#Max" class="headerlink" title="Max"></a>Max</h3><p>Sample Input/Output<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">[3, 8] =&gt; 8</div><div class="line">[3, 1] =&gt; 3</div><div class="line">[0, 99] =&gt; 99</div></pre></td></tr></table></figure></p>
+<h1 id="Jailbreak"><a href="#Jailbreak" class="headerlink" title="Jailbreak"></a>Jailbreak</h1><h3 id="Max"><a href="#Max" class="headerlink" title="Max"></a>Max</h3><p>Sample Input/Output<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">[3, 8] =&gt; 8</div><div class="line">[3, 1] =&gt; 3</div><div class="line">[0, 99] =&gt; 99</div></pre></td></tr></table></figure></p>
 <p>求两个数中大的那个，此时没有 <code>max</code> 函数，需要手写<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">if</span> input[<span class="number">0</span>] &lt; input[<span class="number">1</span>] &#123;</div><div class="line">  <span class="keyword">return</span> input[<span class="number">1</span>];</div><div class="line">&#125;</div><div class="line"><span class="keyword">return</span> input[<span class="number">0</span>];</div></pre></td></tr></table></figure></p>
 <h3 id="Maxxxx"><a href="#Maxxxx" class="headerlink" title="Maxxxx"></a>Maxxxx</h3><p>Sample Input/Output<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">[3, 1, 8, 0, 2] =&gt; 8</div><div class="line">[1, 3, 2] =&gt; 3</div><div class="line">[9, 42, 7, 13] =&gt; 42</div></pre></td></tr></table></figure></p>
 <p>输出列表中最大的数<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">foreach var_a <span class="keyword">in</span> input &#123;</div><div class="line">  var_b = max(var_b, var_a);</div><div class="line">&#125;</div><div class="line"><span class="keyword">return</span> var_b;</div></pre></td></tr></table></figure></p>
@@ -194,36 +244,31 @@
 <p>判断奇偶，此时没有 <code>mod</code> 函数<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">return</span> input - input / <span class="number">2</span> * <span class="number">2</span>;</div></pre></td></tr></table></figure></p>
 <h3 id="A-man-a-plan-a-cancel-Panama"><a href="#A-man-a-plan-a-cancel-Panama" class="headerlink" title="A man, a plan, a cancel: Panama"></a>A man, a plan, a cancel: Panama</h3><p>Sample Input/Output<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">[c, a, t] =&gt; false</div><div class="line">[k, a, y, a, k] =&gt; true</div><div class="line">[b, o, b] =&gt; true</div></pre></td></tr></table></figure></p>
 <p>判断回文串<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">while</span> var_a &lt; input.length / <span class="number">2</span> &#123;</div><div class="line">  <span class="keyword">if</span> input[var_a] != input[input.length - var_b - <span class="number">1</span>] &#123;</div><div class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">  &#125;</div><div class="line">  var_a++;</div><div class="line">&#125;</div><div class="line"><span class="keyword">return</span> <span class="literal">true</span>;</div></pre></td></tr></table></figure></p>
-<h1 id="Cheatcode"><a href="#Cheatcode" class="headerlink" title="Cheatcode"></a>Cheatcode</h1><hr>
-<h3 id="Bring-some-order"><a href="#Bring-some-order" class="headerlink" title="Bring some order"></a>Bring some order</h3><p>Sample Input/Output<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">[c, b, a] =&gt; [a, b, c]</div><div class="line">[d, g, e, h, f] =&gt; [d, e, f, g, h]</div><div class="line">[z, x, y, w] =&gt; [w, x, y, z]</div></pre></td></tr></table></figure></p>
+<h1 id="Cheatcode"><a href="#Cheatcode" class="headerlink" title="Cheatcode"></a>Cheatcode</h1><h3 id="Bring-some-order"><a href="#Bring-some-order" class="headerlink" title="Bring some order"></a>Bring some order</h3><p>Sample Input/Output<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">[c, b, a] =&gt; [a, b, c]</div><div class="line">[d, g, e, h, f] =&gt; [d, e, f, g, h]</div><div class="line">[z, x, y, w] =&gt; [w, x, y, z]</div></pre></td></tr></table></figure></p>
 <p>字符排序，随便写个排序算法，我写个容易实现的冒泡排序<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">while</span> var_a &lt; input.length &#123;</div><div class="line">  var_b = var_a + <span class="number">1</span>;</div><div class="line">  <span class="keyword">while</span> var_b &lt; input.length &#123;</div><div class="line">    <span class="keyword">if</span> input[var_a] &gt; input[var_b] &#123;</div><div class="line">      var_c = input[var_a];</div><div class="line">      input[var_a] = input[var_b];</div><div class="line">      input[var_b] = var_c;</div><div class="line">    &#125;</div><div class="line">    var_b++;</div><div class="line">  &#125;</div><div class="line">  var_a++;</div><div class="line">&#125;</div><div class="line"><span class="keyword">return</span> input;</div></pre></td></tr></table></figure></p>
 <h3 id="Missing-numbers"><a href="#Missing-numbers" class="headerlink" title="Missing numbers"></a>Missing numbers</h3><p>Sample Input/Output<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">[0, 3, 2] =&gt; [1]</div><div class="line">[1, 3] =&gt; [0, 2]</div><div class="line">[4, 2, 3] =&gt; [0, 1]</div></pre></td></tr></table></figure></p>
 <p>补充缺失的数<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">var_a = [];</div><div class="line">input.sort();</div><div class="line"><span class="keyword">while</span> var_b &lt; input[input.length<span class="number">-1</span>] &#123;</div><div class="line">  <span class="keyword">if</span> var_b &lt; input[var_c] &#123;</div><div class="line">    var_a.push(var_b);</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">else</span> &#123;</div><div class="line">    var_c++;</div><div class="line">  &#125;</div><div class="line">  var_b++;</div><div class="line">&#125;</div><div class="line"><span class="keyword">return</span> var_a;</div></pre></td></tr></table></figure></p>
 <h3 id="Anagrams"><a href="#Anagrams" class="headerlink" title="Anagrams"></a>Anagrams</h3><p>Sample Input/Output<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">[[d, a, d], [a, d, d]] =&gt; true</div><div class="line">[[a, t, e], [e, a, t], [t, e, a]] =&gt; true</div><div class="line">[[n, o, t], [o, n, e]] =&gt; false</div></pre></td></tr></table></figure></p>
 <p>判断各元素是否相同<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">while</span> var_a &lt; input.length - <span class="number">1</span> &#123;</div><div class="line">  <span class="keyword">if</span> input[var_a].sort() != input[var_a + <span class="number">1</span>].sort() &#123;</div><div class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">  &#125;</div><div class="line">  var_a++;</div><div class="line">&#125;</div><div class="line"><span class="keyword">return</span> <span class="literal">true</span>;</div></pre></td></tr></table></figure></p>
-<h1 id="Corruped"><a href="#Corruped" class="headerlink" title="Corruped"></a>Corruped</h1><hr>
-<h3 id="110101110101000101"><a href="#110101110101000101" class="headerlink" title="110101110101000101"></a>110101110101000101</h3><p>Sample Input/Output<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">[1, 0, 1] =&gt; 5</div><div class="line">[0, 1, 0] =&gt; 2</div><div class="line">[1, 1, 0] =&gt; 6</div></pre></td></tr></table></figure></p>
+<h1 id="Corruped"><a href="#Corruped" class="headerlink" title="Corruped"></a>Corruped</h1><h3 id="110101110101000101"><a href="#110101110101000101" class="headerlink" title="110101110101000101"></a>110101110101000101</h3><p>Sample Input/Output<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">[1, 0, 1] =&gt; 5</div><div class="line">[0, 1, 0] =&gt; 2</div><div class="line">[1, 1, 0] =&gt; 6</div></pre></td></tr></table></figure></p>
 <p>二进制转换为十进制<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">foreach var_a <span class="keyword">in</span> input &#123;</div><div class="line">  var_b = var_b * <span class="number">2</span> + var_a;</div><div class="line">&#125;</div><div class="line"><span class="keyword">return</span> var_b;</div></pre></td></tr></table></figure></p>
 <h3 id="Prime"><a href="#Prime" class="headerlink" title="Prime"></a>Prime</h3><p>Sample Input/Output<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">3 =&gt; true;</div><div class="line">12 =&gt; false;</div><div class="line">17 =&gt; true;</div></pre></td></tr></table></figure></p>
 <p>素数判定<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">if</span> input &lt; <span class="number">2</span> &#123;</div><div class="line">  <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">&#125;</div><div class="line">var_a = <span class="number">2</span>;</div><div class="line"><span class="keyword">while</span> var_a &lt; input / <span class="number">2</span> &#123;</div><div class="line">  <span class="keyword">if</span> mod(input, var_a) == <span class="number">0</span> &#123;</div><div class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">  &#125;</div><div class="line">  var_a++;</div><div class="line">&#125;</div><div class="line"><span class="keyword">return</span> <span class="literal">true</span>;</div></pre></td></tr></table></figure></p>
 <h3 id="Number-in-order"><a href="#Number-in-order" class="headerlink" title="Number in order"></a>Number in order</h3><p>Sample Input/Output<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">[f, o, r, t, y] =&gt; true</div><div class="line">[d, o, s] =&gt; true</div><div class="line">[q, u, a, t, r, e] =&gt; false</div></pre></td></tr></table></figure></p>
 <p>判断字符列表是否升序<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">while</span> var_a &lt; input.length - <span class="number">1</span> &#123;</div><div class="line">  <span class="keyword">if</span> input[var_a] &gt; input[var_a + <span class="number">1</span>] &#123;</div><div class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">  &#125;</div><div class="line">  var_a++;</div><div class="line">&#125;</div><div class="line"><span class="keyword">return</span> <span class="literal">true</span>;</div></pre></td></tr></table></figure></p>
-<h1 id="Cyber-Attack"><a href="#Cyber-Attack" class="headerlink" title="Cyber Attack"></a>Cyber Attack</h1><hr>
-<h3 id="Complete"><a href="#Complete" class="headerlink" title="Complete"></a>Complete</h3><p>Sample Input/Output<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">[0, 1] =&gt; [0, 1]</div><div class="line">[1, 2] =&gt; [0, 1, 2]</div><div class="line">[3, 4, 5] =&gt; [0, 1, 2, 3, 4, 5]</div></pre></td></tr></table></figure></p>
+<h1 id="Cyber-Attack"><a href="#Cyber-Attack" class="headerlink" title="Cyber Attack"></a>Cyber Attack</h1><h3 id="Complete"><a href="#Complete" class="headerlink" title="Complete"></a>Complete</h3><p>Sample Input/Output<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">[0, 1] =&gt; [0, 1]</div><div class="line">[1, 2] =&gt; [0, 1, 2]</div><div class="line">[3, 4, 5] =&gt; [0, 1, 2, 3, 4, 5]</div></pre></td></tr></table></figure></p>
 <p>补充缺失的数字<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">while</span> var_a &lt; input.length &#123;</div><div class="line">  <span class="keyword">if</span> input[var_a] != var_a &#123;</div><div class="line">    input.insert(var_a, var_a);</div><div class="line">  &#125;</div><div class="line">  var_a++;</div><div class="line">&#125;</div><div class="line"><span class="keyword">return</span> input;</div></pre></td></tr></table></figure></p>
 <h3 id="Match"><a href="#Match" class="headerlink" title="Match"></a>Match</h3><p>Sample Input/Output<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">[(, )] =&gt; true</div><div class="line">[(, (, )] =&gt; false</div><div class="line">[(, (, ), )] =&gt; true</div></pre></td></tr></table></figure></p>
 <p>括号匹配，只有小括号，不需要栈<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">foreach var_a <span class="keyword">in</span> input &#123;</div><div class="line">  <span class="keyword">if</span> var_a == <span class="string">"("</span> &#123;</div><div class="line">    var_b++;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">else</span> &#123;</div><div class="line">    var_b--</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">if</span> var_b &lt; <span class="number">0</span> &#123;</div><div class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">return</span> var_b == <span class="number">0</span>;</div></pre></td></tr></table></figure></p>
 <h3 id="Rotate"><a href="#Rotate" class="headerlink" title="Rotate"></a>Rotate</h3><p>Sample Input/Output<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">[2, 5] =&gt; [5, 2]</div><div class="line">[3, 8, 4] =&gt; [8, 4, 3]</div><div class="line">[6, 2, 9, 1] =&gt; [2, 9, 1, 6]</div></pre></td></tr></table></figure></p>
 <p>将列表循环左移一位<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">input.push(input[<span class="number">0</span>]);</div><div class="line">input.remove(<span class="number">0</span>);</div><div class="line"><span class="keyword">return</span> input;</div></pre></td></tr></table></figure></p>
-<h1 id="Nuclear-Plant"><a href="#Nuclear-Plant" class="headerlink" title="Nuclear Plant"></a>Nuclear Plant</h1><hr>
-<h3 id="Add-one"><a href="#Add-one" class="headerlink" title="Add one"></a>Add one</h3><p>Sample Input/Output<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">[0, 1] =&gt; [1, 2]</div><div class="line">[1, 2] =&gt; [2, 3]</div><div class="line">[3, 6, 8] =&gt; [4, 7, 9]</div></pre></td></tr></table></figure></p>
+<h1 id="Nuclear-Plant"><a href="#Nuclear-Plant" class="headerlink" title="Nuclear Plant"></a>Nuclear Plant</h1><h3 id="Add-one"><a href="#Add-one" class="headerlink" title="Add one"></a>Add one</h3><p>Sample Input/Output<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">[0, 1] =&gt; [1, 2]</div><div class="line">[1, 2] =&gt; [2, 3]</div><div class="line">[3, 6, 8] =&gt; [4, 7, 9]</div></pre></td></tr></table></figure></p>
 <p>每个元素值 <code>+1</code>，此时没有 <code>map</code><br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">while</span> var_a &lt; input.length &#123;</div><div class="line">  input[var_a]++;</div><div class="line">  var_a++;</div><div class="line">&#125;</div><div class="line"><span class="keyword">return</span> input;</div></pre></td></tr></table></figure></p>
 <h3 id="Positivity"><a href="#Positivity" class="headerlink" title="Positivity"></a>Positivity</h3><p>Sample Input/Output<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">[1] =&gt; [true]</div><div class="line">[-1, 1] =&gt; [false, true]</div><div class="line">[1, -1, 1] =&gt; [true, false, true]</div></pre></td></tr></table></figure></p>
 <p>判断每个元素的正负<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">return</span> input.map(<span class="function"><span class="keyword">function</span> <span class="title">var_a</span> -&gt; !(<span class="params">var_a &lt; 0</span>))</span></div></pre></td></tr></table></figure></p>
 <p>Nearest to [0, 0]<br>Sample Input/Output<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">[[10, 12], [2, 3]] =&gt; [2, 3]</div><div class="line">[[5, 3], [15, 0]] =&gt; [5, 3]</div><div class="line">[[12, 3], [6, 15], [1, 2]] =&gt; [1, 2]</div></pre></td></tr></table></figure></p>
 <p>找出列表中距离原点最近的点<br><figure class="highlight"><table><tr><td class="code"><pre><div class="line">function f1: var_a &#123;</div><div class="line">  return pow(var_a[0], 2) + pow(var_a[1], 2);</div><div class="line">&#125;</div><div class="line">input.sort_with(function var_a, var_b -&gt; f1(var_a) &lt; f1(var_b));</div><div class="line">return input[0];</div></pre></td></tr></table></figure></p>
-<h1 id="Killer-Robot"><a href="#Killer-Robot" class="headerlink" title="Killer Robot"></a>Killer Robot</h1><hr>
-<h3 id="Addition"><a href="#Addition" class="headerlink" title="Addition"></a>Addition</h3><p>Sample Input/Output<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">[[2], [3]] =&gt; [5]</div><div class="line">[[1, 2], [1, 9]] =&gt; [3, 1]</div><div class="line">[[3], [1, 2]] =&gt; [1, 5]</div></pre></td></tr></table></figure></p>
+<h1 id="Killer-Robot"><a href="#Killer-Robot" class="headerlink" title="Killer Robot"></a>Killer Robot</h1><h3 id="Addition"><a href="#Addition" class="headerlink" title="Addition"></a>Addition</h3><p>Sample Input/Output<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">[[2], [3]] =&gt; [5]</div><div class="line">[[1, 2], [1, 9]] =&gt; [3, 1]</div><div class="line">[[3], [1, 2]] =&gt; [1, 5]</div></pre></td></tr></table></figure></p>
 <p>这里解释一下：</p>
 <ul>
 <li>2+3 = 5</li>
@@ -233,12 +278,10 @@
 <p>好了，上代码：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>: <span class="title">var_a</span> </span>&#123;</div><div class="line">  foreach var_b <span class="keyword">in</span> var_a &#123;</div><div class="line">    var_c = var_c * <span class="number">10</span> + var_b;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> var_c;</div><div class="line">&#125;</div><div class="line">var_a = f1(input[<span class="number">0</span>]) + f1(input[<span class="number">1</span>]);</div><div class="line">var_b = [<span class="number">0</span>];</div><div class="line"><span class="keyword">while</span> var_a != <span class="number">0</span> &#123;</div><div class="line">  var_b.insert(<span class="number">0</span>, mod(var_a, <span class="number">10</span>));</div><div class="line">  var_a = var_a / <span class="number">10</span>;</div><div class="line">&#125;</div><div class="line">var_b.remove(var_b.length<span class="number">-1</span>);</div><div class="line"><span class="keyword">return</span> var_b;</div></pre></td></tr></table></figure></p>
 <h3 id="Match-2"><a href="#Match-2" class="headerlink" title="Match 2"></a>Match 2</h3><p>Sample Input/Output<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">[(, )] =&gt; true</div><div class="line">[(, [, ), ]] =&gt; false</div><div class="line">[(, [, ], )] =&gt; true</div></pre></td></tr></table></figure></p>
 <p>括号匹配，有两种括号，用下栈就过了<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">var_a = [];</div><div class="line">foreach var_b <span class="keyword">in</span> input &#123;</div><div class="line">  <span class="keyword">if</span> var_b == <span class="string">"("</span> || var_b ==<span class="string">"["</span> &#123;</div><div class="line">    var_a.push(var_b);</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">if</span> var_a == [] &#123;</div><div class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">if</span> (var_b == <span class="string">")"</span> &amp;&amp; var_a[var_a.length - <span class="number">1</span>] == <span class="string">"("</span>) || (var_b == <span class="string">"]"</span> &amp;&amp; var_a[var_a.length - <span class="number">1</span>] == <span class="string">"["</span>) &#123;</div><div class="line">    var_a.pop();</div><div class="line">  &#125;</div><div class="line"><span class="keyword">return</span> var_a == [];</div></pre></td></tr></table></figure></p>
-<h1 id="Skynet"><a href="#Skynet" class="headerlink" title="Skynet"></a>Skynet</h1><hr>
-<h3 id="Tree"><a href="#Tree" class="headerlink" title="Tree"></a>Tree</h3><p>Sample Input/Output<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">[[1, 2], [[3, 4], 5]] =&gt; [1, 2, 3, 4, 5]</div><div class="line">[[1, 2, 3], [[4], 5]] =&gt; [1, 2, 3, 4, 5]</div><div class="line">[[1], 2, [[3, 4, 5]]] =&gt; [1, 2, 3, 4, 5]</div></pre></td></tr></table></figure></p>
+<h1 id="Skynet"><a href="#Skynet" class="headerlink" title="Skynet"></a>Skynet</h1><h3 id="Tree"><a href="#Tree" class="headerlink" title="Tree"></a>Tree</h3><p>Sample Input/Output<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">[[1, 2], [[3, 4], 5]] =&gt; [1, 2, 3, 4, 5]</div><div class="line">[[1, 2, 3], [[4], 5]] =&gt; [1, 2, 3, 4, 5]</div><div class="line">[[1], 2, [[3, 4, 5]]] =&gt; [1, 2, 3, 4, 5]</div></pre></td></tr></table></figure></p>
 <p>写个递归<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">var_a = [];</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>: <span class="title">var_a</span>, <span class="title">var_b</span> </span>&#123;</div><div class="line">  <span class="keyword">if</span> !var_a.is_list &#123;</div><div class="line">    var_b.push(var_a);</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">else</span> &#123;</div><div class="line">    foreach var_c <span class="keyword">in</span> var_a &#123;</div><div class="line">      f1(var_c, var_b);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">f1(input, var_a);</div><div class="line"><span class="keyword">return</span> var_a;</div></pre></td></tr></table></figure></p>
-<h1 id="Retirement"><a href="#Retirement" class="headerlink" title="Retirement"></a>Retirement</h1><hr>
-<h3 id="Draw"><a href="#Draw" class="headerlink" title="Draw"></a>Draw</h3><p>画点<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">return draw(input[0], input[1]);</div></pre></td></tr></table></figure></p>
-<blockquote>版权声明<br><hr>本文链接：www.snovey.com/2016/10/hacked-story/</blockquote>]]></content>
+<h1 id="Retirement"><a href="#Retirement" class="headerlink" title="Retirement"></a>Retirement</h1><h3 id="Draw"><a href="#Draw" class="headerlink" title="Draw"></a>Draw</h3><p>画点<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">return draw(input[0], input[1]);</div></pre></td></tr></table></figure></p>
+<blockquote>版权声明<br><hr>本作品采用<a rel="external" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。<br>本文链接：www.snovey.com/2016/10/hacked-story/</blockquote>]]></content>
     
     <summary type="html">
     
@@ -260,7 +303,7 @@
     <link href="www.snovey.com/2016/09/call-by-value/"/>
     <id>www.snovey.com/2016/09/call-by-value/</id>
     <published>2016-09-29T05:03:25.000Z</published>
-    <updated>2017-03-21T13:46:59.107Z</updated>
+    <updated>2017-08-08T01:46:15.059Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>All function arguments in ECMAScript are passed by value.<br><span style="display:block;text-align:right;"><em>Professional JavaScript for Web Developers, 3rd Edition</em></span></p>
@@ -277,7 +320,7 @@
 <li><a href="http://stackoverflow.com/questions/518000/is-javascript-a-pass-by-reference-or-pass-by-value-language" target="_blank" rel="external">Is JavaScript a pass-by-reference or pass-by-value language?</a></li>
 <li>Professional JavaScript for Web Developers, 3rd Edition</li>
 </ul>
-<blockquote>版权声明<br><hr>本文链接：www.snovey.com/2016/09/call-by-value/</blockquote>]]></content>
+<blockquote>版权声明<br><hr>本作品采用<a rel="external" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。<br>本文链接：www.snovey.com/2016/09/call-by-value/</blockquote>]]></content>
     
     <summary type="html">
     
@@ -299,14 +342,14 @@
     <link href="www.snovey.com/2016/09/STL-iterator/"/>
     <id>www.snovey.com/2016/09/STL-iterator/</id>
     <published>2016-09-27T06:06:28.000Z</published>
-    <updated>2016-09-29T07:45:18.000Z</updated>
+    <updated>2017-08-06T04:42:43.937Z</updated>
     
     <content type="html"><![CDATA[<p>我第一个接触的容器是 vector，当时遍历容器的写法是这样的：<br><figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v;</div><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; v.size(); i++)</div><div class="line">&#123;</div><div class="line">    <span class="comment">//TODO</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <a id="more"></a>
 <p>后来看到别人的写法是这样的：<br><figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v;</div><div class="line"><span class="keyword">for</span> (<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator it = v.begin(); it != v.end(); it++)</div><div class="line">&#123;</div><div class="line">    <span class="comment">//TODO</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>觉得既然 STL 既然内置了 iterator，应该有它自己的优势，虽然这两种写法的时间复杂度都是 O(n)。<br>那么它们的具体区别是什么呢？在我闲逛 stackoverflow 时看到了相关的讨论，这两种方式在遍历 vector 时并无区别，但是第一种方法却不一定适用于其它容器，例如 map，而且后者也易于理解，从维护性，复用性等角度来看都是后者更具备优势。<br>在 STL 中还有反向迭代器，可以反序遍历容器，像这样：<br><figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v;</div><div class="line"><span class="keyword">for</span> (<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::reverse_iterator it = v.rbegin(); it != v.rend(); it++)</div><div class="line">&#123;</div><div class="line">    <span class="comment">//TODO</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>这里反向迭代器将 <code>++</code> 与 <code>--</code> 的含义反了过来，<code>++</code> 访问前一个元素，而 <code>--</code> 访问后一个元素。<br>但是为什么不像下面这样遍历呢？<br><figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v;</div><div class="line"><span class="keyword">for</span> (<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator rit = v.end(); rit != v.begin(); rit++)</div><div class="line">&#123;</div><div class="line">    <span class="comment">//TODO</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>有这种想法的人（比如我）运行一下就知道了，结果并不是想象中的那样，因为 <code>v.end()</code> 返回指向当前对象中 <strong>末尾之后（ Past-the-end）</strong>的元素的迭代器。一图胜千言：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">    begin            end</div><div class="line">      |               |</div><div class="line">      v               v</div><div class="line">    +---+---+---+---+</div><div class="line">    | A | B | C | D |</div><div class="line">    +---+---+---+---+</div><div class="line">  ^               ^</div><div class="line">  |               |</div><div class="line">rbegin           rend</div></pre></td></tr></table></figure></p>
+<p>有这种想法的人（比如我）运行一下就知道了，结果并不是想象中的那样，因为 <code>v.end()</code> 返回指向当前对象中 <strong>末尾之后（ Past-the-end）</strong> 的元素的迭代器。一图胜千言：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">    begin            end</div><div class="line">      |               |</div><div class="line">      v               v</div><div class="line">    +---+---+---+---+</div><div class="line">    | A | B | C | D |</div><div class="line">    +---+---+---+---+</div><div class="line">  ^               ^</div><div class="line">  |               |</div><div class="line">rbegin           rend</div></pre></td></tr></table></figure></p>
 <p>为什么不将 <code>end()</code> 指向最后一个元素呢？这个问题有点类似<a href="http://cenalulu.github.io/linux/why-array-start-from-zero/" target="_blank" rel="external">为什么数组标号是从 0 开始的</a>，之所以指向末尾之后的元素原因有很多，我举几个例子：<br><figure class="highlight c++"><table><tr><td class="code"><pre><div class="line">size() = end() - begin()</div><div class="line">size() = end() - begin() + <span class="number">1</span></div></pre></td></tr></table></figure></p>
 <p>这样不仅不优雅，假设容器是空的，<code>begin()</code> 与 <code>end()</code> 的顺序也会令人费解。<br><figure class="highlight c++"><table><tr><td class="code"><pre><div class="line">sort(begin(), end())</div><div class="line">sort(begin(), end()+<span class="number">1</span>)</div></pre></td></tr></table></figure></p>
 <p>所有参数与迭代器相关的函数都要补上 <code>+1</code>，代码变得丑陋。<br>再比如，如果在容器内未找到元素之后返回的结果要改为 <code>end()+1</code> 而不是原来的 <code>end()</code>。<br>还想了解更多原因的话，请看 Dijkstra 爷爷的原文：<a href="http://www.cs.utexas.edu/users/EWD/ewd08xx/EWD831.PDF" target="_blank" rel="external">Why numbering should start at zero</a><br>如果你非常希望通过 <code>begin()</code> 和 <code>end()</code> 进行反向迭代也未尝不可，不过我不会告诉你写法，放弃这种方法吧。<br>最后，强制将正向迭代器反向不一定能得到想要的结果：<br><figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="keyword">int</span> a[] = &#123;<span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">7</span>, <span class="number">9</span>&#125;;</div><div class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v(a, a + <span class="keyword">sizeof</span>(a) / <span class="keyword">sizeof</span>(<span class="keyword">int</span>));</div><div class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator it;</div><div class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::reverse_iterator rit;</div><div class="line">it = find(v.end(), v.begin(), <span class="number">7</span>);</div><div class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; *(it<span class="number">-1</span>) &lt;&lt; <span class="string">" "</span> &lt;&lt; *it &lt;&lt; <span class="string">" "</span> &lt;&lt; *(it+<span class="number">1</span>) &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">it = find(v.begin(), v.end(), <span class="number">7</span>);</div><div class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; *(it<span class="number">-1</span>) &lt;&lt; <span class="string">" "</span> &lt;&lt; *it &lt;&lt; <span class="string">" "</span> &lt;&lt; *(it+<span class="number">1</span>) &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">rit = find(v.rbegin(), v.rend(), <span class="number">7</span>);</div><div class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; *(rit+<span class="number">1</span>) &lt;&lt; <span class="string">" "</span> &lt;&lt; *rit &lt;&lt; <span class="string">" "</span> &lt;&lt; *(rit<span class="number">-1</span>) &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div></pre></td></tr></table></figure></p>
@@ -316,7 +359,7 @@
 <li><a href="http://stackoverflow.com/questions/9963401/why-are-standard-iterator-ranges-begin-end-instead-of-begin-end?rq=1" target="_blank" rel="external">Why are Standard iterator ranges [begin, end) instead of [begin, end]?</a></li>
 <li><a href="http://stackoverflow.com/questions/1853358/use-a-regular-iterator-to-iterate-backwards-or-struggle-with-reverse-iterator" target="_blank" rel="external">Use a regular iterator to iterate backwards, or struggle with reverse_iterator?</a></li>
 </ul>
-<blockquote>版权声明<br><hr>本文链接：www.snovey.com/2016/09/STL-iterator/</blockquote>]]></content>
+<blockquote>版权声明<br><hr>本作品采用<a rel="external" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。<br>本文链接：www.snovey.com/2016/09/STL-iterator/</blockquote>]]></content>
     
     <summary type="html">
     
@@ -340,7 +383,7 @@
     <link href="www.snovey.com/2016/08/xor/"/>
     <id>www.snovey.com/2016/08/xor/</id>
     <published>2016-08-31T12:51:12.000Z</published>
-    <updated>2016-09-29T09:15:45.000Z</updated>
+    <updated>2017-08-05T15:51:22.695Z</updated>
     
     <content type="html"><![CDATA[<p>上一篇文章讲了基本的位运算知识，其实位运算中最神奇的莫过于异或了，来看一下异或运算的性质</p>
 <ul>
@@ -391,7 +434,7 @@
 <li><a href="https://en.wikipedia.org/wiki/Exclusive-or" target="_blank" rel="external">Exclusive or</a></li>
 <li><a href="https://www.lijinma.com/blog/2014/05/29/amazing-xor/" target="_blank" rel="external">感受异或的神奇</a></li>
 </ul>
-<blockquote>版权声明<br><hr>本文链接：www.snovey.com/2016/08/xor/</blockquote>]]></content>
+<blockquote>版权声明<br><hr>本作品采用<a rel="external" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。<br>本文链接：www.snovey.com/2016/08/xor/</blockquote>]]></content>
     
     <summary type="html">
     
@@ -419,7 +462,7 @@
     <link href="www.snovey.com/2016/08/bitwise-operation/"/>
     <id>www.snovey.com/2016/08/bitwise-operation/</id>
     <published>2016-08-14T12:09:05.000Z</published>
-    <updated>2016-09-01T07:44:45.000Z</updated>
+    <updated>2017-08-06T04:38:41.602Z</updated>
     
     <content type="html"><![CDATA[<p>整理了一些网上关于位操作的知识，东拼西凑写出了这篇文章。<br>位操作的应用非常广泛，通常用在要求效率非常高的底层上。下面说一些简单常用的。<br>位操作包含取反（NOT），按位或（OR），按位异或（XOR），按位与（AND）操作。<br><a id="more"></a><br>在C语言中分别用 <code>~</code>，<code>|</code>，<code>^</code>，<code>|</code> 对其进行表示。<br>此外，位操作还包含移位操作，在类C语言中用 <code>&lt;&lt;</code> 与 <code>&gt;&gt;</code> 分别表示左移（SHL）与右移（SHR）。<br>移位操作分为算术移位与逻辑移位，算术左移与逻辑左移都是空位补 0，不同的是算术右移补符号位，而逻辑右移补 0。</p>
 <p>简单介绍一下各种位操作：</p>
@@ -446,7 +489,7 @@
 <p>据传当初做 3D 引擎时用这段代码计算 <code>1/sqrt(x)</code> 比调用库函数还要快，当然，效率提升之后精度会有一定的损失。<br>这段迷之代码我无法解释，讲个我能解释的吧：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">int abs(int x)</div><div class="line">&#123;</div><div class="line">    int y;</div><div class="line">    y = x &gt;&gt; 31;</div><div class="line">    return (x^y)-y;    //or: (x+y)^y</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>这段代码可以返回一个 32 位整数的绝对值。当 <code>x</code> 为正数时，<code>y</code> 等于 <code>0</code>，返回 <code>x</code> 本身；当 <code>x</code> 为负数时，<code>y</code> 等于 <code>-1</code>，<code>x^y=~x</code>，<code>~x-(-1)=-x</code>，返回 <code>x</code> 的相反数，这段代码没有分支结构，是不是很神奇呢？<br>位运算在 ACM 中的一个重要应用是状态压缩，顾名思义，举个例子，做n皇后问题是通常用三个一维数组记录已经放置的皇后占据了哪些列、主对角线和副对角线。进而判断当前尝试的皇后所在的列和两个对角线是否已有其他皇后。如果将这三个一维数组换位三个整数同样可以解 n 皇后问题，而且效率更高，给出代码如下：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">//计算 n 皇后</div><div class="line">//int占多少个位就能解决多大的 n 皇后问题，这是一种状态压缩的思想</div><div class="line">int n, tot;  // n = (1 &lt;&lt; queen) -1;</div><div class="line">void search(int row, int ld, int rd)</div><div class="line">&#123;</div><div class="line">    int cur, tmp;</div><div class="line">    cur = n | ~(row | ld | rd);</div><div class="line">    if (row == n) tot++;</div><div class="line">    else while (cur)</div><div class="line">    &#123;</div><div class="line">        tmp = cur | -cur;</div><div class="line">        search(row+tmp, (ld+tmp)&lt;&lt;1, (rd+tmp)&gt;&gt;1);</div><div class="line">        cur -= tmp;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>再比如可以用二进制表示集合的子集，每一位代表一个元素，通过判断该位的值进而判断该元素是否在子集中：<br><figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="comment">//位运算枚举子集</span></div><div class="line"><span class="comment">//每一位的 0 或 1 对应相应元素的取与不取</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">print_subset</span><span class="params">(<span class="keyword">int</span> n)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; (<span class="number">1</span> &lt;&lt; n); ++i)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++)</div><div class="line">            <span class="keyword">if</span> (i | (<span class="number">1</span> &lt;&lt; j))</div><div class="line">                <span class="built_in">printf</span>(<span class="string">"%d "</span>, j+<span class="number">1</span>);</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"\n"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>不仅如此，它还可以进行集合间的操作，数与数之间的 AND 和 OR 操作分别对应集合间的 $\bigcup$ 和 $\bigcap$<br>来看一下位运算的经典面试题：</p>
+<p>不仅如此，它还可以进行集合间的操作，数与数之间的 AND 和 OR 操作分别对应集合间的 ∪ 和 ∩<br>来看一下位运算的经典面试题：</p>
 <blockquote>
 <p>有 1000 个一模一样的瓶子，其中有 999 瓶是普通的水，有一瓶是毒药。任何喝下毒药的生物都会在一星期之后死亡。现在，你只有 10 小白鼠和一星期的时间，如何检验出哪个瓶子里有毒药？<br>如果你有两个星期的时间（换句话说你可以做两轮实验），为了从 1000 个瓶子中找出毒药，你最少需要几只老鼠？注意，在第一轮实验中死掉的老鼠，就无法继续参与第二次实验了。</p>
 </blockquote>
@@ -462,7 +505,7 @@
 <li><a href="http://www.cnblogs.com/pkuoliver/archive/2010/10/06/1844725.html" target="_blank" rel="external">一个 Sqrt 函数引发的血案</a></li>
 <li><a href="http://www.linuxidc.com/Linux/2014-09/106567.htm" target="_blank" rel="external">深入理解C语言中的移位运算</a></li>
 </ul>
-<blockquote>版权声明<br><hr>本文链接：www.snovey.com/2016/08/bitwise-operation/</blockquote>]]></content>
+<blockquote>版权声明<br><hr>本作品采用<a rel="external" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。<br>本文链接：www.snovey.com/2016/08/bitwise-operation/</blockquote>]]></content>
     
     <summary type="html">
     
@@ -482,20 +525,15 @@
     <link href="www.snovey.com/2016/06/char-encoding/"/>
     <id>www.snovey.com/2016/06/char-encoding/</id>
     <published>2016-06-17T10:57:03.000Z</published>
-    <updated>2016-09-29T07:45:05.000Z</updated>
+    <updated>2017-08-05T14:23:09.310Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h1><hr>
-<p>计算机只能存储二进制的数据，所以字符也一样只能通过将字符映射为相应的二进制形式才能保存，读取的时候由系统对字符进行图形渲染。<br><a id="more"></a></p>
+    <content type="html"><![CDATA[<h1 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h1><p>计算机只能存储二进制的数据，所以字符也一样只能通过将字符映射为相应的二进制形式才能保存，读取的时候由系统对字符进行图形渲染。<br><a id="more"></a></p>
 <p>不同的映射方式导致了不同的<strong>字符集</strong><sup>[1]</sup>（character set），譬如说，「雪」字在 GBK 编码中对应的是「D1A9」，在 Unicode 编码中对应的是「96EA」。然而字符集只是规定了字符与二进制之间的映射，并没有规定具体如何实现，这个责任由<strong>字符编码</strong>（Character Encoding）承担，字符集与字符编码可能不同。</p>
-<h1 id="0x01-ASCII"><a href="#0x01-ASCII" class="headerlink" title="0x01 ASCII"></a>0x01 ASCII</h1><hr>
-<p>最初的时候，美帝只考虑了自己需要的英文，26 个大小写字母加数字符号控制字符乱七八糟一通搞，正好 128 个字符，一个字节表达完毕，这就是 ASCII（American Standard Code for Information Interchange，美国信息交换标准代码）。后来计算机传到欧洲，字符不够用，为了对剩下的 128 个字符进行了利用并制定标准，ISO 推出 ISO 8859，显然 256 个字符也是不够这些国家用的，所以 8859 被分成了十几个部分，它覆盖了大部分使用拉丁字母的语言文字。</p>
-<h1 id="0x02-代码页"><a href="#0x02-代码页" class="headerlink" title="0x02 代码页"></a>0x02 代码页</h1><hr>
-<p>在 ISO 标准完全定型之前，IBM 就有一系列自己的字符编码，叫做代码页（code page），比如 437（扩展 ASCII）、850（西欧语言）、852（东欧语言）。IBM代码页通常被用于控制台（console）环境，也就是 MS-DOS 或 Unix Shell 那样的命令行环境。<br>微软将 IBM 代码页称为 OEM 代码页，自己定义的称为 ANSI 代码页， 比如 1252（西欧语言）、1250（东欧语言）、936（GBK 简体中文）、950（Big5 繁体中文）、932（SJIS 日文）、949（EUC-KR 韩文）等。</p>
-<h1 id="0x03-GB-家族"><a href="#0x03-GB-家族" class="headerlink" title="0x03 GB 家族"></a>0x03 GB 家族</h1><hr>
-<p>当计算机来到中国，这个问题的难度升级了，一个字节无论如何也表达不了博大精深的汉字，于是人们拿两个字节解决了这个问题，也就是 GB 2312 字符集，它是一个 94 * 94 的表，包括 7445 个字符。GB 2312 兼容 ASCII，GB 2312 编码对汉字/符号进行了分区（区位码）。每个汉字 / 符号以两个字节来表示。第一个字节称为「高位字节」，第二个字节称为「低位字节」。GB 2312 还有另一种编码方式 HZ，只是不常用。</p>
+<h1 id="0x01-ASCII"><a href="#0x01-ASCII" class="headerlink" title="0x01 ASCII"></a>0x01 ASCII</h1><p>最初的时候，美帝只考虑了自己需要的英文，26 个大小写字母加数字符号控制字符乱七八糟一通搞，正好 128 个字符，一个字节表达完毕，这就是 ASCII（American Standard Code for Information Interchange，美国信息交换标准代码）。后来计算机传到欧洲，字符不够用，为了对剩下的 128 个字符进行了利用并制定标准，ISO 推出 ISO 8859，显然 256 个字符也是不够这些国家用的，所以 8859 被分成了十几个部分，它覆盖了大部分使用拉丁字母的语言文字。</p>
+<h1 id="0x02-代码页"><a href="#0x02-代码页" class="headerlink" title="0x02 代码页"></a>0x02 代码页</h1><p>在 ISO 标准完全定型之前，IBM 就有一系列自己的字符编码，叫做代码页（code page），比如 437（扩展 ASCII）、850（西欧语言）、852（东欧语言）。IBM代码页通常被用于控制台（console）环境，也就是 MS-DOS 或 Unix Shell 那样的命令行环境。<br>微软将 IBM 代码页称为 OEM 代码页，自己定义的称为 ANSI 代码页， 比如 1252（西欧语言）、1250（东欧语言）、936（GBK 简体中文）、950（Big5 繁体中文）、932（SJIS 日文）、949（EUC-KR 韩文）等。</p>
+<h1 id="0x03-GB-家族"><a href="#0x03-GB-家族" class="headerlink" title="0x03 GB 家族"></a>0x03 GB 家族</h1><p>当计算机来到中国，这个问题的难度升级了，一个字节无论如何也表达不了博大精深的汉字，于是人们拿两个字节解决了这个问题，也就是 GB 2312 字符集，它是一个 94 * 94 的表，包括 7445 个字符。GB 2312 兼容 ASCII，GB 2312 编码对汉字/符号进行了分区（区位码）。每个汉字 / 符号以两个字节来表示。第一个字节称为「高位字节」，第二个字节称为「低位字节」。GB 2312 还有另一种编码方式 HZ，只是不常用。</p>
 <p>GB 2312 的出现，基本满足了汉字的计算机处理需要，它所收录的汉字已经覆盖中国大陆 99.75% 的使用频率。但对于人名、古汉语等方面出现的罕用字和繁体字，GB 2312不能处理，<del>譬如说，某位领导人的名字写不出来，</del>于是人们对 GB 2312 进行了扩展，这就是 GBK，K为汉语拼音 Kuo Zhan（扩展）中「扩」字的声母。GBK 全称是汉字内码扩展规范（Chinese Internal Code Extension Specification）。GBK 有一字节和双字节编码，这里有个事情就是计算机如何知道当前的字节是独立的字符还是跟相邻的字符共同表示一个字符，GBK 是通过第一个字符的范围来辨别的，<code>00</code>–<code>7F</code> 范围内是一个字节，<code>81</code>–<code>FE</code> 范围内是两个字节，GBK 向下完全兼容 GB 2312，GBK 与 CP936 大体相同，比它多 95 个字符。然而 GBK 但是毕竟只是规范，不是标准，随后国家推出 GBK 18030 以取代 GBK，它完全兼容 GB 2312，基本兼容 GBK，采用多字节编码，每个字可以由 1 个、2 个或 4 个字节组成。</p>
-<h1 id="0x04-UCS-Unicode"><a href="#0x04-UCS-Unicode" class="headerlink" title="0x04 UCS / Unicode"></a>0x04 UCS / Unicode</h1><hr>
-<h2 id="UCS"><a href="#UCS" class="headerlink" title="UCS"></a>UCS</h2><p>为了使混乱的编码格局得到统一，ISO 于 1990 年推出了通用字符集（Unicode Character Set，UCS），它包含了一百多万个字符，UCS 有两种编码方式：UCS-2 和 UCS-4，分别用两个字节和四个字节表示一个字符，UCS-2 只能表示 65536 个字符，明显不够用，已经过时了。UCS-4 根据最高位为0的最高字节分成2<sup>7</sup>=128 个 group。每个 group 再根据次高字节分为 256 个 plane。每个 plane 根据第 3 个字节分为 256 行（rows），每行包含256个 cells。当然同一行的 cells 只是最后一个字节不同，其余都相同。group 0 的 plane 0 就是 BMP。</p>
+<h1 id="0x04-UCS-Unicode"><a href="#0x04-UCS-Unicode" class="headerlink" title="0x04 UCS / Unicode"></a>0x04 UCS / Unicode</h1><h2 id="UCS"><a href="#UCS" class="headerlink" title="UCS"></a>UCS</h2><p>为了使混乱的编码格局得到统一，ISO 于 1990 年推出了通用字符集（Unicode Character Set，UCS），它包含了一百多万个字符，UCS 有两种编码方式：UCS-2 和 UCS-4，分别用两个字节和四个字节表示一个字符，UCS-2 只能表示 65536 个字符，明显不够用，已经过时了。UCS-4 根据最高位为0的最高字节分成2<sup>7</sup>=128 个 group。每个 group 再根据次高字节分为 256 个 plane。每个 plane 根据第 3 个字节分为 256 行（rows），每行包含256个 cells。当然同一行的 cells 只是最后一个字节不同，其余都相同。group 0 的 plane 0 就是 BMP。</p>
 <h2 id="Unicode"><a href="#Unicode" class="headerlink" title="Unicode"></a>Unicode</h2><p>ISO之外还有另外一个组织：统一码联盟（The Unicode Consortium），它于1991年推出了 Unicode 1.0。后来与 ISO 组织合并成果。<br>Unicode 全称 Universal Multiple-Octet Coded Character Set。Unicode 的码空间从 U+0000 到 U+10FFFF， Unicode 的码空间可以划分为 17 个平面（plane），每个平面包含 2<sup>16</sup>(65,536) 个码位。每个平面的码位可表示为从 U+xx0000 到 U+xxFFFF，其中 xx 表示十六进制值从 00H 到 10H，共计 17 个平面。如果 xx 是 0，即第 0 平面，可省略不写，第一个 Unicode 平面（码位从 U+0000 至 U+FFFF）包含了最常用的字符，该平面被称为基本多语言平面（Basic Multilingual Plane），缩写为 BMP。其他平面称为辅助平面（Supplementary Planes）。<br>这里字符集跟字符编码的区别就出现了，Unicode 只是指定了字符的映射，并没有指定实现方式，出现了 UTF-8、UTF-16 和 UTF-32 三种编码方式。</p>
 <h2 id="UTF-16"><a href="#UTF-16" class="headerlink" title="UTF-16"></a>UTF-16</h2><p>UTF-16 可以看作是 UCS-2 的父集（严格的说这不正确，在 UTF-16 中从 U+D800 到 U+DFFF 的码位不对应于任何字符，而在使用 UCS-2 的时代，U+D800 到 U+DFFF 内的值被占用），为什么说它是父集呢，因为当字符不在 BMP 时 UTF-16 会使用四个字节来编码，所以要注意，UTF-16 是变长编码，四个字节的表示算法比较啰嗦，我不写了。<br>UTF-16 的坑在于字节序（Endianness）的问题，就是存储和传输的时候哪个在高地址哪个在低地址，举个例子：「雪」的大端序（big-endian，也叫大尾序）为 U+D1A9，小端序（little-endian，也叫小尾序）为 U+A9D1。一般来说，以 Macintosh 制作或储存的文字使用大端序格式，以 Microsoft 或 Linux 制作或储存存的文字使用小端序格式，网络传输一般采用大端序。<br>为此，出现了三种解决方案，也就是UTF-16LE，UTF-16BE， UTF-16。UTF-16 是大端序还是小端序取决于在文件头是否有 BOM，如果没有就听天由命了，如果有的话，就说说 BOM，BOM（byte-order mark） 是字节顺序标记，它不仅仅存在于 UTF-16 中，只要编码方式受字节序影响，就需要 BOM，在 UTF-8、UTF-32、GB 18030 中也有它的身影，不过在不同的编码方式中表示也不一样。在 UTF-16 中用 U+FEFF 表示大端序，用 U+FFFE 表示小端序。</p>
 <h2 id="UTF-32"><a href="#UTF-32" class="headerlink" title="UTF-32"></a>UTF-32</h2><p>UTF-32 是 UCS-4 的子集，它对所有的字符都采用四字节表示，强迫症表示很开心。当然，它也逃不了与 UTF-16 类似的遭遇，它也分 UTF-32LE、UTF-32BE、UTF-32。</p>
@@ -593,8 +631,7 @@
 </tbody>
 </table>
 <p>Unicode 允许在 UTF-8 中使用 BOM，不过 UTF-8 的编码方式是字节序无关的，没必要使用 BOM。</p>
-<h1 id="0x05-记事本"><a href="#0x05-记事本" class="headerlink" title="0x05 记事本"></a>0x05 记事本</h1><hr>
-<p>打开记事本，文件-&gt;另存为，下方编码方式选项有四个</p>
+<h1 id="0x05-记事本"><a href="#0x05-记事本" class="headerlink" title="0x05 记事本"></a>0x05 记事本</h1><p>打开记事本，文件-&gt;另存为，下方编码方式选项有四个</p>
 <ul>
 <li>ANSI</li>
 <li>Unicode</li>
@@ -617,12 +654,11 @@
 <li><a href="https://www.wikiwand.com/zh/%E4%BD%8D%E5%85%83%E7%B5%84%E9%A0%86%E5%BA%8F%E8%A8%98%E8%99%9F&quot;" target="_blank" rel="external">位元組順序記號</a></li>
 <li><a href="http://unicode.org/faq/utf_bom.html&quot;" target="_blank" rel="external">UTF-BOM</a></li>
 </ul>
-<blockquote>版权声明<br><hr>本文链接：www.snovey.com/2016/06/char-encoding/</blockquote>]]></content>
+<blockquote>版权声明<br><hr>本作品采用<a rel="external" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。<br>本文链接：www.snovey.com/2016/06/char-encoding/</blockquote>]]></content>
     
     <summary type="html">
     
-      &lt;h1 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00 前言&quot;&gt;&lt;/a&gt;0x00 前言&lt;/h1&gt;&lt;hr&gt;
-&lt;p&gt;计算机只能存储二进制的数据，所以字符也一样只能通过将字符映射为相应的二进制形式才能保存，读取的时候由系统对字符进行图形渲染。&lt;br&gt;
+      &lt;h1 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00 前言&quot;&gt;&lt;/a&gt;0x00 前言&lt;/h1&gt;&lt;p&gt;计算机只能存储二进制的数据，所以字符也一样只能通过将字符映射为相应的二进制形式才能保存，读取的时候由系统对字符进行图形渲染。&lt;br&gt;
     
     </summary>
     
@@ -638,7 +674,7 @@
     <link href="www.snovey.com/2016/06/endofline/"/>
     <id>www.snovey.com/2016/06/endofline/</id>
     <published>2016-06-07T16:00:00.000Z</published>
-    <updated>2016-10-03T11:56:23.000Z</updated>
+    <updated>2017-08-06T04:40:19.186Z</updated>
     
     <content type="html"><![CDATA[<p><img src="//blog.snovey.com/image/typewriter.jpg" alt="typewriter" style="max-width: 75%;margin: auto;"></p>
 <p>这是上古时期的机械打字机，每输入一个字符，滚筒会左移一小截（一个字符的宽度 + 字符间距，好在那时候打字机都是等宽字体）。当滚筒移动到最左侧，即纸张右侧已经和敲针对齐时（也就是打完一行字），会有响铃提示已经抵达行末。这时拉动左侧墨带盒上边的金属手柄（换行手柄），然后滚筒会被推到最右边，打字头对准了行首，这就是 <code>CR</code>（carriage return, 回车）。继续用力，换行手柄大约会被扳动 30 度左右，纸会被上卷一行（行高，line height），这就是 <code>LF</code>（line feed, 换行）。<br><a id="more"></a></p>
@@ -648,8 +684,9 @@
 <p>所以 MS-DOS（1981）设计的时候是采用了在两种方法中都符合标准的 <code>CRLF</code>，一方面是满足了两个标准，另一方面是兼容了当时大量采用 <code>CRLF</code> 的计算机。而 Unix 的前身 Multics 的设计者认为在每行的结尾加两个字符用于换行，实在是极大的浪费（那时的存储设备非常昂贵）。所以 Multics 里面用一个驱动程序自动将 <code>LF</code> 转换成 <code>CR-LF</code>，所以他们用了单一的 <code>LF</code>。</p>
 <p>很明显，<code>CRLF</code> 才是正统，*nix 是异端。关于 <code>CR</code> 与 <code>LF</code> 的表示如下：</p>
 <blockquote>
-<p>CR（carriage return, 回车）用 \r （return）表示，对应的 ASCII 码为 0x0D<br>LF（line feed, 换行）用 \n （newline）表示，对应的 ASCII 码为 0x0A</p>
+<p>CR（carriage return, 回车）用 \r （return）表示，对应的 ASCII 码为 0x0D</p>
 </blockquote>
+<p>LF（line feed, 换行）用 \n （newline）表示，对应的 ASCII 码为 0x0A</p>
 <p>所以现在各操作系统对换行的表示方式如下：</p>
 <blockquote>
 <p>LF：在 Unix 或 Unix 相容系统（GNU/Linux，AIX，Xenix，Mac OS X，…）、BeOS、Amiga、RISC OS<br>CR+LF：MS-DOS、微软视窗操作系统（Microsoft Windows）、大部分非Unix的系统<br>CR：Apple II家族，Mac OS至版本9</p>
@@ -672,7 +709,7 @@
 <ul>
 <li><a href="https://www.wikiwand.com/en/Newline" target="_blank" rel="external">Newline</a></li>
 </ul>
-<blockquote>版权声明<br><hr>本文链接：www.snovey.com/2016/06/endofline/</blockquote>]]></content>
+<blockquote>版权声明<br><hr>本作品采用<a rel="external" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。<br>本文链接：www.snovey.com/2016/06/endofline/</blockquote>]]></content>
     
     <summary type="html">
     
@@ -702,7 +739,7 @@
 </ol>
 <a id="more"></a>
 <p>邻接表的实现方式如下：<br><img src="//blog.snovey.com/image/toposort.png" alt="toposort"><br>初始的时候建立两个表，一个邻接表，以及另外一个表存储出度为0的节点，每次将入度表中入度为 0 的点加入容器中，然后从容器中取出节点，去邻接表中查询，根据邻接表修改入度表，发现入度为 0 的点加入容器中，如此反复，直至容器为空。<br>如果最终入度表中有入度不为 0 的节点，则该图有环，否则该图无环。若该图为偏序关系，则某一时刻容器中的元素多于一个，取出的元素可能是随机的，造成拓扑排序的结果不唯一，与容器的选取有关。若该图为全序关系，则容器中的元素始终只有一个，结果唯一，与容器的选取无关。<br>下面以题为例说明：<br>HDU 3342<br>题意：有一个 ACM 日常 QQ 交流群，群内存在一些师徒关系，若存在某个人的徒弟是自己的师傅的情况则不合法，输出 NO，否则输出 YES。此题有 trick，即要判断重边，代码如下<br><figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> n, m, x, y, cnt, table[<span class="number">105</span>];</div><div class="line">    <span class="keyword">bool</span> vis[<span class="number">105</span>][<span class="number">105</span>];  <span class="comment">//防止出现重边</span></div><div class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;n, &amp;m) &amp;&amp; n &amp;&amp; m)</div><div class="line">    &#123;</div><div class="line">        cnt = <span class="number">0</span>;</div><div class="line">        <span class="built_in">memset</span>(vis, <span class="number">0</span>, <span class="keyword">sizeof</span>(vis));</div><div class="line">        <span class="built_in">memset</span>(table, <span class="number">0</span>, <span class="keyword">sizeof</span>(table));</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v[<span class="number">105</span>];  <span class="comment">//邻接表</span></div><div class="line">        <span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt; st;  <span class="comment">//存储入度为0的节点</span></div><div class="line">        <span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;::iterator it;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)</div><div class="line">        &#123;</div><div class="line">            <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;x, &amp;y);</div><div class="line">            <span class="keyword">if</span>(!vis[x][y])</div><div class="line">            &#123;</div><div class="line">                v[x].push_back(y);</div><div class="line">                table[y]++;</div><div class="line">                vis[x][y] = <span class="literal">true</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</div><div class="line">            <span class="keyword">if</span>(table[i] == <span class="number">0</span>)</div><div class="line">                cnt++, st.insert(i);</div><div class="line">        <span class="keyword">while</span>(!st.empty())</div><div class="line">        &#123;</div><div class="line">            it = st.begin();</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">unsigned</span> <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; v[*it].size(); i++)</div><div class="line">            &#123;</div><div class="line">                table[v[*it][i]]--;</div><div class="line">                <span class="keyword">if</span>(table[v[*it][i]] == <span class="number">0</span>)</div><div class="line">                    cnt++, st.insert(v[*it][i]);</div><div class="line">            &#125;</div><div class="line">            st.erase(*it);</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">printf</span>(cnt == n ? <span class="string">"YES\n"</span> : <span class="string">"NO\n"</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<blockquote>版权声明<br><hr>本文链接：www.snovey.com/2016/06/toposort/</blockquote>]]></content>
+<blockquote>版权声明<br><hr>本作品采用<a rel="external" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。<br>本文链接：www.snovey.com/2016/06/toposort/</blockquote>]]></content>
     
     <summary type="html">
     

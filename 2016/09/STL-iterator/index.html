@@ -1,21 +1,17 @@
-<!doctype html>
-
-
-
-  
-
-
-<html class="theme-next mist use-motion">
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-
-
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 
+<!--link href="//blog.snovey.com/css/main.css?v=1.0.0" rel="stylesheet" type="text/css" /-->
+
+
+  <meta name="keywords" content="undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined," />
 
 
 
@@ -23,306 +19,109 @@
 
 
 
-
-
-
-
-  
-  
-  <link href="//blog.snovey.com/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
-
-
-
-<link href="//blog.snovey.com/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
-
-<link href="//blog.snovey.com/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="C++,STL,iterator," />
-
-
-
-
-
-  <link rel="alternate" href="/atom.xml" title="雨雪霏霏" type="application/atom+xml" />
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
-
-
-
-
-
-
-<meta name="description" content="我第一个接触的容器是 vector，当时遍历容器的写法是这样的：std::vector&amp;lt;int&amp;gt; v;for (int i = 0; i &amp;lt; v.size(); i++)&amp;#123;    //TODO&amp;#125;">
-<meta property="og:type" content="article">
-<meta property="og:title" content="关于 STL 中迭代器的一点思考">
-<meta property="og:url" content="www.snovey.com/2016/09/STL-iterator/index.html">
-<meta property="og:site_name" content="雨雪霏霏">
-<meta property="og:description" content="我第一个接触的容器是 vector，当时遍历容器的写法是这样的：std::vector&amp;lt;int&amp;gt; v;for (int i = 0; i &amp;lt; v.size(); i++)&amp;#123;    //TODO&amp;#125;">
-<meta property="og:updated_time" content="2016-09-29T07:45:18.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于 STL 中迭代器的一点思考">
-<meta name="twitter:description" content="我第一个接触的容器是 vector，当时遍历容器的写法是这样的：std::vector&amp;lt;int&amp;gt; v;for (int i = 0; i &amp;lt; v.size(); i++)&amp;#123;    //TODO&amp;#125;">
-
-
-
-<script type="text/javascript" id="hexo.configuration">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    scheme: 'Mist',
-    sidebar: {"position":"left","display":"post"},
-    fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: 0,
-      author: '博主'
-    }
-  };
-</script>
-
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.0.0" />
 
 
 
   <link rel="canonical" href="www.snovey.com/2016/09/STL-iterator/"/>
 
-  <title> 关于 STL 中迭代器的一点思考 | 雨雪霏霏 </title>
+<title>雨雪霏霏</title>
+<link rel="stylesheet" href="/css/style.css">
+
 </head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
-  
-
-
-
-
-
-
-
-
-
-
-  
-  
-    
-  
-
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
-
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">雨雪霏霏</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN" class="typo">
+  <header class="header">
+  <div class="header-inner">
+    <div class="blog-title">
+      <a href="/" class="logo">雨雪霏霏</a>
+    </div>
+    <nav class="navbar">
+      <ul class="menu">
+        
+          <li class="menu-item">
+            <a href="/" class="menu-item-link">首页</a>
+          </li>
+          
+          <li class="menu-item">
+            <a href="/archives" class="menu-item-link">归档</a>
+          </li>
+          
+          <li class="menu-item">
+            <a href="/categories" class="menu-item-link">分类</a>
+          </li>
+          
+          <li class="menu-item">
+            <a href="/tags" class="menu-item-link">标签</a>
+          </li>
+          
+          <li class="menu-item">
+            <a href="/about" class="menu-item-link">关于</a>
+          </li>
+          
+        </ul>
+      </nav>
   </div>
-  <p class="site-subtitle"></p>
-</div>
+</header>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
+  <main class="main">
+    <aside class="siderbar">
+  <section class="siderbar-panel">
+    <div class="author-panel" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <img class="author-image" itemprop="image" src="//blog.snovey.com/uploads/avatar.jpg" alt="雨雪霏霏">
+      <p class="author-name" itemprop="name">雨雪霏霏</p>
+      <p class="site-description" itemprop="description" >简单快乐与幸福同行</p>
+    </div>
+    <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="">
+          <span class="site-state-item-name">日志</span>
+          <span class="site-state-item-count">11</span>
+        </a>
+      </div>
       
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
+        <div class="site-state-item site-state-categories">
+          <a href="">
+            <span class="site-state-item-name">分类</span>
+            <span class="site-state-item-count">4</span>
           </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
-
-      
-    </ul>
-  
-
-  
-</nav>
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
-    
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                关于 STL 中迭代器的一点思考
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-27T14:06:28+08:00" content="2016-09-27">
-              2016-09-27
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/杂谈/" itemprop="url" rel="index">
-                    <span itemprop="name">杂谈</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
       
       
-
+        <div class="site-state-item site-state-tags">
+          <a href="">
+            <span class="site-state-item-name">标签</span>
+            <span class="site-state-item-count">11</span>
+          </a>
+        </div>
       
-        <p>我第一个接触的容器是 vector，当时遍历容器的写法是这样的：<br><figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v;</div><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; v.size(); i++)</div><div class="line">&#123;</div><div class="line">    <span class="comment">//TODO</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+    </nav>
+    <div class="feed-link motion-element" style="opacity: 1; display: block; transform: translateX(0px);">
+      <a href="/atom.xml" rel="alternate">RSS</a>
+    </div>
+    <div class="links-of-author motion-element">
+    </div>
+    <div class="cc-license motion-element" itemprop="license">
+      <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">
+        <img src="//blog.snovey.com/images/cc-by-nc-nd.svg" alt="Creative Commons">
+      </a>
+    </div>
+  </section>
+</aside>
+    <button type="button" id="info"><?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1502186391435" class="icon" style="" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1007" xmlns:xlink="http://www.w3.org/1999/xlink" width="32" height="32"><defs><style type="text/css"></style></defs><path d="M65.012178 128.544655 65.012178 230.875275 959.381795 230.875275 959.381795 128.544655 65.012178 128.544655Z" p-id="1008" fill="#ffffff"></path><path d="M64.729745 563.201126 959.269231 563.201126 959.269231 460.870506 64.729745 460.870506 64.729745 563.201126Z" p-id="1009" fill="#ffffff"></path><path d="M64.729745 895.525953 959.269231 895.525953 959.269231 793.195334 64.729745 793.195334 64.729745 895.525953Z" p-id="1010" fill="#ffffff"></path><path d="M64.729745 889.742227" p-id="1011" fill="#000000"></path></svg></button>
+    <article class="post">
+  <div class="post-title">
+    <h2 class="title">关于 STL 中迭代器的一点思考</h2>
+  </div>
+   <div class="post-meta">
+    <span class="post-time">2016-09-27</span>
+  </div>
+  <div class="post-content">
+    <p>我第一个接触的容器是 vector，当时遍历容器的写法是这样的：<br><figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v;</div><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; v.size(); i++)</div><div class="line">&#123;</div><div class="line">    <span class="comment">//TODO</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <a id="more"></a>
 <p>后来看到别人的写法是这样的：<br><figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v;</div><div class="line"><span class="keyword">for</span> (<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator it = v.begin(); it != v.end(); it++)</div><div class="line">&#123;</div><div class="line">    <span class="comment">//TODO</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>觉得既然 STL 既然内置了 iterator，应该有它自己的优势，虽然这两种写法的时间复杂度都是 O(n)。<br>那么它们的具体区别是什么呢？在我闲逛 stackoverflow 时看到了相关的讨论，这两种方式在遍历 vector 时并无区别，但是第一种方法却不一定适用于其它容器，例如 map，而且后者也易于理解，从维护性，复用性等角度来看都是后者更具备优势。<br>在 STL 中还有反向迭代器，可以反序遍历容器，像这样：<br><figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v;</div><div class="line"><span class="keyword">for</span> (<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::reverse_iterator it = v.rbegin(); it != v.rend(); it++)</div><div class="line">&#123;</div><div class="line">    <span class="comment">//TODO</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>这里反向迭代器将 <code>++</code> 与 <code>--</code> 的含义反了过来，<code>++</code> 访问前一个元素，而 <code>--</code> 访问后一个元素。<br>但是为什么不像下面这样遍历呢？<br><figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v;</div><div class="line"><span class="keyword">for</span> (<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator rit = v.end(); rit != v.begin(); rit++)</div><div class="line">&#123;</div><div class="line">    <span class="comment">//TODO</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>有这种想法的人（比如我）运行一下就知道了，结果并不是想象中的那样，因为 <code>v.end()</code> 返回指向当前对象中 <strong>末尾之后（ Past-the-end）</strong>的元素的迭代器。一图胜千言：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">    begin            end</div><div class="line">      |               |</div><div class="line">      v               v</div><div class="line">    +---+---+---+---+</div><div class="line">    | A | B | C | D |</div><div class="line">    +---+---+---+---+</div><div class="line">  ^               ^</div><div class="line">  |               |</div><div class="line">rbegin           rend</div></pre></td></tr></table></figure></p>
+<p>有这种想法的人（比如我）运行一下就知道了，结果并不是想象中的那样，因为 <code>v.end()</code> 返回指向当前对象中 <strong>末尾之后（ Past-the-end）</strong> 的元素的迭代器。一图胜千言：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">    begin            end</div><div class="line">      |               |</div><div class="line">      v               v</div><div class="line">    +---+---+---+---+</div><div class="line">    | A | B | C | D |</div><div class="line">    +---+---+---+---+</div><div class="line">  ^               ^</div><div class="line">  |               |</div><div class="line">rbegin           rend</div></pre></td></tr></table></figure></p>
 <p>为什么不将 <code>end()</code> 指向最后一个元素呢？这个问题有点类似<a href="http://cenalulu.github.io/linux/why-array-start-from-zero/" target="_blank" rel="external">为什么数组标号是从 0 开始的</a>，之所以指向末尾之后的元素原因有很多，我举几个例子：<br><figure class="highlight c++"><table><tr><td class="code"><pre><div class="line">size() = end() - begin()</div><div class="line">size() = end() - begin() + <span class="number">1</span></div></pre></td></tr></table></figure></p>
 <p>这样不仅不优雅，假设容器是空的，<code>begin()</code> 与 <code>end()</code> 的顺序也会令人费解。<br><figure class="highlight c++"><table><tr><td class="code"><pre><div class="line">sort(begin(), end())</div><div class="line">sort(begin(), end()+<span class="number">1</span>)</div></pre></td></tr></table></figure></p>
 <p>所有参数与迭代器相关的函数都要补上 <code>+1</code>，代码变得丑陋。<br>再比如，如果在容器内未找到元素之后返回的结果要改为 <code>end()+1</code> 而不是原来的 <code>end()</code>。<br>还想了解更多原因的话，请看 Dijkstra 爷爷的原文：<a href="http://www.cs.utexas.edu/users/EWD/ewd08xx/EWD831.PDF" target="_blank" rel="external">Why numbering should start at zero</a><br>如果你非常希望通过 <code>begin()</code> 和 <code>end()</code> 进行反向迭代也未尝不可，不过我不会告诉你写法，放弃这种方法吧。<br>最后，强制将正向迭代器反向不一定能得到想要的结果：<br><figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="keyword">int</span> a[] = &#123;<span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">7</span>, <span class="number">9</span>&#125;;</div><div class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v(a, a + <span class="keyword">sizeof</span>(a) / <span class="keyword">sizeof</span>(<span class="keyword">int</span>));</div><div class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator it;</div><div class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::reverse_iterator rit;</div><div class="line">it = find(v.end(), v.begin(), <span class="number">7</span>);</div><div class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; *(it<span class="number">-1</span>) &lt;&lt; <span class="string">" "</span> &lt;&lt; *it &lt;&lt; <span class="string">" "</span> &lt;&lt; *(it+<span class="number">1</span>) &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">it = find(v.begin(), v.end(), <span class="number">7</span>);</div><div class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; *(it<span class="number">-1</span>) &lt;&lt; <span class="string">" "</span> &lt;&lt; *it &lt;&lt; <span class="string">" "</span> &lt;&lt; *(it+<span class="number">1</span>) &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">rit = find(v.rbegin(), v.rend(), <span class="number">7</span>);</div><div class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; *(rit+<span class="number">1</span>) &lt;&lt; <span class="string">" "</span> &lt;&lt; *rit &lt;&lt; <span class="string">" "</span> &lt;&lt; *(rit<span class="number">-1</span>) &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div></pre></td></tr></table></figure></p>
@@ -332,307 +131,42 @@
 <li><a href="http://stackoverflow.com/questions/9963401/why-are-standard-iterator-ranges-begin-end-instead-of-begin-end?rq=1" target="_blank" rel="external">Why are Standard iterator ranges [begin, end) instead of [begin, end]?</a></li>
 <li><a href="http://stackoverflow.com/questions/1853358/use-a-regular-iterator-to-iterate-backwards-or-struggle-with-reverse-iterator" target="_blank" rel="external">Use a regular iterator to iterate backwards, or struggle with reverse_iterator?</a></li>
 </ul>
-<blockquote>版权声明<br><hr>本文链接：www.snovey.com/2016/09/STL-iterator/</blockquote>
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/C/" rel="tag">#C++</a>
-          
-            <a href="/tags/STL/" rel="tag">#STL</a>
-          
-            <a href="/tags/iterator/" rel="tag">#iterator</a>
-          
-        </div>
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2016/08/xor/" rel="next" title="位运算进阶：异或">
-                <i class="fa fa-chevron-left"></i> 位运算进阶：异或
-              </a>
-            
-          </div>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/09/call-by-value/" rel="prev" title="JavaScript 对象作为函数参数的传递方式">
-                JavaScript 对象作为函数参数的传递方式 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
+<blockquote>版权声明<br><hr>本作品采用<a rel="external" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。<br>本文链接：www.snovey.com/2016/09/STL-iterator/</blockquote>
   </div>
+</article>
 
 
-          </div>
-          
-
-
-          
-  <div class="comments" id="comments">
-    
+  </main>
+  <footer class="footer">
+  <div class="footer-inner">
+    <p class="copyright">
+      雨雪霏霏 &copy; 2016-2017
+    </p>
+    <p class="info">
+      Power by hexo &#124; Theme delica &#124; Host on GitHub, Coding
+    </p>
   </div>
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-
-      
-
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="//blog.snovey.com/uploads/avatar.jpg"
-               alt="雨雪霏霏" />
-          <p class="site-author-name" itemprop="name">雨雪霏霏</p>
-          <p class="site-description motion-element" itemprop="description">简单快乐与幸福同行</p>
-        </div>
-        <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">10</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
-          </div>
-
-          
-            <div class="site-state-item site-state-categories">
-              <a href="/categories">
-                <span class="site-state-item-count">4</span>
-                <span class="site-state-item-name">分类</span>
-              </a>
-            </div>
-          
-
-          
-            <div class="site-state-item site-state-tags">
-              <a href="/tags">
-                <span class="site-state-item-count">9</span>
-                <span class="site-state-item-name">标签</span>
-              </a>
-            </div>
-          
-
-        </nav>
-
-        
-          <div class="feed-link motion-element">
-            <a href="/atom.xml" rel="alternate">
-              <i class="fa fa-rss"></i>
-              RSS
-            </a>
-          </div>
-        
-
-        <div class="links-of-author motion-element">
-          
-        </div>
-
-        
-        
-          <div class="cc-license motion-element" itemprop="license">
-            <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" class="cc-opacity" target="_blank">
-              <img src="//blog.snovey.com/images/cc-by-nc-nd.svg" alt="Creative Commons" />
-            </a>
-          </div>
-        
-
-        
-        
-
-      </section>
-
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy; 
-  <span itemprop="copyrightYear">2017</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">雨雪霏霏</span>
-</div>
-
-<div class="powered-by">
-  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
-</div>
-
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
-  </a>
-</div>
-
-        
-
-        
-      </div>
-    </footer>
-
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-    </div>
-  </div>
-
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-
-
-
-
-
-
-
-
-
-  
-
-
-
-  
-  <script type="text/javascript" src="//blog.snovey.com/vendors/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="//blog.snovey.com/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="//blog.snovey.com/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="//blog.snovey.com/vendors/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="//blog.snovey.com/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="//blog.snovey.com/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="//blog.snovey.com/js/src/utils.js?v=5.0.1"></script>
-
-  <script type="text/javascript" src="//blog.snovey.com/js/src/motion.js?v=5.0.1"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="//blog.snovey.com/js/src/scrollspy.js?v=5.0.1"></script>
-<script type="text/javascript" src="//blog.snovey.com/js/src/post-details.js?v=5.0.1"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="//blog.snovey.com/js/src/bootstrap.js?v=5.0.1"></script>
-
-
-
-  
-
-
-
-  
-
-
-
-
-  
-  
-
-  
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    });
+</footer>
+
+  <script>
+    function toggleClassMenu() {
+      myMenu.classList.add("siderbar--animatable");
+    if(!myMenu.classList.contains("siderbar--visible")) {
+      myMenu.classList.add("siderbar--visible");
+    } else {
+      myMenu.classList.remove('siderbar--visible');
+    }
+    }
+
+    function OnTransitionEnd() {
+      myMenu.classList.remove("siderbar--animatable");
+    }
+
+    var myMenu = document.querySelector(".siderbar");
+    var oppMenu = document.querySelector("#info");
+    myMenu.addEventListener("transitionend", OnTransitionEnd, false);
+    oppMenu.addEventListener("click", toggleClassMenu, false);
+    myMenu.addEventListener("click", toggleClassMenu, false);
   </script>
-
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-      var all = MathJax.Hub.getAllJax(), i;
-      for (i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-      }
-    });
-  </script>
-  <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
-
-  
-
-  
-
 </body>
 </html>

@@ -1,21 +1,17 @@
-<!doctype html>
-
-
-
-  
-
-
-<html class="theme-next mist use-motion">
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-
-
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 
+<!--link href="//blog.snovey.com/css/main.css?v=1.0.0" rel="stylesheet" type="text/css" /-->
+
+
+  <meta name="keywords" content="undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined," />
 
 
 
@@ -23,315 +19,110 @@
 
 
 
-
-
-
-
-  
-  
-  <link href="//blog.snovey.com/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
-
-
-
-<link href="//blog.snovey.com/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
-
-<link href="//blog.snovey.com/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="字符编码," />
-
-
-
-
-
-  <link rel="alternate" href="/atom.xml" title="雨雪霏霏" type="application/atom+xml" />
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
-
-
-
-
-
-
-<meta name="description" content="0x00 前言
-计算机只能存储二进制的数据，所以字符也一样只能通过将字符映射为相应的二进制形式才能保存，读取的时候由系统对字符进行图形渲染。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="漫谈字符编码">
-<meta property="og:url" content="www.snovey.com/2016/06/char-encoding/index.html">
-<meta property="og:site_name" content="雨雪霏霏">
-<meta property="og:description" content="0x00 前言
-计算机只能存储二进制的数据，所以字符也一样只能通过将字符映射为相应的二进制形式才能保存，读取的时候由系统对字符进行图形渲染。">
-<meta property="og:updated_time" content="2016-09-29T07:45:05.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="漫谈字符编码">
-<meta name="twitter:description" content="0x00 前言
-计算机只能存储二进制的数据，所以字符也一样只能通过将字符映射为相应的二进制形式才能保存，读取的时候由系统对字符进行图形渲染。">
-
-
-
-<script type="text/javascript" id="hexo.configuration">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    scheme: 'Mist',
-    sidebar: {"position":"left","display":"post"},
-    fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: 0,
-      author: '博主'
-    }
-  };
-</script>
-
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.0.0" />
 
 
 
   <link rel="canonical" href="www.snovey.com/2016/06/char-encoding/"/>
 
-  <title> 漫谈字符编码 | 雨雪霏霏 </title>
+<title>雨雪霏霏</title>
+<link rel="stylesheet" href="/css/style.css">
+
 </head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
-  
-
-
-
-
-
-
-
-
-
-
-  
-  
-    
-  
-
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
-
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">雨雪霏霏</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN" class="typo">
+  <header class="header">
+  <div class="header-inner">
+    <div class="blog-title">
+      <a href="/" class="logo">雨雪霏霏</a>
+    </div>
+    <nav class="navbar">
+      <ul class="menu">
+        
+          <li class="menu-item">
+            <a href="/" class="menu-item-link">首页</a>
+          </li>
+          
+          <li class="menu-item">
+            <a href="/archives" class="menu-item-link">归档</a>
+          </li>
+          
+          <li class="menu-item">
+            <a href="/categories" class="menu-item-link">分类</a>
+          </li>
+          
+          <li class="menu-item">
+            <a href="/tags" class="menu-item-link">标签</a>
+          </li>
+          
+          <li class="menu-item">
+            <a href="/about" class="menu-item-link">关于</a>
+          </li>
+          
+        </ul>
+      </nav>
   </div>
-  <p class="site-subtitle"></p>
-</div>
+</header>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
+  <main class="main">
+    <aside class="siderbar">
+  <section class="siderbar-panel">
+    <div class="author-panel" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <img class="author-image" itemprop="image" src="//blog.snovey.com/uploads/avatar.jpg" alt="雨雪霏霏">
+      <p class="author-name" itemprop="name">雨雪霏霏</p>
+      <p class="site-description" itemprop="description" >简单快乐与幸福同行</p>
+    </div>
+    <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="">
+          <span class="site-state-item-name">日志</span>
+          <span class="site-state-item-count">11</span>
+        </a>
+      </div>
       
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
+        <div class="site-state-item site-state-categories">
+          <a href="">
+            <span class="site-state-item-name">分类</span>
+            <span class="site-state-item-count">4</span>
           </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
-
-      
-    </ul>
-  
-
-  
-</nav>
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
-    
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                漫谈字符编码
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-17T18:57:03+08:00" content="2016-06-17">
-              2016-06-17
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/杂谈/" itemprop="url" rel="index">
-                    <span itemprop="name">杂谈</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
       
       
-
+        <div class="site-state-item site-state-tags">
+          <a href="">
+            <span class="site-state-item-name">标签</span>
+            <span class="site-state-item-count">11</span>
+          </a>
+        </div>
       
-        <h1 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h1><hr>
-<p>计算机只能存储二进制的数据，所以字符也一样只能通过将字符映射为相应的二进制形式才能保存，读取的时候由系统对字符进行图形渲染。<br><a id="more"></a></p>
+    </nav>
+    <div class="feed-link motion-element" style="opacity: 1; display: block; transform: translateX(0px);">
+      <a href="/atom.xml" rel="alternate">RSS</a>
+    </div>
+    <div class="links-of-author motion-element">
+    </div>
+    <div class="cc-license motion-element" itemprop="license">
+      <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">
+        <img src="//blog.snovey.com/images/cc-by-nc-nd.svg" alt="Creative Commons">
+      </a>
+    </div>
+  </section>
+</aside>
+    <button type="button" id="info"><?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1502186391435" class="icon" style="" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1007" xmlns:xlink="http://www.w3.org/1999/xlink" width="32" height="32"><defs><style type="text/css"></style></defs><path d="M65.012178 128.544655 65.012178 230.875275 959.381795 230.875275 959.381795 128.544655 65.012178 128.544655Z" p-id="1008" fill="#ffffff"></path><path d="M64.729745 563.201126 959.269231 563.201126 959.269231 460.870506 64.729745 460.870506 64.729745 563.201126Z" p-id="1009" fill="#ffffff"></path><path d="M64.729745 895.525953 959.269231 895.525953 959.269231 793.195334 64.729745 793.195334 64.729745 895.525953Z" p-id="1010" fill="#ffffff"></path><path d="M64.729745 889.742227" p-id="1011" fill="#000000"></path></svg></button>
+    <article class="post">
+  <div class="post-title">
+    <h2 class="title">漫谈字符编码</h2>
+  </div>
+   <div class="post-meta">
+    <span class="post-time">2016-06-17</span>
+  </div>
+  <div class="post-content">
+    <h1 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h1><p>计算机只能存储二进制的数据，所以字符也一样只能通过将字符映射为相应的二进制形式才能保存，读取的时候由系统对字符进行图形渲染。<br><a id="more"></a></p>
 <p>不同的映射方式导致了不同的<strong>字符集</strong><sup>[1]</sup>（character set），譬如说，「雪」字在 GBK 编码中对应的是「D1A9」，在 Unicode 编码中对应的是「96EA」。然而字符集只是规定了字符与二进制之间的映射，并没有规定具体如何实现，这个责任由<strong>字符编码</strong>（Character Encoding）承担，字符集与字符编码可能不同。</p>
-<h1 id="0x01-ASCII"><a href="#0x01-ASCII" class="headerlink" title="0x01 ASCII"></a>0x01 ASCII</h1><hr>
-<p>最初的时候，美帝只考虑了自己需要的英文，26 个大小写字母加数字符号控制字符乱七八糟一通搞，正好 128 个字符，一个字节表达完毕，这就是 ASCII（American Standard Code for Information Interchange，美国信息交换标准代码）。后来计算机传到欧洲，字符不够用，为了对剩下的 128 个字符进行了利用并制定标准，ISO 推出 ISO 8859，显然 256 个字符也是不够这些国家用的，所以 8859 被分成了十几个部分，它覆盖了大部分使用拉丁字母的语言文字。</p>
-<h1 id="0x02-代码页"><a href="#0x02-代码页" class="headerlink" title="0x02 代码页"></a>0x02 代码页</h1><hr>
-<p>在 ISO 标准完全定型之前，IBM 就有一系列自己的字符编码，叫做代码页（code page），比如 437（扩展 ASCII）、850（西欧语言）、852（东欧语言）。IBM代码页通常被用于控制台（console）环境，也就是 MS-DOS 或 Unix Shell 那样的命令行环境。<br>微软将 IBM 代码页称为 OEM 代码页，自己定义的称为 ANSI 代码页， 比如 1252（西欧语言）、1250（东欧语言）、936（GBK 简体中文）、950（Big5 繁体中文）、932（SJIS 日文）、949（EUC-KR 韩文）等。</p>
-<h1 id="0x03-GB-家族"><a href="#0x03-GB-家族" class="headerlink" title="0x03 GB 家族"></a>0x03 GB 家族</h1><hr>
-<p>当计算机来到中国，这个问题的难度升级了，一个字节无论如何也表达不了博大精深的汉字，于是人们拿两个字节解决了这个问题，也就是 GB 2312 字符集，它是一个 94 * 94 的表，包括 7445 个字符。GB 2312 兼容 ASCII，GB 2312 编码对汉字/符号进行了分区（区位码）。每个汉字 / 符号以两个字节来表示。第一个字节称为「高位字节」，第二个字节称为「低位字节」。GB 2312 还有另一种编码方式 HZ，只是不常用。</p>
+<h1 id="0x01-ASCII"><a href="#0x01-ASCII" class="headerlink" title="0x01 ASCII"></a>0x01 ASCII</h1><p>最初的时候，美帝只考虑了自己需要的英文，26 个大小写字母加数字符号控制字符乱七八糟一通搞，正好 128 个字符，一个字节表达完毕，这就是 ASCII（American Standard Code for Information Interchange，美国信息交换标准代码）。后来计算机传到欧洲，字符不够用，为了对剩下的 128 个字符进行了利用并制定标准，ISO 推出 ISO 8859，显然 256 个字符也是不够这些国家用的，所以 8859 被分成了十几个部分，它覆盖了大部分使用拉丁字母的语言文字。</p>
+<h1 id="0x02-代码页"><a href="#0x02-代码页" class="headerlink" title="0x02 代码页"></a>0x02 代码页</h1><p>在 ISO 标准完全定型之前，IBM 就有一系列自己的字符编码，叫做代码页（code page），比如 437（扩展 ASCII）、850（西欧语言）、852（东欧语言）。IBM代码页通常被用于控制台（console）环境，也就是 MS-DOS 或 Unix Shell 那样的命令行环境。<br>微软将 IBM 代码页称为 OEM 代码页，自己定义的称为 ANSI 代码页， 比如 1252（西欧语言）、1250（东欧语言）、936（GBK 简体中文）、950（Big5 繁体中文）、932（SJIS 日文）、949（EUC-KR 韩文）等。</p>
+<h1 id="0x03-GB-家族"><a href="#0x03-GB-家族" class="headerlink" title="0x03 GB 家族"></a>0x03 GB 家族</h1><p>当计算机来到中国，这个问题的难度升级了，一个字节无论如何也表达不了博大精深的汉字，于是人们拿两个字节解决了这个问题，也就是 GB 2312 字符集，它是一个 94 * 94 的表，包括 7445 个字符。GB 2312 兼容 ASCII，GB 2312 编码对汉字/符号进行了分区（区位码）。每个汉字 / 符号以两个字节来表示。第一个字节称为「高位字节」，第二个字节称为「低位字节」。GB 2312 还有另一种编码方式 HZ，只是不常用。</p>
 <p>GB 2312 的出现，基本满足了汉字的计算机处理需要，它所收录的汉字已经覆盖中国大陆 99.75% 的使用频率。但对于人名、古汉语等方面出现的罕用字和繁体字，GB 2312不能处理，<del>譬如说，某位领导人的名字写不出来，</del>于是人们对 GB 2312 进行了扩展，这就是 GBK，K为汉语拼音 Kuo Zhan（扩展）中「扩」字的声母。GBK 全称是汉字内码扩展规范（Chinese Internal Code Extension Specification）。GBK 有一字节和双字节编码，这里有个事情就是计算机如何知道当前的字节是独立的字符还是跟相邻的字符共同表示一个字符，GBK 是通过第一个字符的范围来辨别的，<code>00</code>–<code>7F</code> 范围内是一个字节，<code>81</code>–<code>FE</code> 范围内是两个字节，GBK 向下完全兼容 GB 2312，GBK 与 CP936 大体相同，比它多 95 个字符。然而 GBK 但是毕竟只是规范，不是标准，随后国家推出 GBK 18030 以取代 GBK，它完全兼容 GB 2312，基本兼容 GBK，采用多字节编码，每个字可以由 1 个、2 个或 4 个字节组成。</p>
-<h1 id="0x04-UCS-Unicode"><a href="#0x04-UCS-Unicode" class="headerlink" title="0x04 UCS / Unicode"></a>0x04 UCS / Unicode</h1><hr>
-<h2 id="UCS"><a href="#UCS" class="headerlink" title="UCS"></a>UCS</h2><p>为了使混乱的编码格局得到统一，ISO 于 1990 年推出了通用字符集（Unicode Character Set，UCS），它包含了一百多万个字符，UCS 有两种编码方式：UCS-2 和 UCS-4，分别用两个字节和四个字节表示一个字符，UCS-2 只能表示 65536 个字符，明显不够用，已经过时了。UCS-4 根据最高位为0的最高字节分成2<sup>7</sup>=128 个 group。每个 group 再根据次高字节分为 256 个 plane。每个 plane 根据第 3 个字节分为 256 行（rows），每行包含256个 cells。当然同一行的 cells 只是最后一个字节不同，其余都相同。group 0 的 plane 0 就是 BMP。</p>
+<h1 id="0x04-UCS-Unicode"><a href="#0x04-UCS-Unicode" class="headerlink" title="0x04 UCS / Unicode"></a>0x04 UCS / Unicode</h1><h2 id="UCS"><a href="#UCS" class="headerlink" title="UCS"></a>UCS</h2><p>为了使混乱的编码格局得到统一，ISO 于 1990 年推出了通用字符集（Unicode Character Set，UCS），它包含了一百多万个字符，UCS 有两种编码方式：UCS-2 和 UCS-4，分别用两个字节和四个字节表示一个字符，UCS-2 只能表示 65536 个字符，明显不够用，已经过时了。UCS-4 根据最高位为0的最高字节分成2<sup>7</sup>=128 个 group。每个 group 再根据次高字节分为 256 个 plane。每个 plane 根据第 3 个字节分为 256 行（rows），每行包含256个 cells。当然同一行的 cells 只是最后一个字节不同，其余都相同。group 0 的 plane 0 就是 BMP。</p>
 <h2 id="Unicode"><a href="#Unicode" class="headerlink" title="Unicode"></a>Unicode</h2><p>ISO之外还有另外一个组织：统一码联盟（The Unicode Consortium），它于1991年推出了 Unicode 1.0。后来与 ISO 组织合并成果。<br>Unicode 全称 Universal Multiple-Octet Coded Character Set。Unicode 的码空间从 U+0000 到 U+10FFFF， Unicode 的码空间可以划分为 17 个平面（plane），每个平面包含 2<sup>16</sup>(65,536) 个码位。每个平面的码位可表示为从 U+xx0000 到 U+xxFFFF，其中 xx 表示十六进制值从 00H 到 10H，共计 17 个平面。如果 xx 是 0，即第 0 平面，可省略不写，第一个 Unicode 平面（码位从 U+0000 至 U+FFFF）包含了最常用的字符，该平面被称为基本多语言平面（Basic Multilingual Plane），缩写为 BMP。其他平面称为辅助平面（Supplementary Planes）。<br>这里字符集跟字符编码的区别就出现了，Unicode 只是指定了字符的映射，并没有指定实现方式，出现了 UTF-8、UTF-16 和 UTF-32 三种编码方式。</p>
 <h2 id="UTF-16"><a href="#UTF-16" class="headerlink" title="UTF-16"></a>UTF-16</h2><p>UTF-16 可以看作是 UCS-2 的父集（严格的说这不正确，在 UTF-16 中从 U+D800 到 U+DFFF 的码位不对应于任何字符，而在使用 UCS-2 的时代，U+D800 到 U+DFFF 内的值被占用），为什么说它是父集呢，因为当字符不在 BMP 时 UTF-16 会使用四个字节来编码，所以要注意，UTF-16 是变长编码，四个字节的表示算法比较啰嗦，我不写了。<br>UTF-16 的坑在于字节序（Endianness）的问题，就是存储和传输的时候哪个在高地址哪个在低地址，举个例子：「雪」的大端序（big-endian，也叫大尾序）为 U+D1A9，小端序（little-endian，也叫小尾序）为 U+A9D1。一般来说，以 Macintosh 制作或储存的文字使用大端序格式，以 Microsoft 或 Linux 制作或储存存的文字使用小端序格式，网络传输一般采用大端序。<br>为此，出现了三种解决方案，也就是UTF-16LE，UTF-16BE， UTF-16。UTF-16 是大端序还是小端序取决于在文件头是否有 BOM，如果没有就听天由命了，如果有的话，就说说 BOM，BOM（byte-order mark） 是字节顺序标记，它不仅仅存在于 UTF-16 中，只要编码方式受字节序影响，就需要 BOM，在 UTF-8、UTF-32、GB 18030 中也有它的身影，不过在不同的编码方式中表示也不一样。在 UTF-16 中用 U+FEFF 表示大端序，用 U+FFFE 表示小端序。</p>
 <h2 id="UTF-32"><a href="#UTF-32" class="headerlink" title="UTF-32"></a>UTF-32</h2><p>UTF-32 是 UCS-4 的子集，它对所有的字符都采用四字节表示，强迫症表示很开心。当然，它也逃不了与 UTF-16 类似的遭遇，它也分 UTF-32LE、UTF-32BE、UTF-32。</p>
@@ -429,8 +220,7 @@
 </tbody>
 </table>
 <p>Unicode 允许在 UTF-8 中使用 BOM，不过 UTF-8 的编码方式是字节序无关的，没必要使用 BOM。</p>
-<h1 id="0x05-记事本"><a href="#0x05-记事本" class="headerlink" title="0x05 记事本"></a>0x05 记事本</h1><hr>
-<p>打开记事本，文件-&gt;另存为，下方编码方式选项有四个</p>
+<h1 id="0x05-记事本"><a href="#0x05-记事本" class="headerlink" title="0x05 记事本"></a>0x05 记事本</h1><p>打开记事本，文件-&gt;另存为，下方编码方式选项有四个</p>
 <ul>
 <li>ANSI</li>
 <li>Unicode</li>
@@ -453,303 +243,42 @@
 <li><a href="https://www.wikiwand.com/zh/%E4%BD%8D%E5%85%83%E7%B5%84%E9%A0%86%E5%BA%8F%E8%A8%98%E8%99%9F&quot;" target="_blank" rel="external">位元組順序記號</a></li>
 <li><a href="http://unicode.org/faq/utf_bom.html&quot;" target="_blank" rel="external">UTF-BOM</a></li>
 </ul>
-<blockquote>版权声明<br><hr>本文链接：www.snovey.com/2016/06/char-encoding/</blockquote>
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/字符编码/" rel="tag">#字符编码</a>
-          
-        </div>
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2016/06/endofline/" rel="next" title="回车与换行">
-                <i class="fa fa-chevron-left"></i> 回车与换行
-              </a>
-            
-          </div>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/08/bitwise-operation/" rel="prev" title="位运算入门">
-                位运算入门 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
+<blockquote>版权声明<br><hr>本作品采用<a rel="external" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。<br>本文链接：www.snovey.com/2016/06/char-encoding/</blockquote>
   </div>
+</article>
 
 
-          </div>
-          
-
-
-          
-  <div class="comments" id="comments">
-    
+  </main>
+  <footer class="footer">
+  <div class="footer-inner">
+    <p class="copyright">
+      雨雪霏霏 &copy; 2016-2017
+    </p>
+    <p class="info">
+      Power by hexo &#124; Theme delica &#124; Host on GitHub, Coding
+    </p>
   </div>
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-
-      
-
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="//blog.snovey.com/uploads/avatar.jpg"
-               alt="雨雪霏霏" />
-          <p class="site-author-name" itemprop="name">雨雪霏霏</p>
-          <p class="site-description motion-element" itemprop="description">简单快乐与幸福同行</p>
-        </div>
-        <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">10</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
-          </div>
-
-          
-            <div class="site-state-item site-state-categories">
-              <a href="/categories">
-                <span class="site-state-item-count">4</span>
-                <span class="site-state-item-name">分类</span>
-              </a>
-            </div>
-          
-
-          
-            <div class="site-state-item site-state-tags">
-              <a href="/tags">
-                <span class="site-state-item-count">9</span>
-                <span class="site-state-item-name">标签</span>
-              </a>
-            </div>
-          
-
-        </nav>
-
-        
-          <div class="feed-link motion-element">
-            <a href="/atom.xml" rel="alternate">
-              <i class="fa fa-rss"></i>
-              RSS
-            </a>
-          </div>
-        
-
-        <div class="links-of-author motion-element">
-          
-        </div>
-
-        
-        
-          <div class="cc-license motion-element" itemprop="license">
-            <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" class="cc-opacity" target="_blank">
-              <img src="//blog.snovey.com/images/cc-by-nc-nd.svg" alt="Creative Commons" />
-            </a>
-          </div>
-        
-
-        
-        
-
-      </section>
-
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy; 
-  <span itemprop="copyrightYear">2017</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">雨雪霏霏</span>
-</div>
-
-<div class="powered-by">
-  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
-</div>
-
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
-  </a>
-</div>
-
-        
-
-        
-      </div>
-    </footer>
-
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-    </div>
-  </div>
-
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-
-
-
-
-
-
-
-
-
-  
-
-
-
-  
-  <script type="text/javascript" src="//blog.snovey.com/vendors/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="//blog.snovey.com/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="//blog.snovey.com/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="//blog.snovey.com/vendors/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="//blog.snovey.com/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="//blog.snovey.com/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="//blog.snovey.com/js/src/utils.js?v=5.0.1"></script>
-
-  <script type="text/javascript" src="//blog.snovey.com/js/src/motion.js?v=5.0.1"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="//blog.snovey.com/js/src/scrollspy.js?v=5.0.1"></script>
-<script type="text/javascript" src="//blog.snovey.com/js/src/post-details.js?v=5.0.1"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="//blog.snovey.com/js/src/bootstrap.js?v=5.0.1"></script>
-
-
-
-  
-
-
-
-  
-
-
-
-
-  
-  
-
-  
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    });
+</footer>
+
+  <script>
+    function toggleClassMenu() {
+      myMenu.classList.add("siderbar--animatable");
+    if(!myMenu.classList.contains("siderbar--visible")) {
+      myMenu.classList.add("siderbar--visible");
+    } else {
+      myMenu.classList.remove('siderbar--visible');
+    }
+    }
+
+    function OnTransitionEnd() {
+      myMenu.classList.remove("siderbar--animatable");
+    }
+
+    var myMenu = document.querySelector(".siderbar");
+    var oppMenu = document.querySelector("#info");
+    myMenu.addEventListener("transitionend", OnTransitionEnd, false);
+    oppMenu.addEventListener("click", toggleClassMenu, false);
+    myMenu.addEventListener("click", toggleClassMenu, false);
   </script>
-
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-      var all = MathJax.Hub.getAllJax(), i;
-      for (i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-      }
-    });
-  </script>
-  <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
-
-  
-
-  
-
 </body>
 </html>
