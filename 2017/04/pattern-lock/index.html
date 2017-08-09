@@ -1,17 +1,21 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
 <head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="format-detection" content="telephone=no">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 
-<!--link href="//blog.snovey.com/css/main.css?v=1.0.0" rel="stylesheet" type="text/css" /-->
-
-
-  <meta name="keywords" content="undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined," />
 
 
 
@@ -19,104 +23,285 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.0.0" />
+
+
+
+
+  
+  
+  <link href="//blog.snovey.com/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="//blog.snovey.com/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="//blog.snovey.com/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="JavaScript," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="雨雪霏霏" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="参加数字公司的校招，先是留了一个大作业，要求用网页制作一个图案解锁。经过一番奋战，总算做了出来。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="制作图案解锁">
+<meta property="og:url" content="www.snovey.com/2017/04/pattern-lock/index.html">
+<meta property="og:site_name" content="雨雪霏霏">
+<meta property="og:description" content="参加数字公司的校招，先是留了一个大作业，要求用网页制作一个图案解锁。经过一番奋战，总算做了出来。">
+<meta property="og:image" content="www.snovey.com//blog.snovey.com/image/pattern-lock.gif">
+<meta property="og:image" content="www.snovey.com//blog.snovey.com/image/pattern-lock.png">
+<meta property="og:updated_time" content="2017-08-09T02:29:03.725Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="制作图案解锁">
+<meta name="twitter:description" content="参加数字公司的校招，先是留了一个大作业，要求用网页制作一个图案解锁。经过一番奋战，总算做了出来。">
+<meta name="twitter:image" content="www.snovey.com//blog.snovey.com/image/pattern-lock.gif">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
 
 
 
   <link rel="canonical" href="www.snovey.com/2017/04/pattern-lock/"/>
 
-<title>雨雪霏霏</title>
-<link rel="stylesheet" href="/css/style.css">
-
+  <title> 制作图案解锁 | 雨雪霏霏 </title>
 </head>
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN" class="typo">
-  <header class="header">
-  <div class="header-inner">
-    <div class="blog-title">
-      <a href="/" class="logo">雨雪霏霏</a>
-    </div>
-    <nav class="navbar">
-      <ul class="menu">
-        
-          <li class="menu-item">
-            <a href="/" class="menu-item-link">首页</a>
-          </li>
-          
-          <li class="menu-item">
-            <a href="/archives" class="menu-item-link">归档</a>
-          </li>
-          
-          <li class="menu-item">
-            <a href="/categories" class="menu-item-link">分类</a>
-          </li>
-          
-          <li class="menu-item">
-            <a href="/tags" class="menu-item-link">标签</a>
-          </li>
-          
-          <li class="menu-item">
-            <a href="/about" class="menu-item-link">关于</a>
-          </li>
-          
-        </ul>
-      </nav>
-  </div>
-</header>
 
-  <main class="main">
-    <aside class="siderbar">
-  <section class="siderbar-panel">
-    <div class="author-panel" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <img class="author-image" itemprop="image" src="//blog.snovey.com/uploads/avatar.jpg" alt="雨雪霏霏">
-      <p class="author-name" itemprop="name">雨雪霏霏</p>
-      <p class="site-description" itemprop="description" >简单快乐与幸福同行</p>
-    </div>
-    <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-        <a href="">
-          <span class="site-state-item-name">日志</span>
-          <span class="site-state-item-count">11</span>
-        </a>
-      </div>
-      
-        <div class="site-state-item site-state-categories">
-          <a href="">
-            <span class="site-state-item-name">分类</span>
-            <span class="site-state-item-count">4</span>
-          </a>
-        </div>
-      
-      
-        <div class="site-state-item site-state-tags">
-          <a href="">
-            <span class="site-state-item-name">标签</span>
-            <span class="site-state-item-count">11</span>
-          </a>
-        </div>
-      
-    </nav>
-    <div class="feed-link motion-element" style="opacity: 1; display: block; transform: translateX(0px);">
-      <a href="/atom.xml" rel="alternate">RSS</a>
-    </div>
-    <div class="links-of-author motion-element">
-    </div>
-    <div class="cc-license motion-element" itemprop="license">
-      <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">
-        <img src="//blog.snovey.com/images/cc-by-nc-nd.svg" alt="Creative Commons">
-      </a>
-    </div>
-  </section>
-</aside>
-    <button type="button" id="info"><?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1502186391435" class="icon" style="" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1007" xmlns:xlink="http://www.w3.org/1999/xlink" width="32" height="32"><defs><style type="text/css"></style></defs><path d="M65.012178 128.544655 65.012178 230.875275 959.381795 230.875275 959.381795 128.544655 65.012178 128.544655Z" p-id="1008" fill="#ffffff"></path><path d="M64.729745 563.201126 959.269231 563.201126 959.269231 460.870506 64.729745 460.870506 64.729745 563.201126Z" p-id="1009" fill="#ffffff"></path><path d="M64.729745 895.525953 959.269231 895.525953 959.269231 793.195334 64.729745 793.195334 64.729745 895.525953Z" p-id="1010" fill="#ffffff"></path><path d="M64.729745 889.742227" p-id="1011" fill="#000000"></path></svg></button>
-    <article class="post">
-  <div class="post-title">
-    <h2 class="title">制作图案解锁</h2>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">雨雪霏霏</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
   </div>
-   <div class="post-meta">
-    <span class="post-time">2017-04-02</span>
-  </div>
-  <div class="post-content">
-    <p>参加数字公司的校招，先是留了一个大作业，要求用网页制作一个图案解锁。<br>经过一番奋战，总算做了出来。</p>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Kategorien
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            Über
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                制作图案解锁
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2017-04-02T12:38:07+08:00" content="2017-04-02">
+              2017-04-02
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>参加数字公司的校招，先是留了一个大作业，要求用网页制作一个图案解锁。<br>经过一番奋战，总算做了出来。</p>
 <a id="more"></a>
 <p>放张图：<br><img src="//blog.snovey.com/image/pattern-lock.gif" alt="pattern-lock"><br>想感受一下效果么？戳这里：<a href="//snovey.github.io/Web-crafts/pattern-lock/demo.html">pattern-lock</a><br>要制作一个图案解锁，第一步要想好设计，对外开放哪些接口，如果我是一位开发者，我希望初始化的时候可以自定义行数列数，以及颜色大小等参数，如果用户不定义要有一套默认的参数，我希望可以调用方法获取用户的输入，并且提供一些额外的 API。就像买煎饼果子告诉老板不要加辣多放香菜，如果省略某些信息老板还要有自己的默认配置，最后给你你想要的煎饼果子。<br>JavaScript 实现类似这样：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">constructor</span>(obj) &#123;</div><div class="line">  <span class="keyword">this</span>.row    = +obj.row || <span class="number">3</span>;</div><div class="line">  <span class="keyword">this</span>.column = +obj.column || <span class="number">3</span>;</div><div class="line">  <span class="keyword">this</span>.backgroundColor = obj.backgroundColor || <span class="string">'whitesmoke'</span>;</div><div class="line">  <span class="keyword">this</span>.opacity = obj.opacity || <span class="number">0.0</span>;</div><div class="line">  <span class="keyword">this</span>.container = obj.container;</div><div class="line">  <span class="keyword">this</span>.lineColor = obj.lineColor || <span class="string">'springgreen'</span>;</div><div class="line">  <span class="keyword">this</span>.lineWidth = obj.lineWidth || <span class="number">3</span>;</div><div class="line">  <span class="keyword">this</span>.pointBackColor = obj.pointBackColor || <span class="string">'white'</span>;</div><div class="line">  <span class="keyword">this</span>.pointBorderColor = obj.pointBorderColor || <span class="string">'grey'</span>;</div><div class="line">  <span class="keyword">this</span>.radius = obj.radius || <span class="string">'auto'</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>想好之后就是实现的问题了，图案有斜线等元素，比较复杂，所以采用 canvas 实现，以常见的三排三列为例，大致需要画出如下的图案，采取坐标轴如下（别问我为什么是左手系）：</p>
@@ -128,9 +313,278 @@
 <p>最后，整个流程最消耗资源的就是每次发生 <code>touchmove</code> 事件时的重绘画布了，这里需要做一下函数节流和防抖，不过我做的时候出了点问题，就先搁置了。</p>
 <p>想了解详细的使用请移步我的 <a href="//github.com/snovey/Web-crafts/tree/master/pattern-lock">GitHub</a></p>
 <blockquote>版权声明<br><hr>本作品采用<a rel="external" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。<br>本文链接：www.snovey.com/2017/04/pattern-lock/</blockquote>
-  </div>
-</article>
+      
+    </div>
 
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag">#JavaScript</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/polysemy/" rel="next" title="计算机中的一词多义">
+                <i class="fa fa-chevron-left"></i> 计算机中的一词多义
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/nginx-https/" rel="prev" title="Nginx 配置 HTTPS">
+                Nginx 配置 HTTPS <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="//blog.snovey.com/uploads/avatar.jpg"
+               alt="雨雪霏霏" />
+          <p class="site-author-name" itemprop="name">雨雪霏霏</p>
+          <p class="site-description motion-element" itemprop="description">简单快乐与幸福同行</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-name">Artikel</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">Kategorien</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">Tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" class="cc-opacity" target="_blank">
+              <img src="//blog.snovey.com/images/cc-by-nc-nd.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">雨雪霏霏</span>
+</div>
+
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="//blog.snovey.com/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="//blog.snovey.com/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="//blog.snovey.com/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="//blog.snovey.com/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="//blog.snovey.com/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="//blog.snovey.com/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="//blog.snovey.com/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="//blog.snovey.com/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="//blog.snovey.com/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="//blog.snovey.com/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="//blog.snovey.com/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
   <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
       tex2jax: {
@@ -152,37 +606,9 @@
   <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
 
-  </main>
-  <footer class="footer">
-  <div class="footer-inner">
-    <p class="copyright">
-      雨雪霏霏 &copy; 2016-2017
-    </p>
-    <p class="info">
-      Power by hexo &#124; Theme delica &#124; Host on GitHub, Coding
-    </p>
-  </div>
-</footer>
+  
 
-  <script>
-    function toggleClassMenu() {
-      myMenu.classList.add("siderbar--animatable");
-    if(!myMenu.classList.contains("siderbar--visible")) {
-      myMenu.classList.add("siderbar--visible");
-    } else {
-      myMenu.classList.remove('siderbar--visible');
-    }
-    }
+  
 
-    function OnTransitionEnd() {
-      myMenu.classList.remove("siderbar--animatable");
-    }
-
-    var myMenu = document.querySelector(".siderbar");
-    var oppMenu = document.querySelector("#info");
-    myMenu.addEventListener("transitionend", OnTransitionEnd, false);
-    oppMenu.addEventListener("click", toggleClassMenu, false);
-    myMenu.addEventListener("click", toggleClassMenu, false);
-  </script>
 </body>
 </html>

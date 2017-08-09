@@ -1,17 +1,21 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
 <head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="format-detection" content="telephone=no">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 
-<!--link href="//blog.snovey.com/css/main.css?v=1.0.0" rel="stylesheet" type="text/css" /-->
-
-
-  <meta name="keywords" content="undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined,undefined," />
 
 
 
@@ -19,170 +23,614 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.0.0" />
+
+
+
+
+  
+  
+  <link href="//blog.snovey.com/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="//blog.snovey.com/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="//blog.snovey.com/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Nginx,HTTP," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="雨雪霏霏" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="之前我一直认为配置 SSL 证书只不过是在 Nginx 中配置好证书路径就完事了。直到认真做起来才发现别有洞天。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nginx 配置 HTTPS">
+<meta property="og:url" content="www.snovey.com/2017/08/nginx-https/index.html">
+<meta property="og:site_name" content="雨雪霏霏">
+<meta property="og:description" content="之前我一直认为配置 SSL 证书只不过是在 Nginx 中配置好证书路径就完事了。直到认真做起来才发现别有洞天。">
+<meta property="og:updated_time" content="2017-08-09T02:43:24.561Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Nginx 配置 HTTPS">
+<meta name="twitter:description" content="之前我一直认为配置 SSL 证书只不过是在 Nginx 中配置好证书路径就完事了。直到认真做起来才发现别有洞天。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
 
 
 
   <link rel="canonical" href="www.snovey.com/2017/08/nginx-https/"/>
 
-<title>雨雪霏霏</title>
-<link rel="stylesheet" href="/css/style.css">
-
+  <title> Nginx 配置 HTTPS | 雨雪霏霏 </title>
 </head>
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN" class="typo">
-  <header class="header">
-  <div class="header-inner">
-    <div class="blog-title">
-      <a href="/" class="logo">雨雪霏霏</a>
-    </div>
-    <nav class="navbar">
-      <ul class="menu">
-        
-          <li class="menu-item">
-            <a href="/" class="menu-item-link">首页</a>
-          </li>
-          
-          <li class="menu-item">
-            <a href="/archives" class="menu-item-link">归档</a>
-          </li>
-          
-          <li class="menu-item">
-            <a href="/categories" class="menu-item-link">分类</a>
-          </li>
-          
-          <li class="menu-item">
-            <a href="/tags" class="menu-item-link">标签</a>
-          </li>
-          
-          <li class="menu-item">
-            <a href="/about" class="menu-item-link">关于</a>
-          </li>
-          
-        </ul>
-      </nav>
-  </div>
-</header>
 
-  <main class="main">
-    <aside class="siderbar">
-  <section class="siderbar-panel">
-    <div class="author-panel" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <img class="author-image" itemprop="image" src="//blog.snovey.com/uploads/avatar.jpg" alt="雨雪霏霏">
-      <p class="author-name" itemprop="name">雨雪霏霏</p>
-      <p class="site-description" itemprop="description" >简单快乐与幸福同行</p>
-    </div>
-    <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-        <a href="">
-          <span class="site-state-item-name">日志</span>
-          <span class="site-state-item-count">11</span>
-        </a>
-      </div>
-      
-        <div class="site-state-item site-state-categories">
-          <a href="">
-            <span class="site-state-item-name">分类</span>
-            <span class="site-state-item-count">4</span>
-          </a>
-        </div>
-      
-      
-        <div class="site-state-item site-state-tags">
-          <a href="">
-            <span class="site-state-item-name">标签</span>
-            <span class="site-state-item-count">11</span>
-          </a>
-        </div>
-      
-    </nav>
-    <div class="feed-link motion-element" style="opacity: 1; display: block; transform: translateX(0px);">
-      <a href="/atom.xml" rel="alternate">RSS</a>
-    </div>
-    <div class="links-of-author motion-element">
-    </div>
-    <div class="cc-license motion-element" itemprop="license">
-      <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">
-        <img src="//blog.snovey.com/images/cc-by-nc-nd.svg" alt="Creative Commons">
-      </a>
-    </div>
-  </section>
-</aside>
-    <button type="button" id="info"><?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1502186391435" class="icon" style="" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1007" xmlns:xlink="http://www.w3.org/1999/xlink" width="32" height="32"><defs><style type="text/css"></style></defs><path d="M65.012178 128.544655 65.012178 230.875275 959.381795 230.875275 959.381795 128.544655 65.012178 128.544655Z" p-id="1008" fill="#ffffff"></path><path d="M64.729745 563.201126 959.269231 563.201126 959.269231 460.870506 64.729745 460.870506 64.729745 563.201126Z" p-id="1009" fill="#ffffff"></path><path d="M64.729745 895.525953 959.269231 895.525953 959.269231 793.195334 64.729745 793.195334 64.729745 895.525953Z" p-id="1010" fill="#ffffff"></path><path d="M64.729745 889.742227" p-id="1011" fill="#000000"></path></svg></button>
-    <article class="post">
-  <div class="post-title">
-    <h2 class="title">Nginx 配置 HTTPS</h2>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">雨雪霏霏</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
   </div>
-   <div class="post-meta">
-    <span class="post-time">2017-08-01</span>
-  </div>
-  <div class="post-content">
-    <p>之前我一直认为配置 SSL 证书只不过是在 Nginx 中配置好证书路径就完事了。直到认真做起来才发现别有洞天。</p>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Kategorien
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            Über
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Nginx 配置 HTTPS
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2017-08-01T10:51:20+08:00" content="2017-08-01">
+              2017-08-01
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>之前我一直认为配置 SSL 证书只不过是在 Nginx 中配置好证书路径就完事了。直到认真做起来才发现别有洞天。</p>
 <a id="more"></a>
-<p>该文章未完成</p>
-<h2 id="lt-–-SSL-TLS-简介"><a href="#lt-–-SSL-TLS-简介" class="headerlink" title="&lt;!– # SSL/TLS 简介"></a>&lt;!– # SSL/TLS 简介</h2><p>SSL 最初是由网景（Netscape）提出，后来几经修改</p>
-<p>TLS 是位于 HTTP 与 TCP 协议栈中间，</p>
-<h1 id="证书的申请流程"><a href="#证书的申请流程" class="headerlink" title="证书的申请流程"></a>证书的申请流程</h1><p>根据证书链生成证书，如果在 SSL labs 测试时发现提示 Inc</p>
-<h1 id="获取免费证书"><a href="#获取免费证书" class="headerlink" title="获取免费证书"></a>获取免费证书</h1><p>购买证书前先讲一讲证书的分类吧，按适用域名数量分类有：</p>
-<ul>
-<li>单域名 SSL 证书</li>
-<li>多域名 SSL 证书</li>
-<li>泛域名 SSL 证书（野卡）</li>
-</ul>
-<p>按证书认证等级分类有：</p>
-<ul>
-<li>域名型(DV, Domain Validation) SSL 证书</li>
-<li>企业型(OV, Organization Validation) SSL 证书</li>
-<li>增强型(EV, Extended Validation) SSL 证书</li>
-</ul>
-<p>最爽的就是野卡了，一次性解决二级域名，论外貌还是 EV，浏览器的小标识独树一帜，然而鱼与熊掌不可兼得，野卡不能是 EV。不过现在的主题是获取免费的证书，这些都与我们无关，出售证书的商家非常多，提供免费证书的也不少。之前沃通(WoSign)和 StartCom 都已经被浏览器厂商拉黑，这里就不推荐了。可能也正是这种原因，阿里云的免费证书由沃通换成了赛门铁克。目前能用到的免费证书有：</p>
-<ul>
-<li>阿里云云盾证书服务（赛门铁克 DV SSL 证书）</li>
-<li>腾讯云 SSL 证书管理（赛门铁克 GeoTrust DV SSL 证书）</li>
-<li>腾讯云 SSL 证书管理（赛门铁克 TrustAsia DV SSL 证书）</li>
-<li>七牛云 SSL 证书管理（赛门铁克 TrustAsia DV SSL 证书）</li>
-<li>又拍云 SSL 证书管理（赛门铁克 TrustAsia DV SSL 证书）</li>
-<li>Let’s Encrypt</li>
-</ul>
-<p>以上证书中除了 Let’s Encrypt 期限为三个月外，其余均为一年，根据自己的情况进行选择吧。</p>
-<h1 id="安装-Nginx"><a href="#安装-Nginx" class="headerlink" title="安装 Nginx"></a>安装 Nginx</h1><p>为了能够达到比较好的优化效果，这里编译安装 Nginx，具体请参考屈老师的 <a href="https://imququ.com/post/my-nginx-conf.html" target="_blank" rel="external">本博客 Nginx 配置之完整篇</a> ，不同的操作系统，不同的软件版本都有可能出现问题，既无法一一列举，就自行解决吧。<br>拿到证书后配置 Nginx<br><figure class="highlight nginx"><table><tr><td class="code"><pre><div class="line"><span class="attribute">listen</span> <span class="number">443</span> ssl;    <span class="comment"># 侦听端口</span></div><div class="line"><span class="comment"># listen [::]:443 ssl ipv6only=on;    # 如果您希望同时侦听 IPv6，请取消此行注释</span></div><div class="line"></div><div class="line"><span class="attribute">server_name</span> example.com;    <span class="comment"># 请改为您的域名</span></div><div class="line"></div><div class="line"><span class="attribute">ssl_certificate</span> /etc/ssl/private/example_com.bundle.crt;    <span class="comment"># 证书链</span></div><div class="line"><span class="attribute">ssl_certificate_key</span> /etc/ssl/private/example_com.key;    <span class="comment"># 密钥</span></div><div class="line"><span class="attribute">ssl_protocols</span> TLSv1.<span class="number">2</span> TLSv1.<span class="number">1</span> TLSv1;    <span class="comment"># 支持的协议，Windows XP 不支持</span></div><div class="line"><span class="attribute">ssl_prefer_server_ciphers</span> <span class="literal">on</span>;    <span class="comment"># 启用 Forward Secrecy</span></div><div class="line"><span class="attribute">ssl_ciphers</span> <span class="string">"EECDH+ECDSA+AESGCM EECDH+aRSA+AESGCM EECDH+ECDSA+SHA384 EECDH+ECDSA+SHA256 EECDH+aRSA+SHA384 EECDH+aRSA+SHA256 EECDH+aRSA+RC4 EECDH EDH+aRSA !aNULL !eNULL !LOW !3DES !MD5 !EXP !PSK !SRP !DSS !RC4"</span>;</div><div class="line"><span class="attribute">keepalive_timeout</span> <span class="number">70</span>;</div><div class="line"><span class="attribute">ssl_session_cache</span> shared:SSL:<span class="number">10m</span>;</div><div class="line"><span class="attribute">ssl_session_timeout</span> <span class="number">10m</span>;</div></pre></td></tr></table></figure></p>
+<p>该文章未完成，仅为分页提供测试</p>
+<!-- 该文章未完成
+# SSL/TLS 简介
+---
+SSL 最初是由网景（Netscape）提出，后来几经修改
+
+TLS 是位于 HTTP 与 TCP 协议栈中间，
+# 证书的申请流程
+根据证书链生成证书，如果在 SSL labs 测试时发现提示 Inc
+# 获取免费证书
+购买证书前先讲一讲证书的分类吧，按适用域名数量分类有：
+- 单域名 SSL 证书
+- 多域名 SSL 证书
+- 泛域名 SSL 证书（野卡）
+
+按证书认证等级分类有：
+- 域名型(DV, Domain Validation) SSL 证书
+- 企业型(OV, Organization Validation) SSL 证书
+- 增强型(EV, Extended Validation) SSL 证书
+
+最爽的就是野卡了，一次性解决二级域名，论外貌还是 EV，浏览器的小标识独树一帜，然而鱼与熊掌不可兼得，野卡不能是 EV。不过现在的主题是获取免费的证书，这些都与我们无关，出售证书的商家非常多，提供免费证书的也不少。之前沃通(WoSign)和 StartCom 都已经被浏览器厂商拉黑，这里就不推荐了。可能也正是这种原因，阿里云的免费证书由沃通换成了赛门铁克。目前能用到的免费证书有：
+- 阿里云云盾证书服务（赛门铁克 DV SSL 证书）
+- 腾讯云 SSL 证书管理（赛门铁克 GeoTrust DV SSL 证书）
+- 腾讯云 SSL 证书管理（赛门铁克 TrustAsia DV SSL 证书）
+- 七牛云 SSL 证书管理（赛门铁克 TrustAsia DV SSL 证书）
+- 又拍云 SSL 证书管理（赛门铁克 TrustAsia DV SSL 证书）
+- Let’s Encrypt
+
+以上证书中除了 Let's Encrypt 期限为三个月外，其余均为一年，根据自己的情况进行选择吧。
+
+# 安装 Nginx
+为了能够达到比较好的优化效果，这里编译安装 Nginx，具体请参考屈老师的 [本博客 Nginx 配置之完整篇](https://imququ.com/post/my-nginx-conf.html) ，不同的操作系统，不同的软件版本都有可能出现问题，既无法一一列举，就自行解决吧。
+拿到证书后配置 Nginx
+<figure class="highlight nginx"><table><tr><td class="code"><pre><div class="line"><span class="attribute">listen</span> <span class="number">443</span> ssl;    <span class="comment"># 侦听端口</span></div><div class="line"><span class="comment"># listen [::]:443 ssl ipv6only=on;    # 如果您希望同时侦听 IPv6，请取消此行注释</span></div><div class="line"></div><div class="line"><span class="attribute">server_name</span> example.com;    <span class="comment"># 请改为您的域名</span></div><div class="line"></div><div class="line"><span class="attribute">ssl_certificate</span> /etc/ssl/private/example_com.bundle.crt;    <span class="comment"># 证书链</span></div><div class="line"><span class="attribute">ssl_certificate_key</span> /etc/ssl/private/example_com.key;    <span class="comment"># 密钥</span></div><div class="line"><span class="attribute">ssl_protocols</span> TLSv1.<span class="number">2</span> TLSv1.<span class="number">1</span> TLSv1;    <span class="comment"># 支持的协议，Windows XP 不支持</span></div><div class="line"><span class="attribute">ssl_prefer_server_ciphers</span> <span class="literal">on</span>;    <span class="comment"># 启用 Forward Secrecy</span></div><div class="line"><span class="attribute">ssl_ciphers</span> <span class="string">"EECDH+ECDSA+AESGCM EECDH+aRSA+AESGCM EECDH+ECDSA+SHA384 EECDH+ECDSA+SHA256 EECDH+aRSA+SHA384 EECDH+aRSA+SHA256 EECDH+aRSA+RC4 EECDH EDH+aRSA !aNULL !eNULL !LOW !3DES !MD5 !EXP !PSK !SRP !DSS !RC4"</span>;</div><div class="line"><span class="attribute">keepalive_timeout</span> <span class="number">70</span>;</div><div class="line"><span class="attribute">ssl_session_cache</span> shared:SSL:<span class="number">10m</span>;</div><div class="line"><span class="attribute">ssl_session_timeout</span> <span class="number">10m</span>;</div></pre></td></tr></table></figure>
 <h1 id="开启-HSTS"><a href="#开启-HSTS" class="headerlink" title="开启 HSTS"></a>开启 HSTS</h1><h1 id="开启-HPKP"><a href="#开启-HPKP" class="headerlink" title="开启 HPKP"></a>开启 HPKP</h1><p>如果想通过 SSL labs 中的认证，那么需要有备份证书，pin-key 用两个中间证书是不可以的</p>
 <h1 id="开启-CSP"><a href="#开启-CSP" class="headerlink" title="开启 CSP"></a>开启 CSP</h1><h1 id="开启-CAA"><a href="#开启-CAA" class="headerlink" title="开启 CAA"></a>开启 CAA</h1><p>这个是在 DNS 中配置解析，不过目前支持的并不多 –&gt;</p>
-<blockquote>版权声明<br><hr>本作品采用<a rel="external" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。<br>本文链接：www.snovey.com/2017/08/nginx-https/</blockquote>
+<blockquote>版权声明<br><hr>本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。<br>本文链接：www.snovey.com/2017/08/nginx-https/</blockquote>-->
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Nginx/" rel="tag">#Nginx</a>
+          
+            <a href="/tags/HTTP/" rel="tag">#HTTP</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/pattern-lock/" rel="next" title="制作图案解锁">
+                <i class="fa fa-chevron-left"></i> 制作图案解锁
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
-</article>
 
 
-  </main>
-  <footer class="footer">
-  <div class="footer-inner">
-    <p class="copyright">
-      雨雪霏霏 &copy; 2016-2017
-    </p>
-    <p class="info">
-      Power by hexo &#124; Theme delica &#124; Host on GitHub, Coding
-    </p>
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
   </div>
-</footer>
 
-  <script>
-    function toggleClassMenu() {
-      myMenu.classList.add("siderbar--animatable");
-    if(!myMenu.classList.contains("siderbar--visible")) {
-      myMenu.classList.add("siderbar--visible");
-    } else {
-      myMenu.classList.remove('siderbar--visible');
-    }
-    }
 
-    function OnTransitionEnd() {
-      myMenu.classList.remove("siderbar--animatable");
-    }
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
 
-    var myMenu = document.querySelector(".siderbar");
-    var oppMenu = document.querySelector("#info");
-    myMenu.addEventListener("transitionend", OnTransitionEnd, false);
-    oppMenu.addEventListener("click", toggleClassMenu, false);
-    myMenu.addEventListener("click", toggleClassMenu, false);
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="//blog.snovey.com/uploads/avatar.jpg"
+               alt="雨雪霏霏" />
+          <p class="site-author-name" itemprop="name">雨雪霏霏</p>
+          <p class="site-description motion-element" itemprop="description">简单快乐与幸福同行</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-name">Artikel</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">Kategorien</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">Tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" class="cc-opacity" target="_blank">
+              <img src="//blog.snovey.com/images/cc-by-nc-nd.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        
+        
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">雨雪霏霏</span>
+</div>
+
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="//blog.snovey.com/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="//blog.snovey.com/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="//blog.snovey.com/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="//blog.snovey.com/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="//blog.snovey.com/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="//blog.snovey.com/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="//blog.snovey.com/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="//blog.snovey.com/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="//blog.snovey.com/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="//blog.snovey.com/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="//blog.snovey.com/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
   </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+  
+
+  
+
 </body>
 </html>
