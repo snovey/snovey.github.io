@@ -116,17 +116,17 @@
     <span class="post-time">2016-08-31</span>
   </div>
   <div class="post-content">
-    <p>上一篇文章讲了基本的位运算知识，其实位运算中最神奇的莫过于异或了，来看一下异或运算的性质</p>
+    <p>上一篇文章讲了基本的位运算知识，其实位运算中最神奇的莫过于异或了，来看一下异或运算的性质。<br>异或满足交换律，结合律，恒等律，归零律，以及有自反性质。</p>
+<a id="more"></a>
+<p>下面详细列举一下：</p>
 <ul>
 <li>交换律： $A\oplus B=B\oplus A$</li>
 <li>结合律： $A\oplus (B\oplus C)=(A\oplus B)\oplus C$</li>
 <li>恒等律： $X\oplus 0=X$</li>
 <li>归零律： $X\oplus X=0$</li>
 <li>自反： $A\oplus B\oplus B = A\oplus 0 = A$</li>
-<li>推论：如果 $a\oplus b=c$, 那么 $a\oplus c=b,b\oplus c=a$, 推广到 n 个数仍然成立</li>
+<li>推论：如果 $a\oplus b=c$, 那么 $a\oplus c=b,b\oplus c=a$, 推广到 n 个数仍然成立<br>体会一下逆运算<br>交换变量：swap(a, b) &lt;-&gt; a = a+b; b = a-b; a = a-b;<br>把 + 号和 - 号都换成 $\oplus$ 符号：$a = a\oplus b; b = a\oplus b; a = a\oplus b;$<br>第 1 步：$a = a\oplus b, b = b$<br>第 2 步：$a = a\oplus b, b = (a\oplus b)\oplus b = a$<br>第 3 步：$a = (a\oplus b)\oplus a = b, b = a$<br>合成一步用C语言写：<code>a^=b^=a^=b</code> 这个方法能够防止溢出，但是有缺点(&amp;a != &amp;b)。</li>
 </ul>
-<a id="more"></a>
-<p>体会一下逆运算<br>交换变量：swap(a, b) &lt;-&gt; a = a+b; b = a-b; a = a-b;<br>把 + 号和 - 号都换成 $\oplus$ 符号：$a = a\oplus b; b = a\oplus b; a = a\oplus b;$<br>第 1 步：$a = a\oplus b, b = b$<br>第 2 步：$a = a\oplus b, b = (a\oplus b)\oplus b = a$<br>第 3 步：$a = (a\oplus b)\oplus a = b, b = a$<br>合成一步用C语言写：<code>a^=b^=a^=b</code> 这个方法能够防止溢出，但是有缺点(&amp;a != &amp;b)。</p>
 <p>上面的推论推论可以应用于数据备份，RAID 5 用奇偶校验实现冗余。如果阵列中的一块磁盘出现故障，工作磁盘中的数据块与奇偶校验块一起来重建丢失的数据。<br>假设 A1、A2、A3 代表三块磁盘，Ap 用于备份。假设 A1 = 00000111、A2 = 00000101 以及 A3 = 00000000。A1、A2、A3 异或得到的 Ap 等于 00000010。如果第二个磁盘出现故障，A2 将不能被访问，但是可以通过 A1、A3 与 Ap 的异或进行重建：<br>A1$\oplus$A3$\oplus$Ap = 00000101</p>
 <p>利用异或的逆运算是本身，可以进行简单的对称加密。</p>
 <p>异或在集合中用 $\bigtriangleup$ 表示<br>与，或分别代表集合运算中的交，并而异或则代表对称差，证明如下：<br>$$<br>A\bigtriangleup B=(A-B)\cap (B-A)=(A\cup B)-(A\cap B)<br>$$</p>

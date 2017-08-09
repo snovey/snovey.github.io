@@ -123,7 +123,6 @@
       </div>
       <div class="post-content">
         <p>之前我一直认为配置 SSL 证书只不过是在 Nginx 中配置好证书路径就完事了。直到认真做起来才发现别有洞天。</p>
-<p>本文主要讲述如何配置，对于其中的原理一律从简。</p>
       </div>
       <div class="continue"><a class="btn" href="/2017/08/nginx-https/">继续阅读</a></div>
     </article>
@@ -140,7 +139,7 @@
       
       </div>
       <div class="post-content">
-        <p><img src="//blog.snovey.com/image/pattern-lock.gif" alt="pattern-lock" style="margin:auto"><br>想看看效果么？戳这里：<a href="//snovey.github.io/Web-crafts/pattern-lock/demo.html">pattern-lock</a><br>
+        <p>参加数字公司的校招，先是留了一个大作业，要求用网页制作一个图案解锁。<br>经过一番奋战，总算做了出来。</p>
       </div>
       <div class="continue"><a class="btn" href="/2017/04/pattern-lock/">继续阅读</a></div>
     </article>
@@ -157,11 +156,7 @@
       
       </div>
       <div class="post-content">
-        <p>学习中常常遇到同一个词语出现在多个地方，其中有一部分词语让我相当的困惑：</p>
-<ul>
-<li>数学中的「闭包」与计算机科学中的「闭包」有什么关系？</li>
-<li>内存管理中的「堆」与数据结构中的「堆」有什么关系？</li>
-</ul>
+        <p>学习中常常遇到同一个词语出现在多个地方，其中有一部分词语让我相当的困惑：<br>为什么两个词是一样的，但是感觉没有什么联系？比如「闭包」。</p>
       </div>
       <div class="continue"><a class="btn" href="/2016/11/polysemy/">继续阅读</a></div>
     </article>
@@ -178,14 +173,14 @@
       
       </div>
       <div class="post-content">
-        <p><img src="//blog.snovey.com/image/hacked-story.png" alt="hacked-story" style="max-width: 40%;margin: auto;"><br>十一返乡的绿皮车异常拥挤，漫长的旅途连一碗泡面都吃不上，百无聊赖之际想起手机里还有 <a href="http://www.hackedapp.com">hacked</a> 这个游戏，这是我的手机中除了 chrome 的小恐龙之外的唯一一款游戏了，当初初学 C 语言，未能通关便放弃了，它就这样躺在手机里一年多，如今通关把代码贴出来纪念一下。<br>
+        <p>十一返乡的绿皮车异常拥挤，漫长的旅途连一碗泡面都吃不上，百无聊赖之际想起手机里还有 <a href="http://www.hackedapp.com">hacked</a> 这个游戏，这是我的手机中除了 chrome 的小恐龙之外的唯一一款游戏了，当初初学 C 语言，未能通关便放弃了，它就这样躺在手机里一年多，如今终于通关。<br>
       </div>
       <div class="continue"><a class="btn" href="/2016/10/hacked-story/">继续阅读</a></div>
     </article>
   
     <article class="post">
       <div class="post-title">
-        <h1><a class="post-title-link" href="/2016/09/call-by-value/">JavaScript 对象作为函数参数的传递方式</a></h1>
+        <h1><a class="post-title-link" href="/2016/09/call-by-value/">JavaScript 的求值策略</a></h1>
       </div>
       <div class="post-meta">
         <span class="post-time">2016-09-29</span>
@@ -195,9 +190,7 @@
       
       </div>
       <div class="post-content">
-        <blockquote>
-<p>All function arguments in ECMAScript are passed by value.<br><span style="display:block;text-align:right;"><em>Professional JavaScript for Web Developers, 3rd Edition</em></span></p>
-</blockquote>
+        <p>今天阅读红宝书，在 JavaScript 的求值策略中，作者说所有的函数参数都是通过值传递，这里跟其他的语言很不一样，为此我特地查了一下英文原版：</p>
       </div>
       <div class="continue"><a class="btn" href="/2016/09/call-by-value/">继续阅读</a></div>
     </article>
@@ -214,7 +207,7 @@
       
       </div>
       <div class="post-content">
-        <p>我第一个接触的容器是 vector，当时遍历容器的写法是这样的：<br><figure class="highlight c++"><table><tr><td class="code"><pre><div class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v;</div><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; v.size(); i++)</div><div class="line">&#123;</div><div class="line">    <span class="comment">//TODO</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+        <p>接触 STL 的容器有一段时间了，现在来聊一聊迭代器的问题。<br>我第一个接触的容器是 vector，当时遍历容器的写法就是简单的迭代循环。</p>
       </div>
       <div class="continue"><a class="btn" href="/2016/09/STL-iterator/">继续阅读</a></div>
     </article>
@@ -231,15 +224,7 @@
       
       </div>
       <div class="post-content">
-        <p>上一篇文章讲了基本的位运算知识，其实位运算中最神奇的莫过于异或了，来看一下异或运算的性质</p>
-<ul>
-<li>交换律： $A\oplus B=B\oplus A$</li>
-<li>结合律： $A\oplus (B\oplus C)=(A\oplus B)\oplus C$</li>
-<li>恒等律： $X\oplus 0=X$</li>
-<li>归零律： $X\oplus X=0$</li>
-<li>自反： $A\oplus B\oplus B = A\oplus 0 = A$</li>
-<li>推论：如果 $a\oplus b=c$, 那么 $a\oplus c=b,b\oplus c=a$, 推广到 n 个数仍然成立</li>
-</ul>
+        <p>上一篇文章讲了基本的位运算知识，其实位运算中最神奇的莫过于异或了，来看一下异或运算的性质。<br>异或满足交换律，结合律，恒等律，归零律，以及有自反性质。</p>
       </div>
       <div class="continue"><a class="btn" href="/2016/08/xor/">继续阅读</a></div>
     </article>
@@ -273,7 +258,7 @@
       
       </div>
       <div class="post-content">
-        <h1 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h1><p>计算机只能存储二进制的数据，所以字符也一样只能通过将字符映射为相应的二进制形式才能保存，读取的时候由系统对字符进行图形渲染。<br>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>计算机只能存储二进制的数据，所以字符也一样只能通过将字符映射为相应的二进制形式才能保存，读取的时候由系统对字符进行图形渲染。<br>
       </div>
       <div class="continue"><a class="btn" href="/2016/06/char-encoding/">继续阅读</a></div>
     </article>
@@ -290,8 +275,7 @@
       
       </div>
       <div class="post-content">
-        <p><img src="//blog.snovey.com/image/typewriter.jpg" alt="typewriter" style="max-width: 75%;margin: auto;"></p>
-<p>这是上古时期的机械打字机，每输入一个字符，滚筒会左移一小截（一个字符的宽度 + 字符间距，好在那时候打字机都是等宽字体）。当滚筒移动到最左侧，即纸张右侧已经和敲针对齐时（也就是打完一行字），会有响铃提示已经抵达行末。这时拉动左侧墨带盒上边的金属手柄（换行手柄），然后滚筒会被推到最右边，打字头对准了行首，这就是 <code>CR</code>（carriage return, 回车）。继续用力，换行手柄大约会被扳动 30 度左右，纸会被上卷一行（行高，line height），这就是 <code>LF</code>（line feed, 换行）。<br>
+        <p>下图是上古时期的机械打字机，每输入一个字符，滚筒会左移一小截（一个字符的宽度 + 字符间距，好在那时候打字机都是等宽字体）。当滚筒移动到最左侧，即纸张右侧已经和敲针对齐时（也就是打完一行字），会有响铃提示已经抵达行末。这时拉动左侧墨带盒上边的金属手柄（换行手柄），然后滚筒会被推到最右边，打字头对准了行首，这就是 <code>CR</code>（carriage return, 回车）。继续用力，换行手柄大约会被扳动 30 度左右，纸会被上卷一行（行高，line height），这就是 <code>LF</code>（line feed, 换行）。<br>
       </div>
       <div class="continue"><a class="btn" href="/2016/06/endofline/">继续阅读</a></div>
     </article>
@@ -299,11 +283,9 @@
 </section>
 
     <nav class="page-nav">
-       <div class="page-prev tl">
          
-      </div>
-      <div class="page-next tl">
         
+          <div class="page-next tl">
           <a href="/page/2/"  title="undefined">
            &raquo;
            <!-- <span>
@@ -312,8 +294,8 @@
               
           </span> -->
           </a>
+          </div>
         
-      </div>
     </nav>
 
 
