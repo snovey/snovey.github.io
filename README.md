@@ -1,2 +1,1 @@
-This is my blog.
-I'm an undergraduate student major in Software engineering.
+我的博客，分享一些心得。
